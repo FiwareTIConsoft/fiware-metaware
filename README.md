@@ -13,10 +13,11 @@ To-Do
 To-Do
 
 ###API Examples
-To-Do
+__Get the datasets list:__
+curl -X GET -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Cache-Control: no-cache" -H "Postman-Token: ea8c1ca0-4d47-a662-5f5e-dc2a3048ab82" 'http://localhost:8080/metaware/api/v1/datasets/'
 
 ###API Reference Documentation
-Link to the Apiary Blueprints
+Link to the Apiary Blueprints.
 
 ##Tests
 End to End tests.
