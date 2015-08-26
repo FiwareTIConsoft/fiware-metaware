@@ -50,7 +50,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic YWRtaW
   }
 }' 'http://localhost:8080/metaware/api/v1/datasets'
 ```
-___Create a new company:___
+__Create a new company:__
 ```
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Cache-Control: no-cache" -H "Postman-Token: 106e4876-6b39-bc6d-e255-b25c09cc2eba" -d '{
     "name": "FIWARE",
