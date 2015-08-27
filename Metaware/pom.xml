@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.tilab.fiware</groupId>
             <artifactId>Metaware-MongoDBDAOImpl</artifactId>
-            <version>1.0</version>
+            <version>0.0.1</version>
         </dependency>
         <!-- Swagger RESTful doc for Jersey 2.x -->
         <dependency>
