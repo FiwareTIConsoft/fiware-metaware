@@ -76,7 +76,27 @@ public class ProcessDao {
      */
     public List<Process> getProcessesList() {
         log.debug(MSG_DAO_GET_LIST);
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        List<Process> processesList = new ArrayList<>();
+        
+        // Set the collection
+        processesCollection = INSTANCE.getDatasource().getDbCollection(PROCESSES_COLLECTION_NAME);
+        processesCollection.setObjectClass(Process.class);
+        processesCollection.setInternalClass("processingBlocks", ProcessingBlock.class);
+        
+        // Make the query
+        cursor = processesCollection.find();
+        
+        try {
+            while(cursor.hasNext()) {
+                Process p = (Process) cursor.next();
+                processesList.add(p);
+            }
+        } finally {
+            cursor.close();
+        }
+        
+        return processesList;
     }
 
     /**

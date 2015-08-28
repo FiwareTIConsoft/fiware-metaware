@@ -49,7 +49,7 @@ public class ProcessService {
      */
     public List<Process> getProcessesList() {
         log.debug(MSG_SRV_GET_LIST);
-        throw new UnsupportedOperationException("Not supported yet.");
+        return INSTANCE.getProcessDao().getProcessesList();
     }
 
     /**

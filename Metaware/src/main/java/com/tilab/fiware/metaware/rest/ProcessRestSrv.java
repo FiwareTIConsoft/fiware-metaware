@@ -30,6 +30,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -79,15 +80,26 @@ public class ProcessRestSrv {
             responseContainer = "Array"
     )
     @ApiResponses(value = {
-        @ApiResponse(code = 501, message = "Not Implemented")
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 500, message = "Internal server error")
     })
     //@Produces(MediaType.APPLICATION_JSON)
     public Response getProcessesList(@HeaderParam("Authorization") String authorization) {
         log.info(MSG_GET_LIST);
 
-        log.error(MSG_ERR_NOT_IMPL);
+        List<Process> processesList;
+        String jsonMsg;
 
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+        try {
+            processesList = INSTANCE.getProcessService().getProcessesList();
+            jsonMsg = INSTANCE.getObjectMapper().writeValueAsString(processesList);
+            log.debug(jsonMsg);
+        } catch (Exception e) { // this catches also JsonProcessingException
+            log.error(e, e);
+            return Response.serverError().build();
+        }
+
+        return Response.ok(jsonMsg, MediaType.APPLICATION_JSON).build();
     }
 
     /**
@@ -104,7 +116,10 @@ public class ProcessRestSrv {
             response = Process.class
     )
     @ApiResponses(value = {
-        @ApiResponse(code = 501, message = "Not Implemented")
+        @ApiResponse(code = 400, message = "Invalid Id supplied"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 404, message = "Process' metadata not found"),
+        @ApiResponse(code = 500, message = "Internal server error")
     })
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProcess(
