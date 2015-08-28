@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import org.json.JSONException;
+//import org.json.JSONException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -96,7 +96,7 @@ public class DataSourceServiceTest {
     }
 
     @Before
-    public void setUp() throws JsonProcessingException, NoSuchAlgorithmException, JSONException {
+    public void setUp() throws JsonProcessingException, NoSuchAlgorithmException {
         compId = INSTANCE.getCompanyService().createCompany(comp);
         dep.setCompany(compId);
         depId = INSTANCE.getDepartmentService().createDepartment(dep);

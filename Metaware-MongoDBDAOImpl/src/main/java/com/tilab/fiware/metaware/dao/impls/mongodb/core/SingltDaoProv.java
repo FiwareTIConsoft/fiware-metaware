@@ -31,6 +31,7 @@ import com.tilab.fiware.metaware.dao.impls.mongodb.DiscoverObjDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.TemplateDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.UserDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.DataSourceDao;
+import com.tilab.fiware.metaware.dao.impls.mongodb.ProcessDao;
 import java.net.UnknownHostException;
 import java.util.Properties;
 import org.apache.log4j.Logger;
@@ -62,6 +63,7 @@ public enum SingltDaoProv {
     private DataSourceDao dataSourceDao = null;
     private DepartmentDao departmentDao = null;
     private DiscoverObjDao discoverObjDao = null;
+    private ProcessDao processDao = null;
     private TemplateDao templateDao = null;
     private UserDao userDao = null;
 
@@ -99,6 +101,7 @@ public enum SingltDaoProv {
             departmentDao = new DepartmentDao();
             discoverObjDao = new DiscoverObjDao();
             templateDao = new TemplateDao();
+            processDao = new ProcessDao();
             userDao = new UserDao();
 
             log.info(MSG_DAO_OBJECTS_CREATION_OK);
@@ -224,6 +227,15 @@ public enum SingltDaoProv {
      */
     public UserDao getUserDao() {
         return userDao;
+    }
+
+    /**
+     * Gets the DAO of the Process.
+     *
+     * @return processDao
+     */
+    public ProcessDao getProcessDao() {
+        return processDao;
     }
 
     /**

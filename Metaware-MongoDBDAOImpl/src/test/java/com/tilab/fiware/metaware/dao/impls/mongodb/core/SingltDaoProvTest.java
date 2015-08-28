@@ -27,6 +27,7 @@ import com.tilab.fiware.metaware.dao.impls.mongodb.DataSourceDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.DatasetDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.DepartmentDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.DiscoverObjDao;
+import com.tilab.fiware.metaware.dao.impls.mongodb.ProcessDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.TemplateDao;
 import com.tilab.fiware.metaware.dao.impls.mongodb.UserDao;
 import java.util.Properties;
@@ -280,6 +281,20 @@ public class SingltDaoProvTest {
         SingltDaoProv instance = null;
         DiscoverObjDao expResult = null;
         DiscoverObjDao result = instance.getDiscoverObjDao();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getProcessDao method, of class SingltDaoProv.
+     */
+    @Ignore
+    public void testGetProcessDao() {
+        System.out.println("getProcessDao");
+        SingltDaoProv instance = null;
+        ProcessDao expResult = null;
+        ProcessDao result = instance.getProcessDao();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

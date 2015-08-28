@@ -20,14 +20,13 @@
  */
 package com.tilab.fiware.metaware.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.User;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
-import org.json.JSONException;
+//import org.json.JSONException;
 
 /**
  * Operations related to users.
@@ -86,12 +85,8 @@ public class UserService {
      *
      * @param user the new user to be saved.
      * @return the Id of the new user.
-     * @throws JsonProcessingException
-     * @throws java.security.NoSuchAlgorithmException
-     * @throws JSONException
      */
-    public String createUser(User user)
-            throws JsonProcessingException, NoSuchAlgorithmException, JSONException {
+    public String createUser(User user) {
         log.debug(MSG_SRV_CREATE);
         user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
         //user.setSalt(Util.getSalt());
@@ -101,12 +96,11 @@ public class UserService {
     /**
      * Update the selected user if exists, otherwise create a new one.
      *
-     * @param id the Id of the selected user to be updated.
+     * @param id   the Id of the selected user to be updated.
      * @param user the user object with the modifications (or the new user to be saved).
      * @return the updated user object.
-     * @throws JsonProcessingException
      */
-    public User upsertUser(String id, User user) throws JsonProcessingException {
+    public User upsertUser(String id, User user) {
         log.debug(MSG_SRV_UPSERT + id + " ...");
         return INSTANCE.getUserDao().upsertUser(id, user);
     }

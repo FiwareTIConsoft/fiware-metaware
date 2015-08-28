@@ -25,7 +25,7 @@ package com.tilab.fiware.metaware.dao;
  *
  * @author Marco Terrinoni <marco.terrinoni at consoft.it>
  */
-public interface DaoCommonConstatns {
+public interface DaoCommonConstants {
 
     public final static String KEY_DB_HOST = "db.host";
     public final static String KEY_DB_PORT = "db.port";
@@ -40,4 +40,5 @@ public interface DaoCommonConstatns {
     public static final String ALGORITHMS_COLLECTION_NAME = "algorithms";
     public static final String TEMPLATES_COLLECTION_NAME = "templates";
     public static final String USERS_COLLECTION_NAME = "users";
+    public static final String PROCESSES_COLLECTION_NAME = "processes";
 }

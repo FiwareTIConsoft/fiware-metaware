@@ -29,7 +29,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.json.JSONException;
+//import org.json.JSONException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -73,7 +73,8 @@ public class UserServiceTest {
         user1 = new User("user test name 1", "user test surname 1", "user.one@test.com", "123456",
                 "Via Reiss Romoli, 274 Torino", null, null, "usernametestone", "secret", "basic"); // coompany is and department is are set after
         user2 = new User("user test name 2", "user test surname 2", "user.two@test.com", "654321",
-                "Via Reiss Romoli, 274 Torino", null, null, "usernametesttwo", "supersecret", "basic"); // coompany is and department is are set after
+                "Via Reiss Romoli, 274 Torino", null, null, "usernametesttwo", "supersecret",
+                "basic"); // coompany is and department is are set after
     }
 
     @AfterClass
@@ -94,11 +95,9 @@ public class UserServiceTest {
      *
      * @throws com.fasterxml.jackson.core.JsonProcessingException
      * @throws java.security.NoSuchAlgorithmException
-     * @throws org.json.JSONException
      */
     @Test
-    public void testGetUserByCredentials() throws JsonProcessingException, NoSuchAlgorithmException,
-            JSONException {
+    public void testGetUserByCredentials() throws JsonProcessingException, NoSuchAlgorithmException {
         System.out.println("getUserByCredentials");
         UserService instance = new UserService();
         compId = INSTANCE.getCompanyService().createCompany(comp);
@@ -128,11 +127,9 @@ public class UserServiceTest {
      *
      * @throws com.fasterxml.jackson.core.JsonProcessingException
      * @throws java.security.NoSuchAlgorithmException
-     * @throws org.json.JSONException
      */
     @Test
-    public void testGetUsersList() throws JsonProcessingException, NoSuchAlgorithmException,
-            JSONException {
+    public void testGetUsersList() throws JsonProcessingException, NoSuchAlgorithmException {
         System.out.println("getUsersList");
         UserService instance = INSTANCE.getUserService();
         compId = INSTANCE.getCompanyService().createCompany(comp);
@@ -162,11 +159,9 @@ public class UserServiceTest {
      *
      * @throws com.fasterxml.jackson.core.JsonProcessingException
      * @throws java.security.NoSuchAlgorithmException
-     * @throws org.json.JSONException
      */
     @Test
-    public void testGetUser() throws JsonProcessingException, NoSuchAlgorithmException,
-            JSONException {
+    public void testGetUser() throws JsonProcessingException, NoSuchAlgorithmException {
         System.out.println("getUser");
         UserService instance = new UserService();
         compId = INSTANCE.getCompanyService().createCompany(comp);
@@ -191,17 +186,16 @@ public class UserServiceTest {
      *
      * @throws com.fasterxml.jackson.core.JsonProcessingException
      * @throws java.security.NoSuchAlgorithmException
-     * @throws org.json.JSONException
      */
     @Test
-    public void testCreateUser() throws JsonProcessingException, NoSuchAlgorithmException,
-            JSONException {
+    public void testCreateUser() throws JsonProcessingException, NoSuchAlgorithmException {
         System.out.println("createUser");
         compId = INSTANCE.getCompanyService().createCompany(comp);
         dep.setCompany(compId);
         depId = INSTANCE.getDepartmentService().createDepartment(dep);
 
-        User user = new User("user test name", "user test surname", "user@test.com", "123456", "Via Reiss Romoli, 274 Torino", null,
+        User user = new User("user test name", "user test surname", "user@test.com", "123456",
+                "Via Reiss Romoli, 274 Torino", null,
                 null, "usertest", "supersecret", "basic"); // coompany is and department is are set after;
         user.setCompany(compId);
         user.setDepartment(depId);
@@ -221,17 +215,16 @@ public class UserServiceTest {
      *
      * @throws com.fasterxml.jackson.core.JsonProcessingException
      * @throws java.security.NoSuchAlgorithmException
-     * @throws org.json.JSONException
      */
     @Test
-    public void testUpsertUser() throws JsonProcessingException, NoSuchAlgorithmException,
-            JSONException {
+    public void testUpsertUser() throws JsonProcessingException, NoSuchAlgorithmException {
         System.out.println("upsertUser");
         UserService instance = new UserService();
         compId = INSTANCE.getCompanyService().createCompany(comp);
         dep.setCompany(compId);
         depId = INSTANCE.getDepartmentService().createDepartment(dep);
-        User user = new User("user test name", "user test surname", "user@test.com", "123456", "Via Reiss Romoli, 274 Torino", null,
+        User user = new User("user test name", "user test surname", "user@test.com", "123456",
+                "Via Reiss Romoli, 274 Torino", null,
                 null, "usertest", "supersecret", "basic");
         user.setCompany(compId); // allowing the possibility to insert user with no company, this instruction will not be necessary anymore
         user.setDepartment(depId); // allowing the possibility to insert user with no department, this instruction will not be necessary anymore
@@ -260,17 +253,16 @@ public class UserServiceTest {
      *
      * @throws com.fasterxml.jackson.core.JsonProcessingException
      * @throws java.security.NoSuchAlgorithmException
-     * @throws org.json.JSONException
      */
     @Test
-    public void testDeleteUser() throws JsonProcessingException, NoSuchAlgorithmException,
-            JSONException {
+    public void testDeleteUser() throws JsonProcessingException, NoSuchAlgorithmException {
         System.out.println("deleteUser");
         compId = INSTANCE.getCompanyService().createCompany(comp);
         dep.setCompany(compId);
         depId = INSTANCE.getDepartmentService().createDepartment(dep);
         UserService instance = new UserService();
-        User user = new User("user test name", "user test surname", "user@test.com", "123456", "Via Reiss Romoli, 274 Torino", null,
+        User user = new User("user test name", "user test surname", "user@test.com", "123456",
+                "Via Reiss Romoli, 274 Torino", null,
                 null, "usertest", "supersecret", "basic");
         user.setCompany(compId); // allowing the possibility to insert user with no company, this instruction will not be necessary anymore
         user.setDepartment(depId); // allowing the possibility to insert user with no department, this instruction will not be necessary anymore

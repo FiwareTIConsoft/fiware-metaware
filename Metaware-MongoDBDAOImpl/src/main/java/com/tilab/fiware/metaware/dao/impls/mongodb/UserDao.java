@@ -302,7 +302,7 @@ public class UserDao {
     /**
      * Update the selected user if exists, otherwise create a new one.
      *
-     * @param id the Id of the selected user to be updated.
+     * @param id   the Id of the selected user to be updated.
      * @param user the user object with the modifications (or the new user to be saved).
      * @return the updated user object.
      */

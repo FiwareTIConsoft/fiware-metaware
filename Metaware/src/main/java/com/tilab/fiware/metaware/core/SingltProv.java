@@ -31,6 +31,7 @@ import com.tilab.fiware.metaware.service.DataSourceService;
 import com.tilab.fiware.metaware.service.DatasetService;
 import com.tilab.fiware.metaware.service.DepartmentService;
 import com.tilab.fiware.metaware.service.DiscoverObjService;
+import com.tilab.fiware.metaware.service.ProcessService;
 import com.tilab.fiware.metaware.service.TemplateService;
 import com.tilab.fiware.metaware.service.UserService;
 import java.util.Properties;
@@ -64,6 +65,7 @@ public enum SingltProv {
     private DiscoverObjService discoverObjService = null;
     private TemplateService templateService = null;
     private UserService userService = null;
+    private ProcessService processService = null;
     //...
 
     // Messages
@@ -113,6 +115,7 @@ public enum SingltProv {
             discoverObjService = new DiscoverObjService();
             templateService = new TemplateService();
             userService = new UserService();
+            processService = new ProcessService();
 
             log.info(MSG_CORE_OBJECTS_CREATION_OK);
         } catch (Exception e) {
@@ -234,5 +237,14 @@ public enum SingltProv {
      */
     public UserService getUserService() {
         return userService;
+    }
+
+    /**
+     * Gets the service class for Process.
+     *
+     * @return processService
+     */
+    public ProcessService getProcessService() {
+        return processService;
     }
 }

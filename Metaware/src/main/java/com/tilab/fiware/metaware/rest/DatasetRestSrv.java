@@ -106,7 +106,8 @@ public class DatasetRestSrv {
     private static final String URI_ADDRESS = METAWARE + "address#";
     private static final String URI_DISTRIBUTION = METAWARE + "distribution#";
     private static final String URI_PUBLISHER = METAWARE + "publisher#";
-    private static final String URI_LICENSE_CCZERO = "http://creativecommons.org/publicdomain/zero/1.0/";
+    private static final String URI_LICENSE_CCZERO
+            = "http://creativecommons.org/publicdomain/zero/1.0/";
     private static final String URI_VCARD_ORGANIZATION = VCARD + "Organization";
     private static final String URI_VCARD_INDIVIDUAL = VCARD + "Individual";
     private static final String URI_VCARD_TELEPHONE = VCARD + "Voice";
@@ -203,7 +204,7 @@ public class DatasetRestSrv {
      */
     @GET
     @ApiOperation(
-            value = "Retrievs the list of datasets' metadata",
+            value = "Retrieves the list of datasets' metadata",
             response = Dataset.class,
             responseContainer = "Array"
     )
@@ -234,7 +235,7 @@ public class DatasetRestSrv {
      * Retrieves the selected dataset's metadata by Id.
      *
      * @param authorization basic authorization string.
-     * @param id the Id of the selected dataset's metadata.
+     * @param id            the Id of the selected dataset's metadata.
      * @return the selected dataset's metadata.
      */
     @GET
@@ -287,7 +288,7 @@ public class DatasetRestSrv {
      * Create a new dataset's metadata.
      *
      * @param authorization basic authorization string.
-     * @param dataset the dataset's metadata object to be stored.
+     * @param dataset       the dataset's metadata object to be stored.
      * @return the Id of the new dataset's metadata object.
      */
     @POST
@@ -325,8 +326,8 @@ public class DatasetRestSrv {
      * Update an existing dataset's metadata object, or insert a new one.
      *
      * @param authorization basic authorization string.
-     * @param id the Id of the existing dataset's metadata object.
-     * @param dataset the dataset's metadata object with the changes.
+     * @param id            the Id of the existing dataset's metadata object.
+     * @param dataset       the dataset's metadata object with the changes.
      * @return the updated dataset's metadata object.
      */
     @PUT
@@ -348,7 +349,7 @@ public class DatasetRestSrv {
     public Response upsertDataset(
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "The Id of the selected dataset's metadata to be updated",
-                    required = true)
+                      required = true)
             @PathParam("datasetId") String id,
             @ApiParam(value = "The dataset's metadata object with the modifications (or the object "
                     + "to be saved)") Dataset dataset) {
@@ -375,7 +376,7 @@ public class DatasetRestSrv {
      * Deletes the selected dataset's metadata.
      *
      * @param authorization basic authorization string.
-     * @param id the Id of the dataset's metadata object to be deleted.
+     * @param id            the Id of the dataset's metadata object to be deleted.
      * @return the deleted dataset's metadata.
      */
     @DELETE
@@ -392,7 +393,7 @@ public class DatasetRestSrv {
     public Response deleteDataset(
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "The Id of the selected dataset's metadata to be removed",
-                    required = true)
+                      required = true)
             @PathParam("datasetId") String id) {
         log.info(MSG_DELETE);
 
@@ -415,7 +416,7 @@ public class DatasetRestSrv {
     /**
      * Imports a private dataset in Open Data format (DCAT).
      *
-     * @param authorization authorization string.
+     * @param authorization   authorization string.
      * @param dcatInputStream
      * @return
      * @throws java.text.ParseException
@@ -486,7 +487,7 @@ public class DatasetRestSrv {
      * Exports a dataset in Open Data format (DCAT).
      *
      * @param authorization authorization string.
-     * @param id the Id of the dataset.
+     * @param id            the Id of the dataset.
      * @return the RDF serialization of the dataset.
      */
     @GET
@@ -590,7 +591,8 @@ public class DatasetRestSrv {
         Resource resourceContactPoint = model.createResource(URI_CONTACTPOINT + ownerId);
         resourceContactPoint.addProperty(RDF.type, ownerContactPointUri);
         resourceContactPoint.addProperty(vcardFn, ownerName);
-        resourceContactPoint.addProperty(vcardHasEmail, model.createResource("mailto:" + ownerEmail));
+        resourceContactPoint.
+                addProperty(vcardHasEmail, model.createResource("mailto:" + ownerEmail));
         resourceContactPoint.addProperty(vcardHasTelephone, contactPointTelephone);
         resourceContactPoint.addProperty(vardHasAddress, contactPointAddress);
 

@@ -162,7 +162,7 @@ public class CompanyDao {
     /**
      * Update the selected company if exists, otherwise create a new one.
      *
-     * @param id the Id of the selected company to be updated.
+     * @param id      the Id of the selected company to be updated.
      * @param company the company object with the modifications (or the company to be saved).
      * @return the updated company object.
      */

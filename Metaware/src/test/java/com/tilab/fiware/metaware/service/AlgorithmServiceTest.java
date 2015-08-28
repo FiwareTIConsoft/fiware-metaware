@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import org.json.JSONException;
+//import org.json.JSONException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -96,7 +96,7 @@ public class AlgorithmServiceTest {
 
     @Before
     public void setUp() throws
-            JsonProcessingException, NoSuchAlgorithmException, JSONException, InvalidIdException {
+            JsonProcessingException, NoSuchAlgorithmException, InvalidIdException {
         compId = INSTANCE.getCompanyService().createCompany(comp);
         dep.setCompany(compId);
         depId = INSTANCE.getDepartmentService().createDepartment(dep);

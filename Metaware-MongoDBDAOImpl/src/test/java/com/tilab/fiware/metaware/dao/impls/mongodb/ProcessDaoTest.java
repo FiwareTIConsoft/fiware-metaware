@@ -21,12 +21,13 @@
 package com.tilab.fiware.metaware.dao.impls.mongodb;
 
 import com.mongodb.DBCollection;
-import static com.tilab.fiware.metaware.dao.DaoCommonConstants.DATASETS_COLLECTION_NAME;
+import com.tilab.fiware.metaware.dao.DaoCommonConstants;
+import static com.tilab.fiware.metaware.dao.DaoCommonConstants.PROCESSES_COLLECTION_NAME;
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.USERS_COLLECTION_NAME;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
-import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Dataset;
-import com.tilab.fiware.metaware.dao.impls.mongodb.domain.DatasetStructure;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Permission;
+import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Process;
+import com.tilab.fiware.metaware.dao.impls.mongodb.domain.ProcessingBlock;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,25 +39,26 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author Marco Terrinoni <marco.terrinoni at consoft.it>
  */
-public class DatasetDaoTest {
+public class ProcessDaoTest {
 
     private static Properties testProperties;
 
     // MongoDB objects
-    private static DBCollection datasetsCollection;
+    private static DBCollection processesCollection;
     private static DBCollection usersCollection;
 
     // Temporary data
-    private static Dataset data1, data2;
+    private static Process proc1, proc2;
     private static Permission perm1, perm2, perm3;
     private static User user1, user2;
 
-    public DatasetDaoTest() {
+    public ProcessDaoTest() {
     }
 
     @BeforeClass
@@ -78,9 +80,9 @@ public class DatasetDaoTest {
                 "Via Reiss Romoli, 274 Torino", new ObjectId(), new ObjectId(),
                 "usernametestdataset2", "secret", "");
 
-        // Create 2 datasets (moved to setUp to obtain ux's Id)
-        datasetsCollection = INSTANCE.getDatasource().getDbCollection(DATASETS_COLLECTION_NAME);
-        datasetsCollection.setObjectClass(Dataset.class);
+        // Create 2 processes (moved to setUp to obtain ux's Id)
+        processesCollection = INSTANCE.getDatasource().getDbCollection(PROCESSES_COLLECTION_NAME);
+        processesCollection.setObjectClass(Process.class);
     }
 
     @AfterClass
@@ -106,94 +108,97 @@ public class DatasetDaoTest {
         List<Permission> permissionsData2 = new ArrayList<>();
         permissionsData2.add(perm2);
 
-        // Create 2 datasets
-        data1 = new Dataset("dataset test name 1", "dataset test description 1", "test",
+        // Create 2 processes
+        proc1 = new Process("process test name 1", "process test description 1", "test",
                 Long.MIN_VALUE, Long.MIN_VALUE, permissionsData1, new ObjectId(user2.getId()),
-                "test status", true, new DatasetStructure());
-        data2 = new Dataset("dataset test name 2", "dataset test description 2", "test",
-                Long.MIN_VALUE, Long.MIN_VALUE, permissionsData2, new ObjectId(user1.getId()),
-                "test status", true, new DatasetStructure());
+                "test status", "daily", Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE,
+                new ArrayList<ProcessingBlock>(), "http://process.one.test");
+        proc2 = new Process("process test name 2", "process test description 2", "test",
+                Long.MAX_VALUE, Long.MAX_VALUE, permissionsData2, new ObjectId(user1.getId()),
+                "test status", "hourly", Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE,
+                new ArrayList<ProcessingBlock>(), "http://process.one.test");
 
-        // Insert 2 datasets
-        List datasets = new ArrayList();
-        datasets.add(data1);
-        datasets.add(data2);
-        datasetsCollection.insert(datasets);
+        // Insert 2 processes
+        List processes = new ArrayList();
+        processes.add(proc1);
+        processes.add(proc2);
+        processesCollection.insert(processes);
     }
 
     @After
     public void tearDown() {
-        datasetsCollection.drop();
+        processesCollection.drop();
         usersCollection.drop();
     }
 
     /**
-     * Test of getDatasetsList method, of class DatasetDao.
+     * Test of getProcessesList method, of class ProcessDao.
      */
-    @Test
-    public void testGetDatasetsList() {
-        System.out.println("getDatasetsList");
-        DatasetDao instance = new DatasetDao();
-        List<Dataset> expResult = new ArrayList<>();
-        expResult.add(data1);
-        expResult.add(data2);
-        List<Dataset> result = instance.getDatasetsList();
+    @Ignore
+    public void testGetProcessesList() {
+        System.out.println("getProcessesList");
+        ProcessDao instance = new ProcessDao();
+        List<Process> expResult = new ArrayList<>();
+        expResult.add(proc1);
+        expResult.add(proc2);
+        List<Process> result = instance.getProcessesList();
+        assertEquals(expResult, result);
         assertTrue(expResult.containsAll(result) && result.containsAll(expResult));
     }
 
     /**
-     * Test of getDataset method, of class DatasetDao.
+     * Test of getProcess method, of class ProcessDao.
      */
-    @Test
-    public void testGetDataset() {
-        System.out.println("getDataset");
-        String id = data1.getId();
-        DatasetDao instance = new DatasetDao();
-        Dataset expResult = data1;
-        Dataset result = instance.getDataset(id);
+    @Ignore
+    public void testGetProcess() {
+        System.out.println("getProcess");
+        String id = proc1.getId();
+        ProcessDao instance = new ProcessDao();
+        Process expResult = proc1;
+        Process result = instance.getProcess(id);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of createDataset method, of class DatasetDao.
+     * Test of createProcess method, of class ProcessDao.
      */
     @Test
-    public void testCreateDataset() {
-        System.out.println("createDataset");
+    public void testCreateProcess() {
+        System.out.println("createProcess");
         List<Permission> permissionsData = new ArrayList<>();
-        permissionsData.add(perm2);
-        Dataset dataset = new Dataset("dataset test name", "dataset test description", "test",
-                Long.MIN_VALUE, Long.MIN_VALUE, permissionsData, new ObjectId(user1.getId()),
-                "test status", true, new DatasetStructure());
-        DatasetDao instance = new DatasetDao();
-        String result = instance.createDataset(dataset);
+        Process process = new Process("process test name", "process test description",
+                "test", Long.MIN_VALUE, Long.MIN_VALUE, permissionsData, new ObjectId(user1.getId()),
+                "test status", "daily", Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE,
+                new ArrayList<ProcessingBlock>(), "http://create.process.test");
+        ProcessDao instance = new ProcessDao();
+        String result = instance.createProcess(process);
         assertTrue(ObjectId.isValid(result));
     }
 
     /**
-     * Test of upsertDataset method, of class DatasetDao.
+     * Test of upsertProcess method, of class ProcessDao.
      */
-    @Test
-    public void testUpsertDataset() {
-        System.out.println("upsertDataset");
-        String id = data1.getId();
-        data1.setName("this is a new name for dataset");
-        data1.setStatus("new status");
-        DatasetDao instance = new DatasetDao();
-        Dataset expResult = data1;
-        Dataset result = instance.upsertDataset(id, data1);
+    @Ignore
+    public void testUpsertProcess() {
+        System.out.println("upsertProcess");
+        String id = proc1.getId();
+        proc1.setName("this is a new name for process");
+        proc1.setStatus("new status");
+        ProcessDao instance = new ProcessDao();
+        Process expResult = proc1;
+        Process result = instance.upsertProcess(id, proc1);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of deleteDataset method, of class DatasetDao.
+     * Test of deleteProcess method, of class ProcessDao.
      */
-    @Test
-    public void testDeleteDataset() {
-        System.out.println("deleteDataset");
-        String id = data2.getId();
-        DatasetDao instance = new DatasetDao();
-        instance.deleteDataset(id);
+    @Ignore
+    public void testDeleteProcess() {
+        System.out.println("deleteProcess");
+        String id = proc2.getId();
+        ProcessDao instance = new ProcessDao();
+        instance.deleteProcess(id);
     }
 
 }

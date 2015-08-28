@@ -215,9 +215,9 @@ public class DepartmentDao {
     /**
      * Update the selected department if exists, otherwise create a new one.
      *
-     * @param id the Id of the selected department to be updated.
+     * @param id         the Id of the selected department to be updated.
      * @param department the department object with the modifications (or the department to be
-     * saved).
+     *                   saved).
      * @return the updated department object.
      */
     public Department upsertDepartment(String id, Department department) {

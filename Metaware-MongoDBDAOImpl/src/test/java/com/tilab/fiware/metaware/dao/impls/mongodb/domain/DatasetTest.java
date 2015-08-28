@@ -286,13 +286,13 @@ public class DatasetTest {
     @Test
     public void testSetOwner() {
         System.out.println("setOwner");
-        ObjectId owner = new ObjectId();
+        String owner = new ObjectId().toHexString();
         Dataset instance = new Dataset("test name", "test description", "test type", Long.MIN_VALUE,
                 Long.MIN_VALUE, null, new ObjectId(), "test status", true,
                 null);
-        instance.setOwnerId(owner);
+        instance.setOwner(owner);
         ObjectId result = instance.getOwnerId();
-        assertEquals(owner, result);
+        assertEquals(new ObjectId(owner), result);
     }
 
     /**

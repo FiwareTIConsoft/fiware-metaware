@@ -20,7 +20,6 @@
  */
 package com.tilab.fiware.metaware.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Company;
 import java.util.List;
@@ -69,9 +68,8 @@ public class CompanyService {
      *
      * @param company the new company to be saved.
      * @return the Id of the new company.
-     * @throws JsonProcessingException
      */
-    public String createCompany(Company company) throws JsonProcessingException {
+    public String createCompany(Company company) {
         log.debug(MSG_SRV_CREATE);
         return INSTANCE.getCompanyDao().createCompany(company);
     }
@@ -79,12 +77,11 @@ public class CompanyService {
     /**
      * Update the selected company if exists, otherwise create a new one.
      *
-     * @param id the Id of the selected company to be updated.
+     * @param id      the Id of the selected company to be updated.
      * @param company the company object with the modifications (or the company to be saved).
      * @return the updated company object.
-     * @throws JsonProcessingException
      */
-    public Company upsertCompany(String id, Company company) throws JsonProcessingException {
+    public Company upsertCompany(String id, Company company) {
         log.debug(MSG_SRV_UPSERT + id + "...");
         return INSTANCE.getCompanyDao().upsertCompany(id, company);
     }

@@ -20,7 +20,6 @@
  */
 package com.tilab.fiware.metaware.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Department;
 import java.util.List;
@@ -58,7 +57,6 @@ public class DepartmentService {
      *
      * @param id the Id of the selected department.
      * @return the selected department object.
-     * @throws JsonProcessingException
      */
     public Department getDepartment(String id) {
         log.debug(MSG_SRV_GET + id + " ...");
@@ -70,9 +68,8 @@ public class DepartmentService {
      *
      * @param department the new department to be saved
      * @return the Id of the new department.
-     * @throws com.fasterxml.jackson.core.JsonProcessingException
      */
-    public String createDepartment(Department department) throws JsonProcessingException {
+    public String createDepartment(Department department) {
         log.debug(MSG_SRV_CREATE);
         return INSTANCE.getDepartmentDao().createDepartment(department);
     }
@@ -80,14 +77,12 @@ public class DepartmentService {
     /**
      * Update the selected department if exists, otherwise create a new one.
      *
-     * @param id the Id of the selected department to be updated.
+     * @param id         the Id of the selected department to be updated.
      * @param department the department object with the modifications (or the department to be
-     * saved).
+     *                   saved).
      * @return the updated department object.
-     * @throws JsonProcessingException
      */
-    public Department upsertDepartment(String id, Department department)
-            throws JsonProcessingException {
+    public Department upsertDepartment(String id, Department department) {
         log.debug(MSG_SRV_UPSERT + id + " ...");
         return INSTANCE.getDepartmentDao().upsertDepartment(id, department);
     }

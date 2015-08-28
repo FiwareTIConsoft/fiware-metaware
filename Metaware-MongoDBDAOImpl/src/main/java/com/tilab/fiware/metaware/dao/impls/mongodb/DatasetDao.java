@@ -166,8 +166,8 @@ public class DatasetDao {
         }
 
         // Check if the users field is ok and retrieve the objectIds list
-        List<Permission> permissionsList = checkPermissions(dataset, usersCollection, departmentsCollection,
-                companiesCollection);
+        List<Permission> permissionsList = checkPermissions(dataset, usersCollection,
+                departmentsCollection, companiesCollection);
         if (permissionsList != null) {
             dataset.setPermissions(permissionsList);
         } else {
@@ -194,9 +194,9 @@ public class DatasetDao {
     /**
      * Updates the selected dataset's metadata if exists, otherwise creates a new one.
      *
-     * @param id the Id of the selected dataset's metadata to be updated.
+     * @param id      the Id of the selected dataset's metadata to be updated.
      * @param dataset the dataset's metadata object with the modifications (or the metadata to be
-     * saved)
+     *                saved)
      * @return the updated metadata object.
      */
     public Dataset upsertDataset(String id, Dataset dataset) {
@@ -294,10 +294,10 @@ public class DatasetDao {
      * Checks if the selected owner exists in users, departments, or companies collection; if so,
      * returns the related ObjectId.
      *
-     * @param dataset the selected dataset.
-     * @param usersCollection the collection of registered users.
+     * @param dataset               the selected dataset.
+     * @param usersCollection       the collection of registered users.
      * @param departmentsCollection the collection of registered departments.
-     * @param companiesCollection the collection of registered companies.
+     * @param companiesCollection   the collection of registered companies.
      * @return the Id of the owner of the dataset.
      */
     private ObjectId checkOwner(Dataset dataset, DBCollection usersCollection,
@@ -357,10 +357,10 @@ public class DatasetDao {
      * Checks if the selected users (can be user, department, or company) exist in users,
      * departments, or companies collection; if so, return the list of ObjectIds.
      *
-     * @param dataset the selected dataset
-     * @param usersCollection the collection of registered users.
+     * @param dataset               the selected dataset
+     * @param usersCollection       the collection of registered users.
      * @param departmentsCollection the collection of registered departments.
-     * @param companiesCollection the collection of registered companies.
+     * @param companiesCollection   the collection of registered companies.
      * @return idList the list of Ids.
      */
     private List<Permission> checkPermissions(Dataset dataset, DBCollection usersCollection,

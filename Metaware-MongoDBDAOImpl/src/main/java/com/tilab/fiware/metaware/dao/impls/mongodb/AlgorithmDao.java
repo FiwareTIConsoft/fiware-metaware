@@ -192,9 +192,9 @@ public class AlgorithmDao {
     /**
      * Updates the selected algorithm's metadata if exists, otherwise creates a new one.
      *
-     * @param id the Id of the selected algorithm's metadata to be updated.
+     * @param id        the Id of the selected algorithm's metadata to be updated.
      * @param algorihtm the dataset's metadata object with the modifications (or the metadata to be
-     * saved).
+     *                  saved).
      * @return the updated metadata object.
      */
     public Algorithm upsertAlgorithm(String id, Algorithm algorihtm) {
@@ -294,10 +294,10 @@ public class AlgorithmDao {
      * Checks if the selected owner exists in users, departments, or companies collection; if so,
      * returns the related ObjectId.
      *
-     * @param algorithm the selected algorithm.
-     * @param usersCollection the collection of registered users.
+     * @param algorithm             the selected algorithm.
+     * @param usersCollection       the collection of registered users.
      * @param departmentsCollection the collection of registered departments.
-     * @param companiesCollection the collection of registered companies.
+     * @param companiesCollection   the collection of registered companies.
      * @return the Id of the owner of the algorithm if exists, null otherwise.
      */
     private ObjectId checkOwner(Algorithm algorithm, DBCollection usersCollection,
@@ -308,7 +308,7 @@ public class AlgorithmDao {
         if (algorithm.getOwner() instanceof ObjectId) { // already stored as ObjectId
             ObjectId ownerId = algorithm.getOwnerId();
 
-            log.debug("Inserted owner Id: " + ownerId.toString());
+            log.debug("Inserted owner Id: " + ownerId.toHexString());
 
             query.put("_id", ownerId);
         } else if (algorithm.getOwner() instanceof String) { // stored as a String
@@ -323,7 +323,7 @@ public class AlgorithmDao {
 
             query.put("_id", new ObjectId(ownerId));
         } else { // unknown type
-            log.error("The owner Id is not valid.");
+            log.error(MSG_ERR_NOT_VALID_OWNER_ID);
             return null;
         }
 
@@ -357,10 +357,10 @@ public class AlgorithmDao {
      * Checks if the selected Ids in permissions (can be user, department, or company) exist in
      * users, departments, or companies collection; if so, returns the list of permissions.
      *
-     * @param algorithm the selected algorithm.
-     * @param usersCollection the collection of registered users.
+     * @param algorithm             the selected algorithm.
+     * @param usersCollection       the collection of registered users.
      * @param departmentsCollection the collection of registered departments.
-     * @param companiesCollection the collection of registered companies.
+     * @param companiesCollection   the collection of registered companies.
      * @return permissionsList the list of permissions.
      */
     private List<Permission> checkPermissions(Algorithm algorithm, DBCollection usersCollection,
@@ -368,6 +368,7 @@ public class AlgorithmDao {
 
         // Check if the field exists
         if (algorithm.getPermissions() == null) {
+            log.error(MSG_ERR_NOT_VALID_PERMISSION);
             return null;
         }
 
@@ -381,6 +382,7 @@ public class AlgorithmDao {
         for (Object rawCurrPerm : rawPermissionsList) {
             Permission currPerm = new Permission((Map) rawCurrPerm);
             if (!ObjectId.isValid(currPerm.getReference())) {
+                log.error(MSG_ERR_NOT_VALID_PERMISSION);
                 return null;
             }
             // TODO: insert check for "perm" string too
@@ -398,6 +400,7 @@ public class AlgorithmDao {
             int resNumDepartment = departmentsCollection.find(query).count(); // count departments
             int resNumCompany = companiesCollection.find(query).count(); // count companies
             if ((resNumUser + resNumDepartment + resNumCompany) == 0) {
+                log.error(MSG_ERR_NOT_VALID_PERMISSION);
                 return null;
             }
         }

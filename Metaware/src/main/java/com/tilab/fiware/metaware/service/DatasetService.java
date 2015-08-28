@@ -54,7 +54,7 @@ public class DatasetService {
     }
 
     /**
-     * Retrieves the selected dataset's metadata for the specific user.
+     * Retrieves the selected dataset's metadata.
      *
      * @param id the Id of the selected dataset's metadata.
      * @return the selected dataset's metadata.
@@ -69,9 +69,8 @@ public class DatasetService {
      *
      * @param dataset the new dataset's metadata to be saved.
      * @return the Id of the new dataset's metadata.
-     * @throws com.fasterxml.jackson.core.JsonProcessingException
      */
-    public String createDataset(Dataset dataset) throws JsonProcessingException {
+    public String createDataset(Dataset dataset) {
         log.debug(MSG_SRV_CREATE);
         return INSTANCE.getDatasetDao().createDataset(dataset);
     }
@@ -79,9 +78,9 @@ public class DatasetService {
     /**
      * Update the selected dataset's metadata if exists, otherwise create a new one.
      *
-     * @param id the Id of the selected dataset's metadata to be updated.
+     * @param id      the Id of the selected dataset's metadata to be updated.
      * @param dataset the dataset's metadata object with the modifications (or the dataset's
-     * metadata to be saved).
+     *                metadata to be saved).
      * @return the updated dataset's metadata object.
      */
     public Dataset upsertDataset(String id, Dataset dataset) {

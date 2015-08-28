@@ -44,7 +44,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
-import org.json.JSONException;
+//import org.json.JSONException;
 
 /**
  * API about users.
@@ -91,7 +91,7 @@ public class UserRestSrv {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUsersList(
             @ApiParam(value = "Basic authentication string",
-                    defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
             @HeaderParam("Authorization") String authorization) {
         log.info(MSG_GET_LIST);
 
@@ -119,7 +119,7 @@ public class UserRestSrv {
      * Retrieves the selected user by Id.
      *
      * @param authorization basic authorization string.
-     * @param id the id of the selected user.
+     * @param id            the id of the selected user.
      * @return the selected user.
      */
     @GET
@@ -138,7 +138,7 @@ public class UserRestSrv {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(
             @ApiParam(value = "Basic authentication string",
-                    defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "Id of the user to fetch", required = true)
             @PathParam("userId") String id) {
@@ -174,7 +174,7 @@ public class UserRestSrv {
      * Creates a new user.
      *
      * @param authorization basic authorization string.
-     * @param user the new user to be created.
+     * @param user          the new user to be created.
      * @return the id of the new user.
      */
     @POST
@@ -191,7 +191,7 @@ public class UserRestSrv {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(
             @ApiParam(value = "Basic authentication string",
-                    defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "The user to be created", required = true) User user) {
         log.info(MSG_CREATE);
@@ -203,7 +203,7 @@ public class UserRestSrv {
         } catch (BadRequestException e) {
             log.error(e, e);
             return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch (JsonProcessingException | NoSuchAlgorithmException | JSONException e) {
+        } catch (Exception e) {
             log.error(e, e);
             return Response.serverError().build();
         }
@@ -215,8 +215,8 @@ public class UserRestSrv {
      * Updates an existing user on insert a new one.
      *
      * @param authorization basic authorization string.
-     * @param id the Id of the selected user to be updated.
-     * @param user the user object with the modifications (or the user to be saved).
+     * @param id            the Id of the selected user to be updated.
+     * @param user          the user object with the modifications (or the user to be saved).
      * @return
      */
     @PUT
@@ -236,12 +236,12 @@ public class UserRestSrv {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response upsertUser(
             @ApiParam(value = "Basic authentication string",
-                    defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "The Id of the selected user to be updated", required = true)
             @PathParam("userId") String id,
             @ApiParam(value = "The user object with the modifications (or the user to be saved)",
-                    required = true) User user) {
+                      required = true) User user) {
         log.info(MSG_UPSERT);
 
         User res;
@@ -268,7 +268,7 @@ public class UserRestSrv {
      * Deletes the selected user by Id.
      *
      * @param authorization basic authorization string.
-     * @param id the id of the selected user to be removed.
+     * @param id            the id of the selected user to be removed.
      * @return
      */
     @DELETE
@@ -285,7 +285,7 @@ public class UserRestSrv {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(
             @ApiParam(value = "Basic authentication string",
-                    defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "The Id of the selected user to be removed", required = true)
             @PathParam("userId") String id) {
