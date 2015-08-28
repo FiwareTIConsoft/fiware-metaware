@@ -225,7 +225,6 @@ public class DiscoverObjDaoTest {
         List expResultList = new ArrayList();
         expResultList.add(data3);
         DiscoverObjDao instance = new DiscoverObjDao();
-        System.out.println(id);
         List result = instance.discoverUsable(id);
         assertTrue(expResultList.containsAll(result) && result.containsAll(expResultList));
     }

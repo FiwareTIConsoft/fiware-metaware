@@ -20,8 +20,10 @@
  */
 package com.tilab.fiware.metaware.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import static com.tilab.fiware.metaware.core.SingltProv.INSTANCE;
 import com.tilab.fiware.metaware.dao.exception.BadRequestException;
+import com.tilab.fiware.metaware.dao.exception.ResourceNotFoundException;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Process;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -104,16 +106,39 @@ public class ProcessRestSrv {
     @ApiResponses(value = {
         @ApiResponse(code = 501, message = "Not Implemented")
     })
-    //@Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getProcess(
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "Id of the process' metadata to fetch", required = true)
             @PathParam("processId") String id) {
         log.info(MSG_GET);
 
-        log.error(MSG_ERR_NOT_IMPL);
+        Process process;
 
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+        // Retrieve requesting process
+        try {
+            process = INSTANCE.getProcessService().getProcess(id);
+        } catch (BadRequestException e) {
+            log.error(e, e);
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (ResourceNotFoundException e) {
+            log.error(e, e);
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } catch (Exception e) {
+            log.error(e, e);
+            return Response.serverError().build();
+        }
+
+        String jsonMsg;
+
+        try {
+            jsonMsg = INSTANCE.getObjectMapper().writeValueAsString(process);
+        } catch (JsonProcessingException e) {
+            log.error(e, e);
+            return Response.serverError().build();
+        }
+
+        return Response.ok(jsonMsg, MediaType.APPLICATION_JSON).build();
     }
 
     /**

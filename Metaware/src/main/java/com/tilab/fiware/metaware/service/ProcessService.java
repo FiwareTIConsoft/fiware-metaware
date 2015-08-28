@@ -60,7 +60,7 @@ public class ProcessService {
      */
     public Process getProcess(String id) {
         log.debug(MSG_SRV_GET + id);
-        throw new UnsupportedOperationException("Not supported yet.");
+        return INSTANCE.getProcessDao().getProcess(id);
     }
 
     /**

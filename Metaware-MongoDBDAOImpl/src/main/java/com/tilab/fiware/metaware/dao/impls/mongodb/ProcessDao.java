@@ -29,11 +29,13 @@ import static com.tilab.fiware.metaware.dao.DaoCommonConstants.DEPARTMENTS_COLLE
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.PROCESSES_COLLECTION_NAME;
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.USERS_COLLECTION_NAME;
 import com.tilab.fiware.metaware.dao.exception.BadRequestException;
+import com.tilab.fiware.metaware.dao.exception.ResourceNotFoundException;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Company;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Department;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Permission;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Process;
+import com.tilab.fiware.metaware.dao.impls.mongodb.domain.ProcessingBlock;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +87,37 @@ public class ProcessDao {
      */
     public Process getProcess(String id) {
         log.debug(MSG_DAO_GET + id);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        // Check Id validity
+        if (!ObjectId.isValid(id)) {
+            log.error(MSG_ERR_NOT_VALID_ID);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_ID);
+        }
+
+        // Set the collection
+        processesCollection = INSTANCE.getDatasource().getDbCollection(PROCESSES_COLLECTION_NAME);
+        processesCollection.setObjectClass(Process.class);
+        processesCollection.setInternalClass("processingBlocks", ProcessingBlock.class);
+
+        // Make the query
+        BasicDBObject query = new BasicDBObject();
+        query.put("_id", new ObjectId(id));
+        Process process = (Process) processesCollection.findOne(query);
+
+        if (process == null) {
+            log.error(MSG_ERR_NOT_FOUND);
+            throw new ResourceNotFoundException(MSG_ERR_NOT_FOUND);
+        }
+
+        String jsonMsg;
+
+        try {
+            jsonMsg = INSTANCE.getObjectMapper().writeValueAsString(process);
+        } catch (JsonProcessingException e) {
+            log.error(e, e);
+        }
+
+        return process;
     }
 
     /**
