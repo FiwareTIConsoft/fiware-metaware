@@ -13,14 +13,38 @@ This project is part of FIWARE.
 ##Abstract
 This is a cookbook with recipes that show how to interact with Metaware API.
 
+##Authentication
+Every API listed in this document can be accessed through a Basic authorization ("Authorization" field in header).
+
+##Authorization
+The authorization in Metaware is based on a specific "permission" field, stored in every object.
+This field is an array and each element contains two fields:
++ referenceId (id - string) - Id of the referring entity (can be a company, a department, or a user)
++ perm (string) - similarly to Unix permissions, this string contains the actions that the referring entity can do; "r": can read, "u": can update, "d": can delete (e.g., "rud": the referring entity can read, update, and delete the object).
+
+##Error list
++ Bad request (400): the received JSON object contains some errors.
++ Resource not found (404): they selected resource cannot be found.
++ Server error (500): the Metaware server has encountered an unexpected error.
+
 
 
 #Group Company
 Resources related to companies in the API.
 
+A company has the following fields:
++ _id (id - string)
++ name (string)
++ description (string)
++ email (string)
++ phone (string)
++ address (string)
++ url (string)
+
 ##Companies [/api/v1/companies]
 This resource refers to the whole companies collection.
 ###List all companies [GET]
+Retrieves the list of all the stored companies metadata.
 + Request (application/json)
 
     + Headers
@@ -58,6 +82,7 @@ This resource refers to the whole companies collection.
         ]
 
 ###Insert a new company [POST]
+The metadata related to the new company is stored.
 + Request (application/json)
 
     + Headers
@@ -85,6 +110,7 @@ This resource refers to a specific company.
     + companyId (string) - Id of a specific company
 
 ###Retrieve a company [GET]
+Obtains the metadata of the selected company.
 + Request (application/json)
 
     + Headers
@@ -103,6 +129,7 @@ This resource refers to a specific company.
         }
 
 ###Update a company [PUT]
+Modifies (or insert if missing) the metadata related to a specific company.
 + Request (application/json)
 
     + Headers
@@ -131,6 +158,7 @@ This resource refers to a specific company.
         }
 
 ###Remove a company [DELETE]
+Removes the metadata related to the selected company.
 + Request (application/json)
 
     + Headers
@@ -144,9 +172,22 @@ This resource refers to a specific company.
 
 
 #Group Department
+Resources related to departments in the API.
+
+A department belongs to a company and it has the following fields:
++ _id (id - string)
++ name (string)
++ description (string)
++ company_id (id - string) - this is the Id of the related company
++ email (string)
++ phone (string)
++ address (string)
++ url (string)
+
 ##Departments [/api/v1/departments]
 This resource refers to the whole departments collection.
 ###List all departments [GET]
+Retrieves the metadata about all the departments stored in Metaware.
 + Request (application/json)
 
     + Headers
@@ -177,6 +218,7 @@ This resource refers to the whole departments collection.
         ]
 
 ###Insert a new department [POST]
+Store the metadata information about a new department.
 + Request (application/json)
 
     + Headers
@@ -205,6 +247,7 @@ This resource refers to a specific department.
     + departmentId (string) - Id of a specific departments
 
 ###Retrieve a department [GET]
+Obtains the metadata information related to the selected department.
 + Request (application/json)
 
     + Headers
@@ -224,6 +267,7 @@ This resource refers to a specific department.
         }
 
 ###Update a department [PUT]
+Modifies (or insert if missing) the metadata information related to the selected department.
 + Request (application/json)
 
     + Headers
@@ -254,6 +298,7 @@ This resource refers to a specific department.
         }
 
 ###Remove a department [DELETE]
+Removes from Metaware the metadata related to a specific department.
 + Request (application/json)
 
     + Headers
@@ -268,9 +313,24 @@ This resource refers to a specific department.
 
 #Group User
 Resources related to users in the API.
+
+A user can be associated to a department and a company; the schema is the following:
++ _id (id - string)
++ name (string)
++ surname (string)
++ email (string)
++ phone (string)
++ address (string)
++ company_id (id - string) - this is the Id of the related company
++ department_id (id - string) - this is the Id of the related department
++ username (string)
++ password (hashed string)
++ role (string) - can be "basic" or "admin".
+
 ##Users [/api/v1/users]
 This resource refers to the whole users collection.
 ###List all users [GET]
+Retrieves the metadata related to all the registered users.
 + Request (application/json)
 
     + Headers
@@ -307,6 +367,7 @@ This resource refers to the whole users collection.
         ]
 
 ###Insert a new user [POST]
+Registers the metadata of a new user.
 + Request (application/json)
 
     + Headers
@@ -337,6 +398,7 @@ This resource refers to a specific user.
     + userId (string) - Id of a specific user
 
 ###Retrieve a user [GET]
+Obtains the metadata of the selected user.
 + Request (application/json)
 
     + Headers
@@ -359,6 +421,7 @@ This resource refers to a specific user.
         }
 
 ###Update a user [PUT]
+Update (or insert if missing) the metadata of the selected user.
 + Request (application/json)
 
     + Headers
@@ -395,6 +458,7 @@ This resource refers to a specific user.
         }
 
 ###Remove a user [DELETE]
+Removes the metadata of the selected user.
 + Request (application/json)
 
     + Headers
@@ -409,9 +473,28 @@ This resource refers to a specific user.
 
 #Group Algorithm
 Resources related to algorithms in the API.
+
+An algorithm has the following fields:
++ _id (id - string)
++ name (string)
++ description (string)
++ type (string)
++ creationDate (long - unix epoch time)
++ lastModifiedDate (long - unix epoch time)
++ permissions (array - permission object) - array of permissions
++ owner (id - string) - the Id of the owner of the algorithm's metadata (can be a company, a department, or a user)
++ status (string)
++ model (string)
++ subModel (string)
++ hiveQuery (string)
++ elapsedTime (long)
++ runNumber (integer)
++ logUrl (string)
+
 ##Algorithms [/api/v1/algorithms]
 This resource refers to the whole algorithms collection.
 ###List all algorithms [GET]
+Retrieves the metadata about all the stored algorithms.
 + Request (application/json)
 
     + Headers
@@ -472,6 +555,7 @@ This resource refers to the whole algorithms collection.
         ]
 
 ###Insert a new algorithm [POST]
+Store the metadata information regarding a new algorithm.
 + Request (application/json)
 
     + Headers
@@ -508,6 +592,7 @@ This resource refers to a specific algorithm.
     + algorithmId (string) - Id of a specific algorithm
     
 ###Retrieve an algorithm [GET]
+Obtains the metadata about a selected algorithm.
 + Request (application/json)
 
     + Headers
@@ -540,6 +625,7 @@ This resource refers to a specific algorithm.
         }
 
 ###Update an algorithm [PUT]
+Modifies (or insert if missing) the metadata about the selected algorithm.
 + Request (application/json)
 
     + Headers
@@ -596,6 +682,7 @@ This resource refers to a specific algorithm.
         }
 
 ###Delete an algorithm [DELETE]
+Removes from Metaware the metadata of the selected algorithm.
 + Request (application/json)
 
     + Headers
@@ -610,9 +697,24 @@ This resource refers to a specific algorithm.
 
 #Group Dataset
 Resources related to datasets in the API.
+
+A dataset has the following fields:
++ _id (id - string)
++ name (string)
++ description (string)
++ type (string)
++ creationDate (long - unix epoch time)
++ lastModifiedDate (long - unix epoch time)
++ permissions (array - permission object) - array of permissions
++ owner (id - string) - the Id of the owner of the algorithm's metadata (can be a company, a department, or a user)
++ status (string)
++ readOnly (boolean
++ structure (dataset structure - object) - simple JSON containing the structure of the related dataset (e.g., "X_COORD" : "integer")
+
 ##Datasets [/api/v1/datasets]
 This resource refers to the whole datasets collection.
 ###List all datasets [GET]
+Retrieves the metadata of the whole list of datasets in Metaware.
 + Request (application/json)
 
     + Headers
@@ -687,6 +789,7 @@ This resource refers to the whole datasets collection.
         ]
 
 ###Insert a new dataset [POST]
+Store the metadata information about the new dataset.
 + Request (application/json)
 
     + Headers
@@ -719,6 +822,7 @@ This resource refers to a specific dataset.
     + datasetId (string) - Id of a specific dataset
 
 ###Retrieve a dataset [GET]
+Obtains the metadata information related to the specified dataset.
 + Request (application/json)
 
     + Headers
@@ -742,6 +846,7 @@ This resource refers to a specific dataset.
         }
 
 ###Update a dataset [PUT]
+Update (or insert, if missing) the metadata related to the selected algorithm.
 + Request (application/json)
 
     + Headers
@@ -794,6 +899,7 @@ This resource refers to a specific dataset.
         }
 
 ###Delete a dataset [DELETE]
+Removes from Metaware the metadata related to the selected dataset
 + Request (application/json)
 
     + Headers
@@ -804,9 +910,10 @@ This resource refers to a specific dataset.
 
         55b2415196f0bc192c79cc31
 
-##Import OpenData (DCAT) [/api/v1/datasets/importOpenData]
+## Import OpenData [/api/v1/datasets/importOpenData]
 This resource imports a dataset in DCAT format.
-###Import a dataset (DCAT) [POST]
+###Import a dataset DCAT [POST]
+Convert and store the DCAT representation of the dataset (open data).
 + Request (application/json)
 
     + Headers
@@ -887,10 +994,14 @@ This resource imports a dataset in DCAT format.
                 </rdf:Description>
             </rdf:RDF>
 
++ Response 200 (application/json)
 
-##Export OpenData (DCAT) [/api/v1/datasets/exportOpenData/{datasetId}]
+        55b2415196f0bc192c79cc31
+
+##Export OpenData [/api/v1/datasets/exportOpenData/{datasetId}]
 This resource exports a specific dataset in DCAT format.
-###Export a dataset (DCAT) [GET]
+###Export a dataset DCAT [GET]
+Retrives and convert the dataset in DCAT format (open data).
 + Request (application/json)
 
     + Headers
@@ -973,9 +1084,28 @@ This resource exports a specific dataset in DCAT format.
 
 #Group Data-Source
 Resources related to data-sources in the API.
+
+A data-source has the following fields:
++ _id (id - string)
++ name (string)
++ description (string)
++ type (string)
++ creationDate (long - unix epoch time)
++ lastModifiedDate (long - unix epoch time)
++ permissions (array - permission object) - array of permissions
++ owner (id - string) - the Id of the owner of the algorithm's metadata (can be a company, a department, or a user)
++ status (string)
++ subtype (string)
++ url (string)
++ username (string)
++ password (string)
++ resourceType (string) - can be "table", "query", or "file"
++ resource (string) - can be "table name", "query", "file name"
+
 ##Data-Sources [/api/v1/datasources]
 This resource refers to the whole data-sources collection.
 ###List all data-sources [GET]
+Retrieves the metadata information about the whole list of data-sources.
 + Request (application/json)
 
     + Headers
@@ -1010,6 +1140,7 @@ This resource refers to the whole data-sources collection.
         ]
 
 ###Insert a new data-source [POST]
+Store the metadata of the new data-source.
 + Request (application/json)
 
     + Headers
@@ -1040,10 +1171,12 @@ This resource refers to the whole data-sources collection.
         55a53117e00277027a182d41
 
 ##Data-Sources [/api/v1/datasources/{datasourceId}]
+This resource refers to a specific data-source.
 + Parameters
     + datasourceId (string) - Id of a specific data-source
 
 ###Retrieve a data-source [GET]
+Obtains the metadata of the specified data-source.
 + Request (application/json)
 
     + Headers
@@ -1076,6 +1209,7 @@ This resource refers to the whole data-sources collection.
         }
 
 ###Update a data-source [PUT]
+Modifies (or insert if missing) the metadata of the selected data-source.
 + Request (application/json)
 
     + Headers
@@ -1123,6 +1257,7 @@ This resource refers to the whole data-sources collection.
         }
 
 ###Delete a data-source [DELETE]
+Removes the metadata of the selected data-source.
 + Request (application/json)
 
     + Headers
@@ -1137,9 +1272,28 @@ This resource refers to the whole data-sources collection.
 
 #Group Process
 Resources related to processes in the API.
+
+A process has the following fields:
++ _id (id - string)
++ name (string)
++ description (string)
++ type (string)
++ creationDate (long - unix epoch time)
++ lastModifiedDate (long - unix epoch time)
++ permissions (array - permission object) - array of permissions
++ owner (id - string) - the Id of the owner of the algorithm's metadata (can be a company, a department, or a user)
++ status (string)
++ frequence (string) - can be "daily", "hourly", etc.
++ startingTime (long - unix epoch time)
++ lastRunTime (long - unix epoch time)
++ runNumber (long)
++ processingBlocks (array - processing blocks) - array of processing block objects; each of these object has two fields: "order" (int) and "block" (string)
++ logUrl (string)
+
 ##Processes [/api/v1/processes]
 This resource refers to the whole processes collection.
 ###List all processes [GET]
+Retrieves the metadata about the whole list of stored processes.
 + Request (application/json)
 
     + Headers
@@ -1183,6 +1337,7 @@ This resource refers to the whole processes collection.
         ]
 
 ###Insert a new process [POST]
+Store the metadata information related to the new process.
 + Request (application/json)
 
     + Headers
@@ -1228,10 +1383,12 @@ This resource refers to the whole processes collection.
         55e07c35a4466d29e3c4cea0
 
 ##Processes [/api/v1/processes/{processId}]
+This resource refers to a specific process.
 + Parameters
     + processId (string) - Id of a specific process
 
 ###Retrieve a process [GET]
+Obtains the metadata of the selected process.
 + Request (application/json)
 
     + Headers
@@ -1273,6 +1430,7 @@ This resource refers to the whole processes collection.
         }
 
 ###Update a process [PUT]
+Update (or insert new, if missing) the metadata of the selected process.
 + Request (application/json)
 
     + Headers
@@ -1339,6 +1497,7 @@ This resource refers to the whole processes collection.
         }
 
 ###Delete a process [DELETE]
+Removes the metadata of the selected process.
 + Request (application/json)
 
     + Headers
@@ -1353,9 +1512,28 @@ This resource refers to the whole processes collection.
 
 #Group Template
 Resources related to templates in the API.
+
+A template contains the various fields that an entity can have (e.g., algorithm, company, user); a template can only have two fields (+ the index), but the latter contains a set of sub-fields that describe the associated entity.
+The following is the example of Company template:
+        
+        {
+            "_id" : ObjectId("5514334787284ced30e20bcf"),
+            "name" : "company",
+            "details" : {
+                "_id" : "id - string",
+                "name" : "string",
+                "description" : "string",
+                "email" : "string",
+                "phone" : "string",
+                "address" : "string",
+                "url" : "string"
+            }
+        }
+
 ##Processes [/api/v1/templates]
 This resource refers to the whole templates collection.
 ###List all templates [GET]
+Obtains all the templates stored in Metaware.
 + Request (application/json)
 
     + Headers
@@ -1410,6 +1588,7 @@ This resource refers to the whole templates collection.
         ]
 
 ###Insert a new template [POST]
+Store a new template.
 + Request (application/json)
 
     + Headers
@@ -1445,10 +1624,12 @@ This resource refers to the whole templates collection.
 
 
 ##Templates [/api/v1/templates/{templateName}]
+This resource refers to a specific template.
 + Parameters
     + templateName (string) - The name of the refering object
 
 ###Retrieve a template [GET]
+Obtains the information related to the specified template.
 + Request (application/json)
 
     + Headers
@@ -1476,6 +1657,7 @@ This resource refers to the whole templates collection.
 
 
 ###Delete a template [DELETE]
+Removes a template from Metaware.
 + Request (application/json)
 
     + Headers
@@ -1491,6 +1673,8 @@ This resource refers to the whole templates collection.
 #Group DiscoverObj
 Resources related to the discover functionality in the API.
 ##Usable [/api/v1/discoverObjects/usable/{requestedId}]
+This resource can be used to obtain a list of objects that can be used by the specified entity (can be a company, a department, or a user).
+This API scans the various collections by checking the "permissions" array in every object, to retrieves the objects "usable" by the specified entity.
 ###Discover usable objects [GET]
 + Request (application/json)
 
@@ -1561,6 +1745,8 @@ Resources related to the discover functionality in the API.
         ]
 
 ##Owned [/api/v1/discoverObjects/owned/{ownerId}]
+This resource can be used to obtain a list of objects that are owned by the specified entity (can be a company, a department, or a user).
+This API scans the various collections by checking the "owner" field in every object.
 ###Discover owned objects [GET]
 + Request (application/json)
 
