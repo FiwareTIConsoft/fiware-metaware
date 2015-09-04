@@ -1,0 +1,1596 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+#Metaware
+
+Copyright (C) 2015 Telecom Italia S.p.A.
+
+Metaware is the Open Source reference implementation of the Metadata Store Management Platform GE.
+
+This project is part of FIWARE.
+
+
+##Abstract
+This is a cookbook with recipes that show how to interact with Metaware API.
+
+
+
+#Group Company
+Resources related to companies in the API.
+
+##Companies [/api/v1/companies]
+This resource refers to the whole companies collection.
+###List all companies [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "550812fab2d1f89cb41208c2",
+                "name": "Telecom Italia",
+                "description": "Telecom Italia Lab",
+                "email": "info@tilab.com",
+                "phone": "+390112285111",
+                "address": "Via Reiss Romoli 274 Torino",
+                "url": "http://www.telecomitalia.com/"
+            },
+            {
+                "_id": "55081305b2d1f89cb41208c3",
+                "name": "Consoft",
+                "description": "Gruppo Consoft",
+                "email": "info@gruppoconsoft.com",
+                "phone": "+390113161571",
+                "url": "http://www.consoft.it/"
+            },
+            {
+                "_id": "559512dd11f6f3a1c91d0421",
+                "name": "FIWARE",
+                "description": "Open APIs for Open Minds",
+                "email": "fiware-general-help@lists.fi-ware.org",
+                "phone": "",
+                "url": "https://www.fiware.org/"
+            }
+        ]
+
+###Insert a new company [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Consoft",
+                "description": "Gruppo Consoft",
+                "email": "info@gruppoconsoft.com",
+                "phone": "+390113161571",
+                "url": "http://www.consoft.it/"
+            }
+
++ Response 200 (application/json)
+
+        55081305b2d1f89cb41208c3
+
+
+##Companies [/api/v1/companies/{companyId}]
+This resource refers to a specific company.
++ Parameters
+    + companyId (string) - Id of a specific company
+
+###Retrieve a company [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "559512dd11f6f3a1c91d0421",
+            "name": "FIWARE",
+            "description": "Open APIs for Open Minds",
+            "email": "fiware-general-help@lists.fi-ware.org",
+            "phone": "",
+            "url": "https://www.fiware.org/"
+        }
+
+###Update a company [PUT]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "FIWARE Open Source Community",
+                "description": "Open APIs for Open Minds",
+                "email": "fiware-general-help@lists.fi-ware.org",
+                "phone": "123456789",
+                "url": "https://www.fiware.org/"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "559512dd11f6f3a1c91d0421",
+            "name": "FIWARE Open Source Community",
+            "description": "Open APIs for Open Minds",
+            "email": "fiware-general-help@lists.fi-ware.org",
+            "phone": "123456789",
+            "url": "https://www.fiware.org/"
+        }
+
+###Remove a company [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        559512dd11f6f3a1c91d0421
+
+
+
+#Group Department
+##Departments [/api/v1/departments]
+This resource refers to the whole departments collection.
+###List all departments [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "55081357b2d1f89cb41208c5",
+                "name": "Research",
+                "description": "Research department",
+                "company_id": "550812fab2d1f89cb41208c2",
+                "email": "research@telecomitalia.com",
+                "phone": "+390112285111",
+                "url": "http://www.telecomitalia.com/research"
+            },
+            {
+                "_id": "5594f73011f61c70f31dbbfc",
+                "name": "Applications BU",
+                "description": "Applications Business Unit",
+                "company_id": "55081305b2d1f89cb41208c3",
+                "email": "info@gruppoconsoft.com",
+                "phone": "+390113161571",
+                "url": "http://www.consoft.it/"
+            }
+        ]
+
+###Insert a new department [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Customer Service",
+                "description": "Customer service department",
+                "company_id": "550812fab2d1f89cb41208c2",
+                "email": "customerservice@telecomitalia.com",
+                "phone": "+390112285111",
+                "url": "http://www.telecomitalia.com/customerservice"
+            }
+
++ Response 200 (application/json)
+
+        5508134db2d1f89cb41209d5
+
+
+##Departments [/api/v1/departments/{departmentId}]
+This resource refers to a specific department.
++ Parameters
+    + departmentId (string) - Id of a specific departments
+
+###Retrieve a department [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55081357b2d1f89cb41208c5",
+            "name": "Research",
+            "description": "Research department",
+            "company_id": "550812fab2d1f89cb41208c2",
+            "email": "research@telecomitalia.com",
+            "phone": "+390112285111",
+            "url": "http://www.telecomitalia.com/research"
+        }
+
+###Update a department [PUT]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Customer Service Center",
+                "description": "Customer service department",
+                "company_id": "550812fab2d1f89cb41208c2",
+                "email": "customerservicedep@telecomitalia.com",
+                "phone": "+390112285111",
+                "url": "http://www.telecomitalia.com/customerservice"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "5508134db2d1f89cb41209d5",
+            "name": "Customer Service Center",
+            "description": "Customer service department",
+            "company_id": "550812fab2d1f89cb41208c2",
+            "email": "customerservicedep@telecomitalia.com",
+            "phone": "+390112285111",
+            "url": "http://www.telecomitalia.com/customerservice"
+        }
+
+###Remove a department [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        5594f73011f61c70f31dbbfc
+
+
+
+#Group User
+Resources related to users in the API.
+##Users [/api/v1/users]
+This resource refers to the whole users collection.
+###List all users [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "5594fc1611f61c70f31dbbfe",
+                "name": "Marco",
+                "surname": "Verdi",
+                "email": "marcoverdi@telecomitalia.com",
+                "phone": "+390112285111",
+                "company_id": "550812fab2d1f89cb41208c2",
+                "department_id": "5508134db2d1f89cb41208c4",
+                "username": "verdi",
+                "password": "aeca01371581fda90e31862e10405c4948567d1f74cd92aeac5fe8cd29b6ea96",
+                "role": "admin"
+            },
+            {
+                "_id": "55a63b3ae0021578699e84d0",
+                "name": "Lucia",
+                "surname": "Bianchi",
+                "email": "lucia.bianchi@consoft.it",
+                "phone": "+390113161571",
+                "company_id": "55081305b2d1f89cb41208c3",
+                "department_id": "5594f73011f61c70f31dbbfc",
+                "username": "bianchi",
+                "password": "14e59f423e87958ebe26243504b88e5a682e86af814844f2379650303e2bef21",
+                "role": "basic"
+            }
+        ]
+
+###Insert a new user [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Mario",
+                "surname": "Rossi",
+                "email": "mariorossi@consoft.it",
+                "phone": "+390112285111",
+                "company_id": "55081305b2d1f89cb41208c3",
+                "department_id": "5594f73011f61c70f31dbbfc",
+                "username": "rossi",
+                "password": "aeca01371581fda90e31862e10405c4948567d1f74cd92aeac5fe8cd29b6ea96",
+                "role": "basic"
+            }
+
++ Response 200 (application/json)
+
+        55081305b2d1f89cb41208c3
+
+##Users [/api/v1/users/{userId}]
+This resource refers to a specific user.
++ Parameters
+    + userId (string) - Id of a specific user
+
+###Retrieve a user [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55a63b3ae0021578699e84d0",
+            "name": "Lucia",
+            "surname": "Bianchi",
+            "email": "lucia.bianchi@consoft.it",
+            "phone": "+390113161571",
+            "company_id": "55081305b2d1f89cb41208c3",
+            "department_id": "5594f73011f61c70f31dbbfc",
+            "username": "bianchi",
+            "password": "14e59f423e87958ebe26243504b88e5a682e86af814844f2379650303e2bef21",
+            "role": "basic"
+        }
+
+###Update a user [PUT]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Francesca",
+                "surname": "Bianchi",
+                "email": "francescabianchi@consoft.it",
+                "phone": "+39587964421",
+                "company_id": "55081305b2d1f89cb41208c3",
+                "department_id": "5594f73011f61c70f31dbbfc",
+                "username": "bianchihcnaib",
+                "password": "14e59f423e87958ebe26243504b88e5a682e86af814844f2379650303e2bef21",
+                "role": "basic"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55a63b3ae0021578699e84d0",
+            "name": "Francesca",
+            "surname": "Bianchi",
+            "email": "francescabianchi@consoft.it",
+            "phone": "+39587964421",
+            "company_id": "55081305b2d1f89cb41208c3",
+            "department_id": "5594f73011f61c70f31dbbfc",
+            "username": "bianchihcnaib",
+            "password": "14e59f423e87958ebe26243504b88e5a682e86af814844f2379650303e2bef21",
+            "role": "basic"
+        }
+
+###Remove a user [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        55a63b3ae0021578699e84d0
+
+
+
+#Group Algorithm
+Resources related to algorithms in the API.
+##Algorithms [/api/v1/algorithms]
+This resource refers to the whole algorithms collection.
+###List all algorithms [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "556f31ac2c7cc6dbf16985c9",
+                "name": "Dijkstra",
+                "description": "Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph.",
+                "type": "Search",
+                "creationDate": 1362962298,
+                "lastModifiedDate": 1392962298,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    },
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "r"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "model": "model test",
+                "subModel": "submodel test",
+                "hiveQuery": "none",
+                "elapsedTime": 123456789,
+                "runNumber": 125,
+                "logUrl": "https://en.wikipedia.org/wiki/Dijkstra's_algorithm"
+            },
+            {
+                "_id": "556f31e02c7cc6dbf16985ca",
+                "name": "NTRUEncrypt",
+                "description": "The NTRUEncrypt public key cryptosystem, also known as the NTRU encryption algorithm, is a lattice-based alternative to RSA and ECC and is based on the shortest vector problem in a lattice (which is not known to be breakable using quantum computers).",
+                "type": "Security",
+                "creationDate": 820458061,
+                "lastModifiedDate": 1293843661,
+                "permissions": [
+                    {
+                        "referenceId": "5594fc1611f61c70f31dbbfe",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "5594fc1611f61c70f31dbbfe",
+                "status": "private",
+                "model": "updated model test",
+                "subModel": "submodel test",
+                "hiveQuery": "none",
+                "elapsedTime": 123456789,
+                "runNumber": 500,
+                "logUrl": "https://www.securityinnovation.com/products/encryption-libraries/ntru-cryptography.html"
+            }
+        ]
+
+###Insert a new algorithm [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "RSA",
+                "description": "RSA is one of the first practical public-key cryptosystems and is widely used for secure data transmission. In such a cryptosystem, the encryption key is public and differs from the decryption key which is kept secre.",
+                "type": "Security",
+                "creationDate": 218160000,
+                "lastModifiedDate": 968198400,
+                "permissions": [],
+                "owner": "5594fc1611f61c70f31dbbfe",
+                "status": "public",
+                "model": "updated model test",
+                "subModel": "submodel test",
+                "hiveQuery": "none",
+                "elapsedTime": 123456789,
+                "runNumber": 10,
+                "logUrl": "http://www.emc.com/emc-plus/rsa-labs/standards-initiatives/pkcs-rsa-cryptography-standard.htm"
+            }
+
++ Response 200 (application/json)
+
+        556f31e02c7cc6dbf16985ca
+
+
+##Algorithms [/api/v1/algorithms/{algorithmId}]
+This resource refers to a specific algorithm.
++ Parameters
+    + algorithmId (string) - Id of a specific algorithm
+    
+###Retrieve an algorithm [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "556f31e02c7cc6dbf16985ca",
+            "name": "NTRUEncrypt",
+            "description": "The NTRUEncrypt public key cryptosystem, also known as the NTRU encryption algorithm, is a lattice-based alternative to RSA and ECC and is based on the shortest vector problem in a lattice (which is not known to be breakable using quantum computers).",
+            "type": "Security",
+            "creationDate": 820458061,
+            "lastModifiedDate": 1293843661,
+            "permissions": [
+                {
+                    "referenceId": "5594fc1611f61c70f31dbbfe",
+                    "perm": "rud"
+                }
+            ],
+            "owner": "5594fc1611f61c70f31dbbfe",
+            "status": "private",
+            "model": "updated model test",
+            "subModel": "submodel test",
+            "hiveQuery": "none",
+            "elapsedTime": 123456789,
+            "runNumber": 500,
+            "logUrl": "https://www.securityinnovation.com/products/encryption-libraries/ntru-cryptography.html"
+        }
+
+###Update an algorithm [PUT]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "NTRU encryption algorithm",
+                "description": "The NTRUEncrypt public key cryptosystem, also known as the NTRU encryption algorithm, is a lattice-based alternative to RSA and ECC and is based on the shortest vector problem in a lattice (which is not known to be breakable using quantum computers).",
+                "type": "Security",
+                "creationDate": 820458061,
+                "lastModifiedDate": 1293843661,
+                "permissions": [
+                    {
+                        "referenceId": "5594fc1611f61c70f31dbbfe",
+                        "perm": "r"
+                    }
+                ],
+                "owner": "5594fc1611f61c70f31dbbfe",
+                "status": "private",
+                "model": "model test",
+                "subModel": "submodel test",
+                "hiveQuery": "none",
+                "elapsedTime": 123456789,
+                "runNumber": 5000,
+                "logUrl": "https://www.securityinnovation.com/products/encryption-libraries/ntru-cryptography.html"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "556f31e02c7cc6dbf16985ca",
+            "name": "NTRU encryption algorithm",
+            "description": "The NTRUEncrypt public key cryptosystem, also known as the NTRU encryption algorithm, is a lattice-based alternative to RSA and ECC and is based on the shortest vector problem in a lattice (which is not known to be breakable using quantum computers).",
+            "type": "Security",
+            "creationDate": 820458061,
+            "lastModifiedDate": 1293843661,
+            "permissions": [
+                {
+                    "referenceId": "5594fc1611f61c70f31dbbfe",
+                    "perm": "r"
+                }
+            ],
+            "owner": "5594fc1611f61c70f31dbbfe",
+            "status": "private",
+            "model": "model test",
+            "subModel": "submodel test",
+            "hiveQuery": "none",
+            "elapsedTime": 123456789,
+            "runNumber": 5000,
+            "logUrl": "https://www.securityinnovation.com/products/encryption-libraries/ntru-cryptography.html"
+        }
+
+###Delete an algorithm [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        556f31e02c7cc6dbf16985ca
+
+
+
+#Group Dataset
+Resources related to datasets in the API.
+##Datasets [/api/v1/datasets]
+This resource refers to the whole datasets collection.
+###List all datasets [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "559503cd11f61c70f31dbbff",
+                "name": "Bike Sharing",
+                "description": "Bike Sharing of Turin from AperTO",
+                "type": "test",
+                "creationDate": 1411002061,
+                "lastModifiedDate": 1474160461,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "readOnly": false,
+                "keyword": "bike",
+                "theme": "viability",
+                "accessUrl": "http://aperto.comune.torino.it/sites/default/files/bike_sharing.csv",
+                "distDescription": "Comma separated value file",
+                "distFormat": "cvs",
+                "license": "http://www.dati.gov.it/iodl/2.0/",
+                "structure": {
+                    "ID_STRING": "String",
+                    "ID_BIKE_SHARING": "String",
+                    "DENOMINAZIONE": "String",
+                    "URL": "String",
+                    "COORD_X": "Float",
+                    "COORD_Y": "Float"
+                }
+            },
+            {
+                "_id": "5595128411f6f3a1c91d0420",
+                "name": "Car Sharing",
+                "description": "Car Sharing of Turin from AperTO",
+                "type": "test",
+                "creationDate": 1411002061,
+                "lastModifiedDate": 1474160461,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "readOnly": false,
+                "keyword": "car",
+                "theme": "viability",
+                "accessUrl": "http://aperto.comune.torino.it/sites/default/files/car_sharing.csv",
+                "distDescription": "Comma separated value file",
+                "distFormat": "cvs",
+                "license": "http://www.dati.gov.it/iodl/2.0/",
+                "structure": {
+                    "ID_CAR_SHARING": "String",
+                    "NOME_PARCHEGGIO": "String",
+                    "UBICAZIONE": "String",
+                    "URL": "String",
+                    "COORD_X": "Float",
+                    "COORD_Y": "Float"
+                }
+            }
+        ]
+
+###Insert a new dataset [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Skate Sharing",
+                "description": "Skate Sharing of Turin from AperTO",
+                "type": "Default type",
+                "creationDate": 1411002061,
+                "lastModifiedDate": 1474160461,
+                "permissions": [],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "readOnly": false,
+                "structure": {}
+            }
+
++ Response 200 (application/json)
+
+        55b2415196f0bc192c79cc31
+
+
+##Datasets [/api/v1/datasets/{datasetId}]
+This resource refers to a specific dataset.
++ Parameters
+    + datasetId (string) - Id of a specific dataset
+
+###Retrieve a dataset [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55b2415196f0bc192c79cc31",
+            "name": "Skate Sharing",
+            "description": "Skate Sharing of Turin from AperTO",
+            "type": "Default type",
+            "creationDate": 1411002061,
+            "lastModifiedDate": 1474160461,
+            "permissions": [],
+            "owner": "550812fab2d1f89cb41208c2",
+            "status": "public",
+            "readOnly": false,
+            "structure": {}
+        }
+
+###Update a dataset [PUT]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Skate Sharing",
+                "description": "Skate Sharing of Turin from AperTO",
+                "type": "Default type",
+                "creationDate": 1411002061,
+                "lastModifiedDate": 1474160461,
+                "permissions": [],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "readOnly": false,
+                "structure": {
+                    "ID_SKATE_SHARING": "String",
+                    "NAME_HUB": "String",
+                    "UBICAZIONE": "String",
+                    "URL": "String",
+                    "COORD_X": "Float",
+                    "COORD_Y": "Float"
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55b2415196f0bc192c79cc31",
+            "name": "Skate Sharing",
+            "description": "Skate Sharing of Turin from AperTO",
+            "type": "Default type",
+            "creationDate": 1411002061,
+            "lastModifiedDate": 1474160461,
+            "permissions": [],
+            "owner": "550812fab2d1f89cb41208c2",
+            "status": "public",
+            "readOnly": false,
+            "structure": {
+                "ID_SKATE_SHARING": "String",
+                "NAME_HUB": "String",
+                "UBICAZIONE": "String",
+                "URL": "String",
+                "COORD_X": "Float",
+                "COORD_Y": "Float"
+            }
+        }
+
+###Delete a dataset [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        55b2415196f0bc192c79cc31
+
+##Import OpenData (DCAT) [/api/v1/datasets/importOpenData]
+This resource imports a dataset in DCAT format.
+###Import a dataset (DCAT) [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            <?xml version="1.0"?>
+            <rdf:RDF
+                xmlns:dct="http://purl.org/dc/terms/"
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:adms="http://www.w3.org/ns/adms#"
+                xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+                xmlns:dcat="http://www.w3.org/ns/dcat#"
+                xmlns:foaf="http://xmlns.com/foaf/0.1/" >
+                <rdf:Description rdf:about="http://metaware.org/dataset#559503cd11f61c70f31dbbff">
+                    <rdf:type>http://www.w3.org/ns/dcat#Dataset</rdf:type>
+                    <dct:description>Bike Sharing of Turin from AperTO</dct:description>
+                    <dct:publisher rdf:resource="http://metaware.org/organization#550812fab2d1f89cb41208c2"/>
+                    <dct:title>Bike Sharing</dct:title>
+                    <adms:contactPoint rdf:resource="http://metaware.org/contactpoint#550812fab2d1f89cb41208c2"/>
+                    <dcat:keyword>bike</dcat:keyword>
+                    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-09-18T03:01:01</dct:modified>
+                    <dct:identifier>559503cd11f61c70f31dbbff</dct:identifier>
+                    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-09-18T03:01:01</dct:issued>
+                    <dcat:distribution rdf:resource="http://metaware.org/distribution#558d759f8192682c10631285"/>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://metaware.org/organization#550812fab2d1f89cb41208c2">
+                    <foaf:mbox>info@tilab.com</foaf:mbox>
+                    <foaf:homepage>http://www.telecomitalia.com/</foaf:homepage>
+                    <foaf:name>Telecom Italia</foaf:name>
+                    <dct:type>http://purl.org/adms/publishertype/Company</dct:type>
+                    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://metaware.org/address#">
+                    <vcard:country-name>tmp</vcard:country-name>
+                    <vcard:locality>tmp</vcard:locality>
+                    <vcard:postal-code>tmp</vcard:postal-code>
+                    <vcard:street-address>Via Reiss Romoli 274 Torino</vcard:street-address>
+                    <rdf:type>http://www.w3.org/2006/vcard/ns#Address</rdf:type>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://metaware.org/publisher#558d761b8192682c10631286">
+                    <foaf:name>Telecom Italia</foaf:name>
+                    <dct:type>http://purl.org/adms/publishertype/Company</dct:type>
+                    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://metaware.org/telephone#">
+                    <rdf:type>http://www.w3.org/2006/vcard/ns#Work</rdf:type>
+                    <rdf:type>http://www.w3.org/2006/vcard/ns#Voice</rdf:type>
+                    <vcard:hasValue>+390112285111</vcard:hasValue>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://metaware.org/distribution#558d759f8192682c10631285">
+                    <dct:license>http://www.dati.gov.it/iodl/2.0/</dct:license>
+                    <dct:format>cvs</dct:format>
+                    <dct:description>Comma separated value file</dct:description>
+                    <dcat:accessURL>http://aperto.comune.torino.it/sites/default/files/bike_sharing.csv</dcat:accessURL>
+                    <rdf:type>http://www.w3.org/ns/dcat#Distribution</rdf:type>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://metaware.org/catalog#">
+                    <dcat:dataset rdf:resource="http://metaware.org/dataset#559503cd11f61c70f31dbbff"/>
+                    <dct:license rdf:resource="http://www.dati.gov.it/iodl/2.0/"/>
+                    <foaf:homepage>http://metaware.org/</foaf:homepage>
+                    <dct:title>Default Catalog Title</dct:title>
+                    <dct:publisher rdf:resource="http://metaware.org/publisher#558d761b8192682c10631286"/>
+                    <rdf:type>http://www.w3.org/ns/dcat#Catalog</rdf:type>
+                    <dct:description>This is the default catalog for MetaWare.</dct:description>
+                    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-09-04T10:40:18</dct:modified>
+                    <dct:language>http://id.loc.gov/vocabulary/iso639-1/en</dct:language>
+                    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-09-04T10:40:18</dct:issued>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://metaware.org/contactpoint#550812fab2d1f89cb41208c2">
+                    <vcard:hasAddress rdf:resource="http://metaware.org/address#"/>
+                    <vcard:hasTelephone rdf:resource="http://metaware.org/telephone#"/>
+                    <vcard:hasEmail rdf:resource="mailto:info@tilab.com"/>
+                    <vcard:fn>Telecom Italia</vcard:fn>
+                    <rdf:type>http://www.w3.org/2006/vcard/ns#Organization</rdf:type>
+                </rdf:Description>
+            </rdf:RDF>
+
+
+##Export OpenData (DCAT) [/api/v1/datasets/exportOpenData/{datasetId}]
+This resource exports a specific dataset in DCAT format.
+###Export a dataset (DCAT) [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/xml)
+
+        <?xml version="1.0"?>
+        <rdf:RDF
+            xmlns:dct="http://purl.org/dc/terms/"
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:adms="http://www.w3.org/ns/adms#"
+            xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+            xmlns:dcat="http://www.w3.org/ns/dcat#"
+            xmlns:foaf="http://xmlns.com/foaf/0.1/" >
+            <rdf:Description rdf:about="http://metaware.org/dataset#559503cd11f61c70f31dbbff">
+                <rdf:type>http://www.w3.org/ns/dcat#Dataset</rdf:type>
+                <dct:description>Bike Sharing of Turin from AperTO</dct:description>
+                <dct:publisher rdf:resource="http://metaware.org/organization#550812fab2d1f89cb41208c2"/>
+                <dct:title>Bike Sharing</dct:title>
+                <adms:contactPoint rdf:resource="http://metaware.org/contactpoint#550812fab2d1f89cb41208c2"/>
+                <dcat:keyword>bike</dcat:keyword>
+                <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-09-18T03:01:01</dct:modified>
+                <dct:identifier>559503cd11f61c70f31dbbff</dct:identifier>
+                <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-09-18T03:01:01</dct:issued>
+                <dcat:distribution rdf:resource="http://metaware.org/distribution#558d759f8192682c10631285"/>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://metaware.org/organization#550812fab2d1f89cb41208c2">
+                <foaf:mbox>info@tilab.com</foaf:mbox>
+                <foaf:homepage>http://www.telecomitalia.com/</foaf:homepage>
+                <foaf:name>Telecom Italia</foaf:name>
+                <dct:type>http://purl.org/adms/publishertype/Company</dct:type>
+                <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://metaware.org/address#">
+                <vcard:country-name>tmp</vcard:country-name>
+                <vcard:locality>tmp</vcard:locality>
+                <vcard:postal-code>tmp</vcard:postal-code>
+                <vcard:street-address>Via Reiss Romoli 274 Torino</vcard:street-address>
+                <rdf:type>http://www.w3.org/2006/vcard/ns#Address</rdf:type>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://metaware.org/publisher#558d761b8192682c10631286">
+                <foaf:name>Telecom Italia</foaf:name>
+                <dct:type>http://purl.org/adms/publishertype/Company</dct:type>
+                <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://metaware.org/telephone#">
+                <rdf:type>http://www.w3.org/2006/vcard/ns#Work</rdf:type>
+                <rdf:type>http://www.w3.org/2006/vcard/ns#Voice</rdf:type>
+                <vcard:hasValue>+390112285111</vcard:hasValue>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://metaware.org/distribution#558d759f8192682c10631285">
+                <dct:license>http://www.dati.gov.it/iodl/2.0/</dct:license>
+                <dct:format>cvs</dct:format>
+                <dct:description>Comma separated value file</dct:description>
+                <dcat:accessURL>http://aperto.comune.torino.it/sites/default/files/bike_sharing.csv</dcat:accessURL>
+                <rdf:type>http://www.w3.org/ns/dcat#Distribution</rdf:type>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://metaware.org/catalog#">
+                <dcat:dataset rdf:resource="http://metaware.org/dataset#559503cd11f61c70f31dbbff"/>
+                <dct:license rdf:resource="http://www.dati.gov.it/iodl/2.0/"/>
+                <foaf:homepage>http://metaware.org/</foaf:homepage>
+                <dct:title>Default Catalog Title</dct:title>
+                <dct:publisher rdf:resource="http://metaware.org/publisher#558d761b8192682c10631286"/>
+                <rdf:type>http://www.w3.org/ns/dcat#Catalog</rdf:type>
+                <dct:description>This is the default catalog for MetaWare.</dct:description>
+                <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-09-04T10:40:18</dct:modified>
+                <dct:language>http://id.loc.gov/vocabulary/iso639-1/en</dct:language>
+                <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-09-04T10:40:18</dct:issued>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://metaware.org/contactpoint#550812fab2d1f89cb41208c2">
+                <vcard:hasAddress rdf:resource="http://metaware.org/address#"/>
+                <vcard:hasTelephone rdf:resource="http://metaware.org/telephone#"/>
+                <vcard:hasEmail rdf:resource="mailto:info@tilab.com"/>
+                <vcard:fn>Telecom Italia</vcard:fn>
+                <rdf:type>http://www.w3.org/2006/vcard/ns#Organization</rdf:type>
+            </rdf:Description>
+        </rdf:RDF>
+
+#Group Data-Source
+Resources related to data-sources in the API.
+##Data-Sources [/api/v1/datasources]
+This resource refers to the whole data-sources collection.
+###List all data-sources [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "55a53117e00277027a182d41",
+                "name": "Sharing System data-source",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "type": "test",
+                "creationDate": 1436889028,
+                "lastModifiedDate": 1436889039,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "5508151eb2d1f89cb41208c6",
+                "status": "public",
+                "subtype": "initial test",
+                "url": "jdbc://mysql://metaware.org/test/sharing",
+                "username": "metaware",
+                "password": "metaware",
+                "resourceType": "query",
+                "resource": "SELECT * FROM SHARING"
+            }
+        ]
+
+###Insert a new data-source [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Warehouse System data-source",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "type": "test",
+                "creationDate": 1436889028,
+                "lastModifiedDate": 1436889039,
+                "permissions": [],
+                "owner": "5508151eb2d1f89cb41208c6",
+                "status": "public",
+                "subtype": "initial test",
+                "url": "jdbc://mysql://metaware.org/test/warehouse",
+                "username": "metaware",
+                "password": "metaware",
+                "resourceType": "query",
+                "resource": "SELECT * FROM WAREHOUSE"
+            }
+
++ Response 200 (application/json)
+
+        55a53117e00277027a182d41
+
+##Data-Sources [/api/v1/datasources/{datasourceId}]
++ Parameters
+    + datasourceId (string) - Id of a specific data-source
+
+###Retrieve a data-source [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55a53117e00277027a182d41",
+            "name": "Sharing System data-source",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "type": "test",
+            "creationDate": 1436889028,
+            "lastModifiedDate": 1436889039,
+            "permissions": [
+                {
+                    "referenceId": "5508151eb2d1f89cb41208c6",
+                    "perm": "rud"
+                }
+            ],
+            "owner": "5508151eb2d1f89cb41208c6",
+            "status": "public",
+            "subtype": "initial test",
+            "url": "jdbc://mysql://metaware.org/test/sharing",
+            "username": "metaware",
+            "password": "metaware",
+            "resourceType": "query",
+            "resource": "SELECT * FROM SHARING"
+        }
+
+###Update a data-source [PUT]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "_id": "55a53117e00277027a182d41",
+                "name": "Sharing System data-source",
+                "description": "Source point for sharing system.",
+                "type": "Relational database",
+                "creationDate": 1436889028,
+                "lastModifiedDate": 1436889039,
+                "permissions": [],
+                "owner": "5508151eb2d1f89cb41208c6",
+                "status": "public",
+                "subtype": "initial test",
+                "url": "jdbc://mysql://metaware.org/test/sharing",
+                "username": "metaware",
+                "password": "metaware",
+                "resourceType": "query",
+                "resource": "SELECT * FROM SHARING"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55a53117e00277027a182d41",
+            "name": "Sharing System data-source",
+            "description": "Source point for sharing system.",
+            "type": "Relational database",
+            "creationDate": 1436889028,
+            "lastModifiedDate": 1436889039,
+            "permissions": [],
+            "owner": "5508151eb2d1f89cb41208c6",
+            "status": "public",
+            "subtype": "initial test",
+            "url": "jdbc://mysql://metaware.org/test/sharing",
+            "username": "metaware",
+            "password": "metaware",
+            "resourceType": "query",
+            "resource": "SELECT * FROM SHARING"
+        }
+
+###Delete a data-source [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        55a53117e00277027a182d41
+
+
+
+#Group Process
+Resources related to processes in the API.
+##Processes [/api/v1/processes]
+This resource refers to the whole processes collection.
+###List all processes [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "55e03507a44640611190febc",
+                "name": "Nmap process",
+                "description": "Nmap process running on test machine",
+                "type": "test",
+                "creationDate": 1411002061,
+                "lastModifiedDate": 1440756837,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "frequence": "daily",
+                "startingTime": 1440749631,
+                "lastRuntime": 1411002061,
+                "runNumber": 100,
+                "processingBlocks": [
+                    {
+                        "order": 2,
+                        "block": "somedata"
+                    },
+                    {
+                        "order": 3,
+                        "block": "someotherdata"
+                    }
+                ],
+                "logUrl": "http://metaware.org/process/test/log"
+            }
+        ]
+
+###Insert a new process [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "_id": "55e07c35a4466d29e3c4cea0",
+                "name": "Tracker process",
+                "description": "Tracker process running on test machine",
+                "type": "test",
+                "creationDate": 1411002062,
+                "lastModifiedDate": 1440756832,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "frequence": "daily",
+                "startingTime": 1440749632,
+                "lastRuntime": 1411002062,
+                "runNumber": 1000,
+                "processingBlocks": [
+                    {
+                        "order": 4,
+                        "block": "somedata"
+                    },
+                    {
+                        "order": 5,
+                        "block": "someotherdata"
+                    }
+                ],
+                "logUrl": "http://metaware.org/process/test/log/another"
+            }
+
++ Response 200 (application/json)
+
+        55e07c35a4466d29e3c4cea0
+
+##Processes [/api/v1/processes/{processId}]
++ Parameters
+    + processId (string) - Id of a specific process
+
+###Retrieve a process [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55e07c35a4466d29e3c4cea0",
+            "name": "Tracker process",
+            "description": "Tracker process running on test machine",
+            "type": "test",
+            "creationDate": 1411002062,
+            "lastModifiedDate": 1440756832,
+            "permissions": [
+                {
+                    "referenceId": "5508151eb2d1f89cb41208c6",
+                    "perm": "rud"
+                }
+            ],
+            "owner": "550812fab2d1f89cb41208c2",
+            "status": "public",
+            "frequence": "daily",
+            "startingTime": 1440749632,
+            "lastRuntime": 1411002062,
+            "runNumber": 1000,
+            "processingBlocks": [
+                {
+                    "order": 4,
+                    "block": "somedata"
+                },
+                {
+                    "order": 5,
+                    "block": "someotherdata"
+                }
+            ],
+            "logUrl": "http://metaware.org/process/test/log/another"
+        }
+
+###Update a process [PUT]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "Tracker process",
+                "description": "Tracker process running on localhost",
+                "type": "test",
+                "creationDate": 1411002062,
+                "lastModifiedDate": 1440756832,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "private",
+                "frequence": "hourly",
+                "startingTime": 1440749632,
+                "lastRuntime": 1411002062,
+                "runNumber": 1000,
+                "processingBlocks": [
+                    {
+                        "order": 5,
+                        "block": "someimportantdata"
+                    }
+                ],
+                "logUrl": "http://metaware.org/process/test/log/important"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "55e07c35a4466d29e3c4cea0",
+            "name": "Tracker process",
+            "description": "Tracker process running on localhost",
+            "type": "test",
+            "creationDate": 1411002062,
+            "lastModifiedDate": 1440756832,
+            "permissions": [
+                {
+                    "referenceId": "5508151eb2d1f89cb41208c6",
+                    "perm": "rud"
+                }
+            ],
+            "owner": "550812fab2d1f89cb41208c2",
+            "status": "private",
+            "frequence": "hourly",
+            "startingTime": 1440749632,
+            "lastRuntime": 1411002062,
+            "runNumber": 1000,
+            "processingBlocks": [
+                {
+                    "order": 5,
+                    "block": "someimportantdata"
+                }
+            ],
+            "logUrl": "http://metaware.org/process/test/log/important"
+        }
+
+###Delete a process [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        55e07c35a4466d29e3c4cea0
+
+
+
+#Group Template
+Resources related to templates in the API.
+##Processes [/api/v1/templates]
+This resource refers to the whole templates collection.
+###List all templates [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "550b0b10264ed792cace7a3c",
+                "name": "user",
+                "details": {
+                    "_id": "id - string",
+                    "name": "string",
+                    "surname": "string",
+                    "email": "string",
+                    "phone": "string",
+                    "company_id": "id - string",
+                    "department_id": "id - string",
+                    "username": "string",
+                    "password": "hex - string",
+                    "role": "string"
+                }
+            },
+            {
+                "_id": "5514334787284ced30e20bcf",
+                "name": "company",
+                "details": {
+                    "_id": "id - string",
+                    "name": "string",
+                    "description": "string",
+                    "email": "string",
+                    "phone": "string",
+                    "address": "string",
+                    "url": "string"
+                }
+            },
+            {
+                "_id": "5514338387284ced30e20bd0",
+                "name": "department",
+                "details": {
+                    "_id": "id - string",
+                    "name": "string",
+                    "description": "string",
+                    "company_id": "id - string",
+                    "email": "string",
+                    "phone": "string",
+                    "url": "string"
+                }
+            }
+        ]
+
+###Insert a new template [POST]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
+    + Body
+
+            {
+                "name": "datasources",
+                "details": {
+                    "_id": "id - string",
+                    "name": "string",
+                    "description": "string",
+                    "type": "string",
+                    "creationDate": "int32",
+                    "lastModifiedDate": "int32",
+                    "permissions": "array - permission",
+                    "owner": "id - string",
+                    "status": "string",
+                    "subtype": "string",
+                    "url": "string",
+                    "username": "string",
+                    "password": "string",
+                    "resourceType": "string [table | query | file]",
+                    "resource": "string [table name | query | file name]"
+                }
+            }
+
++ Response 200 (application/json)
+
+        55a63e04e0021578699e84d4
+
+
+##Templates [/api/v1/templates/{templateName}]
++ Parameters
+    + templateName (string) - The name of the refering object
+
+###Retrieve a template [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        {
+            "_id": "550b0b10264ed792cace7a3c",
+            "name": "user",
+            "details": {
+                "_id": "id - string",
+                "name": "string",
+                "surname": "string",
+                "email": "string",
+                "phone": "string",
+                "company_id": "id - string",
+                "department_id": "id - string",
+                "username": "string",
+                "password": "hex - string",
+                "role": "string"
+            }
+        }
+
+
+###Delete a template [DELETE]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        550b0b10264ed792cace7a3c
+
+
+
+#Group DiscoverObj
+Resources related to the discover functionality in the API.
+##Usable [/api/v1/discoverObjects/usable/{requestedId}]
+###Discover usable objects [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "556f31ac2c7cc6dbf16985c9",
+                "name": "Dijkstra",
+                "description": "Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph.",
+                "type": "Search",
+                "creationDate": 1362962298,
+                "lastModifiedDate": 1392962298,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    },
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "r"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "model": "model test",
+                "subModel": "submodel test",
+                "hiveQuery": "none",
+                "elapsedTime": 123456789,
+                "runNumber": 125,
+                "logUrl": "https://en.wikipedia.org/wiki/Dijkstra's_algorithm"
+            },
+            {
+                "_id": "5595128411f6f3a1c91d0420",
+                "name": "Car Sharing",
+                "description": "Car Sharing of Turin from AperTO",
+                "type": "test",
+                "creationDate": 1411002061,
+                "lastModifiedDate": 1474160461,
+                "permissions": [
+                    {
+                        "referenceId": "5508151eb2d1f89cb41208c6",
+                        "perm": "rud"
+                    }
+                ],
+                "owner": "550812fab2d1f89cb41208c2",
+                "status": "public",
+                "readOnly": false,
+                "keyword": "car",
+                "theme": "viability",
+                "accessUrl": "http://aperto.comune.torino.it/sites/default/files/car_sharing.csv",
+                "distDescription": "Comma separated value file",
+                "distFormat": "cvs",
+                "license": "http://www.dati.gov.it/iodl/2.0/",
+                "structure": {
+                    "ID_CAR_SHARING": "String",
+                    "NOME_PARCHEGGIO": "String",
+                    "UBICAZIONE": "String",
+                    "URL": "String",
+                    "COORD_X": "Float",
+                    "COORD_Y": "Float"
+                }
+            }
+        ]
+
+##Owned [/api/v1/discoverObjects/owned/{ownerId}]
+###Discover owned objects [GET]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Basic YWRtaW46YWRtaW4=
+
++ Response 200 (application/json)
+
+        [
+            {
+            "_id": "556f31e02c7cc6dbf16985ca",
+            "name": "NTRUEncrypt",
+            "description": "The NTRUEncrypt public key cryptosystem, also known as the NTRU encryption algorithm, is a lattice-based alternative to RSA and ECC and is based on the shortest vector problem in a lattice (which is not known to be breakable using quantum computers).",
+            "type": "Security",
+            "creationDate": 820458061,
+            "lastModifiedDate": 1293843661,
+            "permissions": [
+                {
+                    "referenceId": "5594fc1611f61c70f31dbbfe",
+                    "perm": "rud"
+                }
+            ],
+            "owner": "5594fc1611f61c70f31dbbfe",
+            "status": "private",
+            "model": "updated model test",
+            "subModel": "submodel test",
+            "hiveQuery": "none",
+            "elapsedTime": 123456789,
+            "runNumber": 500,
+            "logUrl": "https://www.securityinnovation.com/products/encryption-libraries/ntru-cryptography.html"
+            }
+        ]
