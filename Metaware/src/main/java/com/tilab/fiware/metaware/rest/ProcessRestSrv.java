@@ -211,10 +211,12 @@ public class ProcessRestSrv {
             + "object."
     )
     @ApiResponses(value = {
-        @ApiResponse(code = 501, message = "Not Implemented")
+        @ApiResponse(code = 404, message = "Process' metadata not found"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 500, message = "Internal server error")
     })
     @Consumes(MediaType.APPLICATION_JSON)
-    //@Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response upsertProcess(
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "Id of the process' metadata to update", required = true)
@@ -222,9 +224,21 @@ public class ProcessRestSrv {
             @ApiParam(value = "The process' metadata object with the modifications") Process process) {
         log.info(MSG_UPSERT + id);
 
-        log.error(MSG_ERR_NOT_IMPL);
+        Process proc;
+        String jsonMsg;
 
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+        try {
+            proc = INSTANCE.getProcessService().upsertProcess(id, process);
+            jsonMsg = INSTANCE.getObjectMapper().writeValueAsString(proc);
+        } catch (BadRequestException e) {
+            log.error(e, e);
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (Exception e) {
+            log.error(e, e);
+            return Response.serverError().build();
+        }
+
+        return Response.ok(jsonMsg, MediaType.APPLICATION_JSON).build();
     }
 
     /**
@@ -253,13 +267,13 @@ public class ProcessRestSrv {
 
         try {
             INSTANCE.getProcessService().deleteProcess(id);
-        } catch(BadRequestException e) {
+        } catch (BadRequestException e) {
             log.error(e, e);
             return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch(ResourceNotFoundException e) {
+        } catch (ResourceNotFoundException e) {
             log.error(e, e);
             return Response.status(Response.Status.NOT_FOUND).build();
-        } catch(Exception e) {
+        } catch (Exception e) {
             log.error(e, e);
             return Response.serverError().build();
         }

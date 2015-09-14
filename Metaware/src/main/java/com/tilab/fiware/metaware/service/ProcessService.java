@@ -83,7 +83,7 @@ public class ProcessService {
      */
     public Process upsertProcess(String id, Process process) {
         log.debug(MSG_SRV_UPSERT + id);
-        throw new UnsupportedOperationException("Not supported yet.");
+        return INSTANCE.getProcessDao().upsertProcess(id, process);
     }
 
     /**

@@ -175,7 +175,7 @@ public class ProcessServiceTest {
     /**
      * Test of upsertProcess method, of class ProcessService.
      */
-    @Ignore
+    @Test
     public void testUpsertProcess() {
         System.out.println("upsertProcess");
         String id = procId2;
@@ -188,13 +188,13 @@ public class ProcessServiceTest {
         process.setOwner(userId2);
         process.setStatus("public");
         process.setFrequence("daily");
-        process.setStartingTime(process.getStartingTime());
-        process.setLastRunTime(process.getLastRunTime());
+        process.setStartingTime(Long.MAX_VALUE);
+        process.setLastRunTime(Long.MIN_VALUE);
         process.setRunNumber(100L);
         process.setProcessingBlocks(new ArrayList<ProcessingBlock>());
-        process.setLogUrl(process.getLogUrl());
+        process.setLogUrl("http://another.url.test/");
         ProcessService instance = INSTANCE.getProcessService();
-        Process expResult = proc2;
+        Process expResult = process;
         Process result = instance.upsertProcess(id, process);
         assertEquals(expResult, result);
     }

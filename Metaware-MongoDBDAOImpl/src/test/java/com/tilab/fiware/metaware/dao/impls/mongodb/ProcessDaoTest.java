@@ -177,7 +177,7 @@ public class ProcessDaoTest {
     /**
      * Test of upsertProcess method, of class ProcessDao.
      */
-    @Ignore
+    @Test
     public void testUpsertProcess() {
         System.out.println("upsertProcess");
         String id = proc1.getId();

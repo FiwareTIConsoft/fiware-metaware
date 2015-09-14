@@ -64,7 +64,7 @@ public class DatasetDao {
     private static final String MSG_ERR_NOT_VALID_ID = "Not a valid Id.";
     private static final String MSG_ERR_NOT_VALID_OWNER_ID = "Not a valid owner Id.";
     private static final String MSG_ERR_NOT_VALID_OBJ = "Dataset's metadata object not specified.";
-    private static final String MSG_ERR_NOT_VALID_USERS_ID = "Not a valid list of users' id.";
+    private static final String MSG_ERR_NOT_VALID_PERMISSION = "Not a valid list of permissions.";
 
     // MongoDB objects
     private DBCollection datasetsCollection;
@@ -171,8 +171,8 @@ public class DatasetDao {
         if (permissionsList != null) {
             dataset.setPermissions(permissionsList);
         } else {
-            log.error(MSG_ERR_NOT_VALID_USERS_ID);
-            throw new BadRequestException(MSG_ERR_NOT_VALID_USERS_ID);
+            log.error(MSG_ERR_NOT_VALID_PERMISSION);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_PERMISSION);
         }
 
         datasetsCollection = INSTANCE.getDatasource().getDbCollection(DATASETS_COLLECTION_NAME);
@@ -244,8 +244,8 @@ public class DatasetDao {
         if (permissionsList != null) {
             dataset.setPermissions(permissionsList);
         } else {
-            log.error(MSG_ERR_NOT_VALID_USERS_ID);
-            throw new BadRequestException(MSG_ERR_NOT_VALID_USERS_ID);
+            log.error(MSG_ERR_NOT_VALID_PERMISSION);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_PERMISSION);
         }
 
         datasetsCollection = INSTANCE.getDatasource().getDbCollection(DATASETS_COLLECTION_NAME);

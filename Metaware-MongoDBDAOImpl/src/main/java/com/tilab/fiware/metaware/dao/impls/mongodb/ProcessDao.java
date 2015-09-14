@@ -204,8 +204,70 @@ public class ProcessDao {
      * @return the updated process' metadata.
      */
     public Process upsertProcess(String id, Process process) {
-        log.debug(MSG_DAO_UPSERT);
-        throw new UnsupportedOperationException("Not supported yet.");
+        log.debug(MSG_DAO_UPSERT + id);
+
+        // Initial checks
+        if (!ObjectId.isValid(id)) { // check id string
+            log.error(MSG_ERR_NOT_VALID_ID);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_ID);
+        }
+        if (process == null) { // check if process param exists
+            log.error(MSG_ERR_NOT_VALID_OBJ);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_OBJ);
+        }
+        if (process.containsField("_id")) { // intercept the possibility to change the Id
+            process.removeField("_id");
+        }
+
+        // Set collections
+        DBCollection usersCollection = INSTANCE.getDatasource().
+                getDbCollection(USERS_COLLECTION_NAME);
+        DBCollection departmentsCollection = INSTANCE.getDatasource().
+                getDbCollection(DEPARTMENTS_COLLECTION_NAME);
+        DBCollection companiesCollection = INSTANCE.getDatasource().
+                getDbCollection(COMPANIES_COLLECTION_NAME);
+        usersCollection.setObjectClass(User.class);
+        departmentsCollection.setObjectClass(Department.class);
+        companiesCollection.setObjectClass(Company.class);
+
+        // Check if the owner field is ok and retrieve the objectId
+        ObjectId ownerId = checkOwner(process, usersCollection, departmentsCollection,
+                companiesCollection);
+        if (ownerId != null) {
+            process.setOwnerId(ownerId);
+        } else {
+            log.error(MSG_ERR_NOT_VALID_OWNER_ID);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_OWNER_ID);
+        }
+
+        // Check if the users field is ok and retrieve the objectIds list
+        List<Permission> permissionsList = checkPermissions(process, usersCollection,
+                departmentsCollection, companiesCollection);
+        if (permissionsList != null) {
+            process.setPermissions(permissionsList);
+        } else {
+            log.error(MSG_ERR_NOT_VALID_PERMISSION);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_PERMISSION);
+        }
+
+        // Perform the update
+        processesCollection = INSTANCE.getDatasource().getDbCollection(PROCESSES_COLLECTION_NAME);
+        processesCollection.setObjectClass(Process.class);
+        BasicDBObject query = new BasicDBObject();
+        query.put("_id", new ObjectId(id));
+        WriteResult wRes = processesCollection.update(query, process, true, false); // selection criteria, modifications to apply, upsert, multi-document
+
+        // Output production
+        String numUpdates = String.valueOf(wRes.getN()); // wRes.getN returns the number of updated objects
+        String jsonMsg;
+        try {
+            jsonMsg = INSTANCE.getObjectMapper().writeValueAsString(process);
+            log.debug(numUpdates + " processes updated: " + process);
+        } catch (JsonProcessingException e) {
+            log.error(e, e);
+        }
+
+        return process;
     }
 
     /**
@@ -214,7 +276,7 @@ public class ProcessDao {
      * @param id the Id of the selected process' metadata object.
      */
     public void deleteProcess(String id) {
-        log.debug(MSG_DAO_DELETE);
+        log.debug(MSG_DAO_DELETE + id);
 
         // Check passed Id
         if (!ObjectId.isValid(id)) {
