@@ -20,7 +20,6 @@
  */
 package com.tilab.fiware.metaware.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Dataset;
 import java.util.List;
@@ -84,7 +83,7 @@ public class DatasetService {
      * @return the updated dataset's metadata object.
      */
     public Dataset upsertDataset(String id, Dataset dataset) {
-        log.debug(MSG_SRV_UPSERT + id + "...");
+        log.debug(MSG_SRV_UPSERT + id);
         return INSTANCE.getDatasetDao().upsertDataset(id, dataset);
     }
 
@@ -94,7 +93,7 @@ public class DatasetService {
      * @param id the Id of the selected dataset's metadata.
      */
     public void deleteDataset(String id) {
-        log.debug(MSG_SRV_DELETE + id + "...");
+        log.debug(MSG_SRV_DELETE + id);
         INSTANCE.getDatasetDao().deleteDataset(id);
     }
 }

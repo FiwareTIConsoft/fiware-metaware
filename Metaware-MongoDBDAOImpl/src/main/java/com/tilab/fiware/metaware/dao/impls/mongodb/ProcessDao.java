@@ -24,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.WriteResult;
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.COMPANIES_COLLECTION_NAME;
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.DEPARTMENTS_COLLECTION_NAME;
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.PROCESSES_COLLECTION_NAME;
@@ -76,26 +77,26 @@ public class ProcessDao {
      */
     public List<Process> getProcessesList() {
         log.debug(MSG_DAO_GET_LIST);
-        
+
         List<Process> processesList = new ArrayList<>();
-        
+
         // Set the collection
         processesCollection = INSTANCE.getDatasource().getDbCollection(PROCESSES_COLLECTION_NAME);
         processesCollection.setObjectClass(Process.class);
         processesCollection.setInternalClass("processingBlocks", ProcessingBlock.class);
-        
+
         // Make the query
         cursor = processesCollection.find();
-        
+
         try {
-            while(cursor.hasNext()) {
+            while (cursor.hasNext()) {
                 Process p = (Process) cursor.next();
                 processesList.add(p);
             }
         } finally {
             cursor.close();
         }
-        
+
         return processesList;
     }
 
@@ -214,7 +215,23 @@ public class ProcessDao {
      */
     public void deleteProcess(String id) {
         log.debug(MSG_DAO_DELETE);
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        // Check passed Id
+        if (!ObjectId.isValid(id)) {
+            log.error(MSG_ERR_NOT_VALID_ID);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_ID);
+        }
+
+        processesCollection = INSTANCE.getDatasource().getDbCollection(PROCESSES_COLLECTION_NAME);
+        BasicDBObject query = new BasicDBObject();
+        query.put("_id", new ObjectId(id));
+        WriteResult wRes = processesCollection.remove(query);
+
+        // Check the number of deleted objects
+        if (wRes.getN() == 0) { // if 0 then the query found nothing
+            log.error(MSG_ERR_NOT_FOUND);
+            throw new ResourceNotFoundException(MSG_ERR_NOT_FOUND);
+        }
     }
 
     /**

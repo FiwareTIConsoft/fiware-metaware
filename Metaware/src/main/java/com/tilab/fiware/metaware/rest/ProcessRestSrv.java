@@ -240,18 +240,31 @@ public class ProcessRestSrv {
             value = "Deletes the selected process' metadata by its Id"
     )
     @ApiResponses(value = {
-        @ApiResponse(code = 501, message = "Not Implemented")
+        @ApiResponse(code = 404, message = "Process' metadata not found"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 500, message = "Internal server error")
     })
-    //@Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteProcess(
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "Id of the process' metadata to remove", required = true)
             @PathParam("processId") String id) {
         log.info(MSG_DELETE + id);
 
-        log.error(MSG_ERR_NOT_IMPL);
+        try {
+            INSTANCE.getProcessService().deleteProcess(id);
+        } catch(BadRequestException e) {
+            log.error(e, e);
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch(ResourceNotFoundException e) {
+            log.error(e, e);
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } catch(Exception e) {
+            log.error(e, e);
+            return Response.serverError().build();
+        }
 
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+        return Response.ok(id, MediaType.APPLICATION_JSON).build();
     }
 
 }

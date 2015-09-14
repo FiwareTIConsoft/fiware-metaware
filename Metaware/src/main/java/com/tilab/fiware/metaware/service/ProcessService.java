@@ -93,6 +93,6 @@ public class ProcessService {
      */
     public void deleteProcess(String id) {
         log.debug(MSG_SRV_DELETE + id);
-        throw new UnsupportedOperationException("Not supported yet.");
+        INSTANCE.getProcessDao().deleteProcess(id);
     }
 }

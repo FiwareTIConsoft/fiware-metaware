@@ -21,7 +21,6 @@
 package com.tilab.fiware.metaware.dao.impls.mongodb;
 
 import com.mongodb.DBCollection;
-import com.tilab.fiware.metaware.dao.DaoCommonConstants;
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.PROCESSES_COLLECTION_NAME;
 import static com.tilab.fiware.metaware.dao.DaoCommonConstants.USERS_COLLECTION_NAME;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
@@ -134,7 +133,7 @@ public class ProcessDaoTest {
     /**
      * Test of getProcessesList method, of class ProcessDao.
      */
-    @Ignore
+    @Test
     public void testGetProcessesList() {
         System.out.println("getProcessesList");
         ProcessDao instance = new ProcessDao();
@@ -149,7 +148,7 @@ public class ProcessDaoTest {
     /**
      * Test of getProcess method, of class ProcessDao.
      */
-    @Ignore
+    @Test
     public void testGetProcess() {
         System.out.println("getProcess");
         String id = proc1.getId();
@@ -167,9 +166,9 @@ public class ProcessDaoTest {
         System.out.println("createProcess");
         List<Permission> permissionsData = new ArrayList<>();
         Process process = new Process("process test name", "process test description",
-                "test", Long.MIN_VALUE, Long.MIN_VALUE, permissionsData, new ObjectId(user1.getId()),
-                "test status", "daily", Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE,
-                new ArrayList<ProcessingBlock>(), "http://create.process.test");
+                "test", Long.MIN_VALUE, Long.MIN_VALUE, permissionsData,
+                new ObjectId(user1.getId()), "test status", "daily", Long.MIN_VALUE, Long.MIN_VALUE,
+                Long.MIN_VALUE, new ArrayList<ProcessingBlock>(), "http://create.process.test");
         ProcessDao instance = new ProcessDao();
         String result = instance.createProcess(process);
         assertTrue(ObjectId.isValid(result));
@@ -193,7 +192,7 @@ public class ProcessDaoTest {
     /**
      * Test of deleteProcess method, of class ProcessDao.
      */
-    @Ignore
+    @Test
     public void testDeleteProcess() {
         System.out.println("deleteProcess");
         String id = proc2.getId();

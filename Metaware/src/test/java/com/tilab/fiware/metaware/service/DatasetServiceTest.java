@@ -28,7 +28,6 @@ import com.tilab.fiware.metaware.dao.impls.mongodb.domain.DatasetStructure;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Department;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.Permission;
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.User;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

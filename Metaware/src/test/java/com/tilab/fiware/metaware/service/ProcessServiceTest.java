@@ -128,7 +128,7 @@ public class ProcessServiceTest {
     /**
      * Test of getProcessesList method, of class ProcessService.
      */
-    @Ignore
+    @Test
     public void testGetProcessesList() {
         System.out.println("getProcessesList");
         ProcessService instance = INSTANCE.getProcessService();
@@ -142,7 +142,7 @@ public class ProcessServiceTest {
     /**
      * Test of getProcess method, of class ProcessService.
      */
-    @Ignore
+    @Test
     public void testGetProcess() {
         System.out.println("getProcess");
         String id = procId1;
@@ -155,7 +155,7 @@ public class ProcessServiceTest {
     /**
      * Test of createProcess method, of class ProcessService.
      */
-    @Ignore
+    @Test
     public void testCreateProcess() {
         System.out.println("createProcess");
         Process process = new Process("process test name", "process test description",
@@ -202,14 +202,18 @@ public class ProcessServiceTest {
     /**
      * Test of deleteProcess method, of class ProcessService.
      */
-    @Ignore
+    @Test
     public void testDeleteProcess() {
         System.out.println("deleteProcess");
-        String id = "";
         ProcessService instance = INSTANCE.getProcessService();
+        Process process = new Process("process test name", "process test description",
+                "test type", Long.MIN_VALUE, Long.MIN_VALUE, null, null, "private", "hourly",
+                Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE, new ArrayList<ProcessingBlock>(),
+                "http://process.test.two");
+        process.setPermissions(Arrays.asList(perm1));
+        process.setOwner(userId2);
+        String id = instance.createProcess(process);
         instance.deleteProcess(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

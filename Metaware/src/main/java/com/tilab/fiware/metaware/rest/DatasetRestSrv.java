@@ -85,8 +85,8 @@ public class DatasetRestSrv {
     private static final String MSG_GET_LIST = "Datasets' metadata list requested.";
     private static final String MSG_GET = "Dataset's metadata requested with Id: ";
     private static final String MSG_CREATE = "New dataset's metadata creation requested.";
-    private static final String MSG_UPSERT = "Dataset's metadata update requested.";
-    private static final String MSG_DELETE = "Dataset's metadata removal requested.";
+    private static final String MSG_UPSERT = "Dataset's metadata update requested with Id: ";
+    private static final String MSG_DELETE = "Dataset's metadata removal requested with Id: ";
     private static final String MGS_IMPORT_OPENDATA = "New dataset import.";
     private static final String MGS_EXPORT_OPENDATA = "Dataset export.";
 
@@ -353,7 +353,7 @@ public class DatasetRestSrv {
             @PathParam("datasetId") String id,
             @ApiParam(value = "The dataset's metadata object with the modifications (or the object "
                     + "to be saved)") Dataset dataset) {
-        log.info(MSG_UPSERT);
+        log.info(MSG_UPSERT + id);
 
         Dataset res;
         String jsonMsg;
@@ -395,7 +395,7 @@ public class DatasetRestSrv {
             @ApiParam(value = "The Id of the selected dataset's metadata to be removed",
                       required = true)
             @PathParam("datasetId") String id) {
-        log.info(MSG_DELETE);
+        log.info(MSG_DELETE + id);
 
         try {
             INSTANCE.getDatasetService().deleteDataset(id);
