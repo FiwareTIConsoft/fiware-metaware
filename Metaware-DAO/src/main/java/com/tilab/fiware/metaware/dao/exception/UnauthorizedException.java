@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Author: Marco Terrinoni <marco.terrinoni at consoft.it>
+ * Author: Marco Terrinoni marco.terrinoni at consoft.it
  */
 package com.tilab.fiware.metaware.dao.exception;
 
 /**
  * Generic runtime exception for unauthorized request.
  *
- * @author Marco Terrinoni <marco.terrinoni at consoft.it>
+ * @author Marco Terrinoni marco.terrinoni at consoft.it
  */
 public class UnauthorizedException extends RuntimeException {
 

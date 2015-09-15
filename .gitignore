@@ -98,3 +98,4 @@ Metaware/target/
 Metaware-DAO/target/
 Metaware-MongoDBDAOImpl/target/
 Metaware-MongoDBDAOImpl/logs/
+/target/

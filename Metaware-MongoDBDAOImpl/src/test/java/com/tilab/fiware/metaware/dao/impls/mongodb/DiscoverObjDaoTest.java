@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Author: Marco Terrinoni <marco.terrinoni at consoft.it>
+ * Author: Marco Terrinoni marco.terrinoni at consoft.it
  */
 package com.tilab.fiware.metaware.dao.impls.mongodb;
 
@@ -49,7 +49,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Marco Terrinoni <marco.terrinoni at consoft.it>
+ * @author Marco Terrinoni marco.terrinoni at consoft.it
  */
 public class DiscoverObjDaoTest {
 
