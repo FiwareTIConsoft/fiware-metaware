@@ -33,6 +33,7 @@ public class User extends BasicDBObject {
 //    private String surname;
 //    private String email;
 //    private String phone;
+//    private String address;
 //    private Company company;
 //    private Department departments;
 //    private String username;
@@ -48,16 +49,16 @@ public class User extends BasicDBObject {
     /**
      * Full constructor.
      *
-     * @param name the namer of the user.
-     * @param surname the surname of the user.
-     * @param email the email address of the user.
-     * @param phone the phone number of the user.
-     * @param address
-     * @param company_id the company which the user is associated with.
+     * @param name          the namer of the user.
+     * @param surname       the surname of the user.
+     * @param email         the email address of the user.
+     * @param phone         the phone number of the user.
+     * @param address       the address of the user (stored as a String).
+     * @param company_id    the company which the user is associated with.
      * @param department_id the department which the used is associated with.
-     * @param username the username of the user.
-     * @param password the password of the user (hashed).
-     * @param role the role of the user.
+     * @param username      the username of the user.
+     * @param password      the password of the user (hashed).
+     * @param role          the role of the user.
      */
     public User(String name, String surname, String email, String phone, String address,
             ObjectId company_id, ObjectId department_id, String username, String password,
@@ -155,10 +156,20 @@ public class User extends BasicDBObject {
         put("phone", phone);
     }
 
+    /**
+     * Get the physical address of the user as a normal String.
+     *
+     * @return the address of the user.
+     */
     public String getAddress() {
         return getString("address");
     }
 
+    /**
+     * Set the physical address of the user.
+     *
+     * @param address the physical address of the user as a String.
+     */
     public void setAddress(String address) {
         put("address", address);
     }
@@ -213,8 +224,9 @@ public class User extends BasicDBObject {
     }
 
     /**
-     * Assign a department to the user. Note: actually at this version this method is for testing
-     * purpose only.
+     * Assign a department to the user.
+     *
+     * Note: actually at this version this method is for testing purpose only.
      *
      * @param department_id the department Id of the user (as String).
      */

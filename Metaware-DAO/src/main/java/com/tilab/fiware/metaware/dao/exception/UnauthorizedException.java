@@ -27,10 +27,17 @@ package com.tilab.fiware.metaware.dao.exception;
  */
 public class UnauthorizedException extends RuntimeException {
 
+    /**
+     *
+     */
     public UnauthorizedException() {
         super("Unauthorized");
     }
 
+    /**
+     *
+     * @param msg
+     */
     public UnauthorizedException(String msg) {
         super(msg);
     }

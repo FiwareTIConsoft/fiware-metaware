@@ -27,10 +27,17 @@ package com.tilab.fiware.metaware.dao.exception;
  */
 public class InternalErrorException extends RuntimeException {
 
+    /**
+     *
+     */
     public InternalErrorException() {
         super("Internal error.");
     }
 
+    /**
+     *
+     * @param message
+     */
     public InternalErrorException(String message) {
         super(message);
     }

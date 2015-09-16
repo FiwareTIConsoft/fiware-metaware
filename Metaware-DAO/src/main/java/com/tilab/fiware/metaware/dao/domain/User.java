@@ -39,10 +39,24 @@ public class User {
     String username;
     String password; // should be hashed
 
+    /**
+     *
+     */
     public User() {
         departments = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param name
+     * @param surname
+     * @param email
+     * @param phone
+     * @param company
+     * @param departments
+     * @param username
+     * @param password
+     */
     public User(String name, String surname, String email, String phone, Company company,
             List<Department> departments, String username, String password) {
         this.name = name;
@@ -55,66 +69,130 @@ public class User {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     *
+     * @param surname
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     *
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     *
+     * @return
+     */
     public Company getCompany() {
         return company;
     }
 
+    /**
+     *
+     * @param company
+     */
     public void setCompany(Company company) {
         this.company = company;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Department> getDepartments() {
         return departments;
     }
 
+    /**
+     *
+     * @param departments
+     */
     public void setDepartmens(List<Department> departments) {
         this.departments = departments;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }

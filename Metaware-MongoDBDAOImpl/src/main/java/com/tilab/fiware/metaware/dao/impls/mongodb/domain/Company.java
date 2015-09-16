@@ -44,12 +44,12 @@ public class Company extends BasicDBObject {
     /**
      * Full constructor.
      *
-     * @param name the name of the company.
+     * @param name        the name of the company.
      * @param description the description of the company.
-     * @param email the email address of the company.
-     * @param phone the phone number of the company (stored as a String).
-     * @param address the address of the company (stored as a String).
-     * @param url the web page of the company.
+     * @param email       the email address of the company.
+     * @param phone       the phone number of the company (stored as a String).
+     * @param address     the address of the company (stored as a String).
+     * @param url         the web page of the company.
      */
     public Company(String name, String description, String email, String phone, String address,
             String url) {
@@ -98,8 +98,9 @@ public class Company extends BasicDBObject {
     }
 
     /**
+     * Set the description of the company.
      *
-     * @param description
+     * @param description the description of the company.
      */
     public void setDescription(String description) {
         put("description", description);
@@ -115,8 +116,9 @@ public class Company extends BasicDBObject {
     }
 
     /**
+     * Set the email address of the company.
      *
-     * @param email
+     * @param email the email address of the company as a normal String.
      */
     public void setEmail(String email) {
         put("email", email);
@@ -132,33 +134,45 @@ public class Company extends BasicDBObject {
     }
 
     /**
+     * Set the phone number of the company.
      *
-     * @param phone
+     * @param phone the phone number of the company.
      */
     public void setPhone(String phone) {
         put("phone", phone);
     }
 
+    /**
+     * Retrieve the physical address of the company in a unique String.
+     *
+     * @return the address of the company.
+     */
     public String getAddress() {
         return getString("address");
     }
 
+    /**
+     * Set the physical address of the company.
+     *
+     * @param address the address of the company in a unique String.
+     */
     public void setAddress(String address) {
         put("address", address);
     }
 
     /**
-     * Get the web page of the company as a normal String.
+     * Get the web page address of the company as a normal String.
      *
-     * @return the web page of the company as a normal String.
+     * @return the web page address of the company as a normal String.
      */
     public String getUrl() {
         return getString("url");
     }
 
     /**
+     * Set the web page address of the company.
      *
-     * @param url
+     * @param url the web page address of the company as a normal String.
      */
     public void setUrl(String url) {
         put("url", url);

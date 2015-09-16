@@ -27,10 +27,17 @@ package com.tilab.fiware.metaware.dao.exception;
  */
 public class ResourceNotFoundException extends RuntimeException {
 
+    /**
+     *
+     */
     public ResourceNotFoundException() {
         super("Selected resource not found.");
     }
 
+    /**
+     *
+     * @param message
+     */
     public ResourceNotFoundException(String message) {
         super(message);
     }

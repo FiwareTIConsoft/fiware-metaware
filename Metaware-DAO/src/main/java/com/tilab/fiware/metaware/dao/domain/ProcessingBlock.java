@@ -30,23 +30,44 @@ public class ProcessingBlock {
     private int order;
     private String block;
 
+    /**
+     *
+     * @param order
+     * @param block
+     */
     public ProcessingBlock(int order, String block) {
         this.order = order;
         this.block = block;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrder() {
         return order;
     }
 
+    /**
+     *
+     * @param order
+     */
     public void setOrder(int order) {
         this.order = order;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getBlock() {
         return block;
     }
 
+    /**
+     *
+     * @param block
+     */
     public void setBlock(String block) {
         this.block = block;
     }

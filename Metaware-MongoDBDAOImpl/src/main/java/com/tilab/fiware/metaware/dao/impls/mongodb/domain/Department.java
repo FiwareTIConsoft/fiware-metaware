@@ -45,13 +45,13 @@ public class Department extends BasicDBObject {
     /**
      * Full constructor.
      *
-     * @param name the name of the department.
+     * @param name        the name of the department.
      * @param description the description of the department.
-     * @param company_id the Id of the company at which the department is associated.
-     * @param email the email address of the department.
-     * @param phone the phone number of the department.
-     * @param address
-     * @param url the web page of the department.
+     * @param company_id  the Id of the company at which the department is associated.
+     * @param email       the email address of the department.
+     * @param phone       the phone number of the department (stored as a String).
+     * @param address     the address of the department (stored as a String).
+     * @param url         the web page of the department.
      */
     public Department(String name, String description, ObjectId company_id, String email,
             String phone, String address, String url) {
@@ -182,16 +182,26 @@ public class Department extends BasicDBObject {
         put("phone", phone);
     }
 
+    /**
+     * Get the physical address of the department as a normal String.
+     *
+     * @return the address of the department.
+     */
     public String getAddress() {
         return getString("address");
     }
 
+    /**
+     * Set the physical address of the department.
+     *
+     * @param address the address of the department as a normal String.
+     */
     public void setAddress(String address) {
         put("address", address);
     }
 
     /**
-     * Get the web page of the department as a normal String.
+     * Get the web page address of the department as a normal String.
      *
      * @return the web page of the department.
      */
@@ -200,8 +210,9 @@ public class Department extends BasicDBObject {
     }
 
     /**
+     * Set the web page address of the department.
      *
-     * @param url
+     * @param url the web page address of the department as a normal String.
      */
     public void setUrl(String url) {
         put("url", url);

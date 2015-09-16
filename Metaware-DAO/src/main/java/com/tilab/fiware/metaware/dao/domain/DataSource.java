@@ -44,6 +44,23 @@ public class DataSource {
     private String resourceType;
     private String resource;
 
+    /**
+     *
+     * @param name
+     * @param description
+     * @param type
+     * @param creationDate
+     * @param lastModifiedDate
+     * @param permissions
+     * @param owner
+     * @param status
+     * @param subtype
+     * @param URL
+     * @param username
+     * @param password
+     * @param resourceType
+     * @param resource
+     */
     public DataSource(String name, String description, String type, Long creationDate,
             Long lastModifiedDate, List<Permission> permissions, User owner, String status,
             String subtype, String URL, String username, String password, String resourceType,
@@ -64,114 +81,226 @@ public class DataSource {
         this.resource = resource;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getCreationDate() {
         return creationDate;
     }
 
+    /**
+     *
+     * @param creationDate
+     */
     public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getLastModifiedDate() {
         return lastModifiedDate;
     }
 
+    /**
+     *
+     * @param lastModifiedDate
+     */
     public void setLastModifiedDate(Long lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Permission> getPermissions() {
         return permissions;
     }
 
+    /**
+     *
+     * @param permissions
+     */
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
     }
 
+    /**
+     *
+     * @return
+     */
     public User getOwner() {
         return owner;
     }
 
+    /**
+     *
+     * @param owner
+     */
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSubtype() {
         return subtype;
     }
 
+    /**
+     *
+     * @param subtype
+     */
     public void setSubtype(String subtype) {
         this.subtype = subtype;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getURL() {
         return URL;
     }
 
+    /**
+     *
+     * @param URL
+     */
     public void setURL(String URL) {
         this.URL = URL;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getResourceType() {
         return resourceType;
     }
 
+    /**
+     *
+     * @param resourceType
+     */
     public void setResourceType(String resourceType) {
         this.resourceType = resourceType;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getResource() {
         return resource;
     }
 
+    /**
+     *
+     * @param resource
+     */
     public void setResource(String resource) {
         this.resource = resource;
     }

@@ -30,13 +30,37 @@ import java.util.List;
  */
 public interface AlgorithmDao {
 
+    /**
+     *
+     * @return
+     */
     public List<Algorithm> getAlgorithmsList();
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Algorithm getAlgorithm(String id);
 
+    /**
+     *
+     * @param algorithm
+     * @return
+     */
     public String createAlgorithm(Algorithm algorithm);
 
+    /**
+     *
+     * @param id
+     * @param algorithm
+     * @return
+     */
     public Algorithm upsertAlgorithm(String id, Algorithm algorithm);
 
+    /**
+     *
+     * @param id
+     */
     public void deleteAlgorithm(String id);
 }

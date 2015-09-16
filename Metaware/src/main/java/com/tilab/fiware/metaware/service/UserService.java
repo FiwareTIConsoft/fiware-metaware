@@ -22,7 +22,6 @@ package com.tilab.fiware.metaware.service;
 
 import com.tilab.fiware.metaware.dao.impls.mongodb.domain.User;
 import static com.tilab.fiware.metaware.dao.impls.mongodb.core.SingltDaoProv.INSTANCE;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;

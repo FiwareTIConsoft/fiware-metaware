@@ -34,9 +34,21 @@ public class Department {
     private String phone;
     private String url;
 
+    /**
+     *
+     */
     public Department() {
     }
 
+    /**
+     *
+     * @param name
+     * @param description
+     * @param company
+     * @param email
+     * @param phone
+     * @param url
+     */
     public Department(String name, String description, Company company, String email, String phone,
             String url) {
         this.name = name;
@@ -47,50 +59,98 @@ public class Department {
         this.url = url;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public Company getCompany() {
         return company;
     }
 
+    /**
+     *
+     * @param company
+     */
     public void setCompany(Company company) {
         this.company = company;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     *
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     *
+     * @param url
+     */
     public void setUrl(String url) {
         this.url = url;
     }

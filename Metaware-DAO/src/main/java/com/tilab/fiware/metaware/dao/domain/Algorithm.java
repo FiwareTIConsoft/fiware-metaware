@@ -44,6 +44,23 @@ public class Algorithm {
     private int runNumber;
     private String logUrl;
 
+    /**
+     *
+     * @param name
+     * @param description
+     * @param type
+     * @param creationDate
+     * @param lastModifiedDate
+     * @param users
+     * @param owner
+     * @param status
+     * @param model
+     * @param subModel
+     * @param hiveQuery
+     * @param elapsedTime
+     * @param runNumber
+     * @param logUrl
+     */
     public Algorithm(String name, String description, String type, Long creationDate,
             Long lastModifiedDate, List<User> users, User owner, String status, String model,
             String subModel, String hiveQuery, Long elapsedTime, int runNumber, String logUrl) {
@@ -63,114 +80,226 @@ public class Algorithm {
         this.logUrl = logUrl;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getCreationDate() {
         return creationDate;
     }
 
+    /**
+     *
+     * @param creationDate
+     */
     public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getLastModifiedDate() {
         return lastModifiedDate;
     }
 
+    /**
+     *
+     * @param lastModifiedDate
+     */
     public void setLastModifiedDate(Long lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<User> getUsers() {
         return users;
     }
 
+    /**
+     *
+     * @param users
+     */
     public void setUsers(List<User> users) {
         this.users = users;
     }
 
+    /**
+     *
+     * @return
+     */
     public User getOwner() {
         return owner;
     }
 
+    /**
+     *
+     * @param owner
+     */
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     *
+     * @param model
+     */
     public void setModel(String model) {
         this.model = model;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSubModel() {
         return subModel;
     }
 
+    /**
+     *
+     * @param subModel
+     */
     public void setSubModel(String subModel) {
         this.subModel = subModel;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHiveQuery() {
         return hiveQuery;
     }
 
+    /**
+     *
+     * @param hiveQuery
+     */
     public void setHiveQuery(String hiveQuery) {
         this.hiveQuery = hiveQuery;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getElapsedTime() {
         return elapsedTime;
     }
 
+    /**
+     *
+     * @param elapsedTime
+     */
     public void setElapsedTime(Long elapsedTime) {
         this.elapsedTime = elapsedTime;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getRunNumber() {
         return runNumber;
     }
 
+    /**
+     *
+     * @param runNumber
+     */
     public void setRunNumber(int runNumber) {
         this.runNumber = runNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLogUrl() {
         return logUrl;
     }
 
+    /**
+     *
+     * @param logUrl
+     */
     public void setLogUrl(String logUrl) {
         this.logUrl = logUrl;
     }

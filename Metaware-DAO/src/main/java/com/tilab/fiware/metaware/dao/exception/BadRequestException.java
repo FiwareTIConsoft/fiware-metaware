@@ -27,10 +27,17 @@ package com.tilab.fiware.metaware.dao.exception;
  */
 public class BadRequestException extends RuntimeException {
 
+    /**
+     *
+     */
     public BadRequestException() {
         super("Wrong request.");
     }
 
+    /**
+     *
+     * @param message
+     */
     public BadRequestException(String message) {
         super(message);
     }

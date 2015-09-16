@@ -55,22 +55,24 @@ public class DataSource extends BasicDBObject {
     /**
      * Full constructor.
      *
-     * @param name the name of the datasource.
-     * @param description the description of the datasource.
-     * @param type the type of the datasource.
-     * @param creationDate the creation date of the datasource.
+     * @param name             the name of the datasource.
+     * @param description      the description of the datasource.
+     * @param type             the type of the datasource.
+     * @param creationDate     the creation date of the datasource.
      * @param lastModifiedDate the date of last update of the datasource.
-     * @param permissions the permissions list of the datasource.
-     * @param owner the owner of the datasource.
-     * @param status the status of the datasource.
-     * @param subtype the sub-type of the datasource.
-     * @param URL the URL from which the datasource is accessible.
-     * @param username the username to access the datasource.
-     * @param password the password to access the datasource (for this current version of Metaware,
-     * this field is stored in plaintext).
-     * @param resourceType the resource type in the datasource (can be: "table", "query", or
-     * "file").
-     * @param resource the resource in the datasource (can be: "table name", "query", "file name").
+     * @param permissions      the permissions list of the datasource.
+     * @param owner            the owner of the datasource.
+     * @param status           the status of the datasource.
+     * @param subtype          the sub-type of the datasource.
+     * @param URL              the URL from which the datasource is accessible.
+     * @param username         the username to access the datasource.
+     * @param password         the password to access the datasource (for this current version of
+     *                         Metaware,
+     *                         this field is stored in plaintext).
+     * @param resourceType     the resource type in the datasource (can be: "table", "query", or
+     *                         "file").
+     * @param resource         the resource in the datasource (can be: "table name", "query", "file
+     *                         name").
      */
     public DataSource(String name, String description, String type, Long creationDate,
             Long lastModifiedDate, List<Permission> permissions, ObjectId owner, String status,
@@ -101,66 +103,130 @@ public class DataSource extends BasicDBObject {
         return getString("_id");
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return getString("name");
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         put("name", name);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return getString("description");
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         put("description", description);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getType() {
         return getString("type");
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(String type) {
         put("type", type);
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getCreationDate() {
         return getLong("creationDate");
     }
 
+    /**
+     *
+     * @param creationDate
+     */
     public void setCreationDate(Long creationDate) {
         put("creationDate", creationDate);
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getLastModifiedDate() {
         return getLong("lastModifiedDate");
     }
 
+    /**
+     *
+     * @param lastModifiedDate
+     */
     public void setLastModifiedDate(Long lastModifiedDate) {
         put("lastModifiedDate", lastModifiedDate);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Object> getPermissions() {
         return (List<Object>) get("permissions");
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Permission> getPermissionsIds() {
         return (List<Permission>) get("permissions");
     }
 
+    /**
+     *
+     * @param permissions
+     */
     public void setPermissions(List<Permission> permissions) {
         put("permissions", permissions);
     }
 
+    /**
+     *
+     * @return
+     */
     public Object getOwner() {
         return get("owner");
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getOwnerId() {
         return getObjectId("owner");
     }
 
+    /**
+     *
+     * @param owner
+     */
     public void setOwner(String owner) {
         if (!ObjectId.isValid(owner)) {
             // do nothing
@@ -170,62 +236,122 @@ public class DataSource extends BasicDBObject {
         }
     }
 
+    /**
+     *
+     * @param owner
+     */
     public void setOwnerId(ObjectId owner) {
         put("owner", owner);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatus() {
         return getString("status");
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         put("status", status);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSubtype() {
         return getString("subtype");
     }
 
+    /**
+     *
+     * @param subtype
+     */
     public void setSubtype(String subtype) {
         put("subtype", subtype);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getURL() {
         return getString("url");
     }
 
+    /**
+     *
+     * @param URL
+     */
     public void setURL(String URL) {
         put("url", URL);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return getString("username");
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         put("username", username);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return getString("password");
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         put("password", password);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getResourceType() {
         return getString("resourceType");
     }
 
+    /**
+     *
+     * @param resourceType
+     */
     public void setResourceType(String resourceType) {
         put("resourceType", resourceType);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getResource() {
         return getString("resource");
     }
 
+    /**
+     *
+     * @param resource
+     */
     public void setResource(String resource) {
         put("resource", resource);
     }

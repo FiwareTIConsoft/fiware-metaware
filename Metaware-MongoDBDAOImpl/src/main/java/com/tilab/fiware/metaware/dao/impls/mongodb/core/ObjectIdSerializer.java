@@ -35,6 +35,14 @@ import org.bson.types.ObjectId;
  */
 public class ObjectIdSerializer extends JsonSerializer<ObjectId> {
 
+    /**
+     * 
+     * @param t
+     * @param jg
+     * @param sp
+     * @throws IOException
+     * @throws JsonProcessingException 
+     */
     @Override
     public void serialize(ObjectId t, JsonGenerator jg, SerializerProvider sp)
             throws IOException, JsonProcessingException {

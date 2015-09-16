@@ -70,6 +70,10 @@ public class DataSourceDao {
     private DBCollection datasourcesCollection;
     private DBCursor cursor;
 
+    /**
+     * 
+     * @return 
+     */
     public List<DataSource> getDataSourcesList() {
         log.debug(MSG_DAO_GET_LIST);
 
@@ -92,6 +96,11 @@ public class DataSourceDao {
         return datasourcesList;
     }
 
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     public DataSource getDataSource(String id) {
         log.debug(MSG_DAO_GET + id);
 
@@ -124,6 +133,11 @@ public class DataSourceDao {
         return datasource;
     }
 
+    /**
+     * 
+     * @param datasource
+     * @return 
+     */
     public String createDataSource(DataSource datasource) {
         log.debug(MSG_DAO_CREATE);
 
@@ -175,6 +189,12 @@ public class DataSourceDao {
         return datasource.getId();
     }
 
+    /**
+     * 
+     * @param id
+     * @param datasource
+     * @return 
+     */
     public DataSource upsertDataSource(String id, DataSource datasource) {
         log.debug(MSG_DAO_UPSERT + id);
 
@@ -243,6 +263,10 @@ public class DataSourceDao {
         return datasource;
     }
 
+    /**
+     * 
+     * @param id 
+     */
     public void deleteDataSource(String id) {
         log.debug(MSG_DAO_DELETE + id);
 

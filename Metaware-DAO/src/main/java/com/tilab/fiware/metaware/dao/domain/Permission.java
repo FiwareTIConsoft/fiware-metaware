@@ -30,23 +30,44 @@ public class Permission {
     User referenceId;
     String perm;
 
+    /**
+     *
+     * @param referenceId
+     * @param perm
+     */
     public Permission(User referenceId, String perm) {
         this.referenceId = referenceId;
         this.perm = perm;
     }
 
+    /**
+     *
+     * @return
+     */
     public User getReferenceId() {
         return referenceId;
     }
 
+    /**
+     *
+     * @param referenceId
+     */
     public void setReferenceId(User referenceId) {
         this.referenceId = referenceId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPerm() {
         return perm;
     }
 
+    /**
+     *
+     * @param perm
+     */
     public void setPerm(String perm) {
         this.perm = perm;
     }

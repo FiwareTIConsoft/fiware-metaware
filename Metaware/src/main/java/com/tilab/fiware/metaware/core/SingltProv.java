@@ -78,6 +78,9 @@ public enum SingltProv {
     private static final String MSG_DISCONNECTING_FROM_DB = "DB disconnection...";
     private static final String MSG_SUCCESSFULLY_DISCONNECTED_FROM_DB = "DB disconnected.";
 
+    /**
+     *
+     */
     SingltProv() {
     }
 
@@ -133,6 +136,10 @@ public enum SingltProv {
         log.info(MSG_SUCCESSFULLY_DISCONNECTED_FROM_DB);
     }
 
+    /**
+     *
+     * @param customProp
+     */
     public void setManualProperties(Properties customProp) {
         this.customProp = customProp;
     }

@@ -32,12 +32,14 @@ public class TemplateDetails extends BasicDBObject {
 
     /**
      * Create a new details section for a template.
+     *
+     * Empty constructor.
      */
     public TemplateDetails() {
     }
 
     /**
-     * Create a new details section from a template from a starting map.
+     * Create a new details section for a template from a starting map.
      *
      * @param m the starting map.
      */

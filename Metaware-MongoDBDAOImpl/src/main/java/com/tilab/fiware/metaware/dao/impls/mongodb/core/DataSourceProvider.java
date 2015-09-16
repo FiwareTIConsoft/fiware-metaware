@@ -71,7 +71,6 @@ public class DataSourceProvider {
 
         serverAddress = new ServerAddress(props.getProperty(KEY_DB_HOST),
                 Integer.parseInt(props.getProperty(KEY_DB_PORT)));
-
 //        mongoCredential = new MongoCredential.createCredential(KEY_DB_USERNAME, KEY_DB_NAME,
 //                KEY_DB_PASSWORD.toCharArray());
 //        mongoClient = new MongoClient(serverAddress, Arrays.asList(mongoCredential));

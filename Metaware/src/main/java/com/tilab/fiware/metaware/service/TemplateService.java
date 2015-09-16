@@ -64,11 +64,21 @@ public class TemplateService {
         return INSTANCE.getTemplateDao().getTemplate(name);
     }
 
+    /**
+     *
+     * @param template
+     * @return
+     * @throws JsonProcessingException
+     */
     public String createTemplate(Template template) throws JsonProcessingException {
         log.debug(MSG_SRV_CREATE);
         return INSTANCE.getTemplateDao().createTemplate(template);
     }
 
+    /**
+     *
+     * @param name
+     */
     public void deleteTemplate(String name) {
         log.debug(MSG_SRV_DELETE + name);
         INSTANCE.getTemplateDao().deleteTemplate(name);

@@ -27,10 +27,17 @@ package com.tilab.fiware.metaware.dao.exception;
  */
 public class InvalidIdException extends RuntimeException {
 
+    /**
+     *
+     */
     public InvalidIdException() {
         super("Not a valid Id.");
     }
 
+    /**
+     *
+     * @param message
+     */
     public InvalidIdException(String message) {
         super(message);
     }

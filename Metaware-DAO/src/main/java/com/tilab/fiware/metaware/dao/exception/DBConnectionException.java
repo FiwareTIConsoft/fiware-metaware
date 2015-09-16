@@ -27,10 +27,17 @@ package com.tilab.fiware.metaware.dao.exception;
  */
 public class DBConnectionException extends RuntimeException {
 
+    /**
+     *
+     */
     public DBConnectionException() {
         super("DB connection failed.");
     }
 
+    /**
+     *
+     * @param message
+     */
     public DBConnectionException(String message) {
         super(message);
     }

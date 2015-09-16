@@ -31,6 +31,9 @@ import com.mongodb.BasicDBObject;
  */
 public class DatasetStructure extends BasicDBObject {
 
+    /**
+     *
+     */
     public DatasetStructure() {
     }
 

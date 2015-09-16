@@ -28,34 +28,61 @@ import java.util.Map;
  * @author Marco Terrinoni marco.terrinoni at consoft.it
  */
 public class ProcessingBlock extends BasicDBObject {
+//    private int order;
+//    private String block;
 
-    private int order;
-    private String block;
-
+    /**
+     * Empty constructor.
+     */
     public ProcessingBlock() {
     }
 
+    /**
+     *
+     * @param m
+     */
     public ProcessingBlock(Map m) {
         super(m);
     }
 
+    /**
+     *
+     * @param order
+     * @param block
+     */
     public ProcessingBlock(int order, String block) {
         put("order", order);
         put("block", block);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrder() {
         return getInt("order");
     }
 
+    /**
+     *
+     * @param order
+     */
     public void setOrder(int order) {
         put("order", order);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getBlock() {
         return getString("block");
     }
 
+    /**
+     *
+     * @param block
+     */
     public void setBlock(String block) {
         put("block", block);
     }

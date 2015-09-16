@@ -41,9 +41,22 @@ public class Template {
     // details: ...
     // objects: ...
 
+    /**
+     *
+     */
     public Template() {
     }
 
+    /**
+     *
+     * @param name
+     * @param description
+     * @param type
+     * @param user
+     * @param owner
+     * @param userObjectStatus
+     * @param ownerObjectStatus
+     */
     public Template(String name, String description, String type, User user, String owner,
             String userObjectStatus, String ownerObjectStatus) {
         this.name = name;
@@ -57,74 +70,146 @@ public class Template {
         this.ownerObjectStatus = ownerObjectStatus;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getCreationDate() {
         return creationDate;
     }
 
+    /**
+     *
+     * @param creationDate
+     */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getLastModifiedDate() {
         return lastModifiedDate;
     }
 
+    /**
+     *
+     * @param lastModifiedDate
+     */
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getOwner() {
         return owner;
     }
 
+    /**
+     *
+     * @param owner
+     */
     public void setOwner(String owner) {
         this.owner = owner;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUserObjectStatus() {
         return userObjectStatus;
     }
 
+    /**
+     *
+     * @param userObjectStatus
+     */
     public void setUserObjectStatus(String userObjectStatus) {
         this.userObjectStatus = userObjectStatus;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getOwnerObjectStatus() {
         return ownerObjectStatus;
     }
 
+    /**
+     *
+     * @param ownerObjectStatus
+     */
     public void setOwnerObjectStatus(String ownerObjectStatus) {
         this.ownerObjectStatus = ownerObjectStatus;
     }

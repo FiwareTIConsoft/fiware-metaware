@@ -158,6 +158,12 @@ public class TemplateRestSrv {
         return Response.ok(jsonMsg, MediaType.APPLICATION_JSON).build();
     }
 
+    /**
+     *
+     * @param authorization
+     * @param template
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -177,6 +183,12 @@ public class TemplateRestSrv {
         return Response.ok(name, MediaType.APPLICATION_JSON).build();
     }
 
+    /**
+     *
+     * @param authorization
+     * @param name
+     * @return
+     */
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

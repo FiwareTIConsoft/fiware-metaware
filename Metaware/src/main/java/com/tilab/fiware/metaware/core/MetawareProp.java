@@ -50,6 +50,9 @@ public class MetawareProp {
     private static final String MSG_START_PROP_LOAD = "Loading Metaware properties...";
     private static final String MSG_END_PROP_LOAD = "Metaware properties successfully loaded.";
 
+    /**
+     *
+     */
     public MetawareProp() {
         log.info(MSG_START_PROP_LOAD);
 

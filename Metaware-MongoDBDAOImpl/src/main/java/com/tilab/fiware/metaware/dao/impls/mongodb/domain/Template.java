@@ -34,10 +34,17 @@ public class Template extends BasicDBObject {
 
     /**
      * Creates a new template.
+     *
+     * Empty constructor.
      */
     public Template() {
     }
 
+    /**
+     *
+     * @param name
+     * @param details
+     */
     public Template(String name, TemplateDetails details) {
         put("name", name);
         put("details", details);

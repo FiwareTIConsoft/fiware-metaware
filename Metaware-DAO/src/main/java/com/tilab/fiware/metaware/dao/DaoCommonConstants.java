@@ -32,7 +32,6 @@ public interface DaoCommonConstants {
     public final static String KEY_DB_NAME = "db.name";
     public static final String KEY_DB_USERNAME = "db.username";
     public static final String KEY_DB_PASSWORD = "db.password";
-
     public static final String COMPANIES_COLLECTION_NAME = "companies";
     public static final String DEPARTMENTS_COLLECTION_NAME = "departments";
     public static final String DATASETS_COLLECTION_NAME = "datasets";

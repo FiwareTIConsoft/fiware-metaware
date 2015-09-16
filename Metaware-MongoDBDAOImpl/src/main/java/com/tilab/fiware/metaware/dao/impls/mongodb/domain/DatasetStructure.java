@@ -32,9 +32,16 @@ import java.util.Map;
  */
 public class DatasetStructure extends BasicDBObject {
 
+    /**
+     * Empty constructor.
+     */
     public DatasetStructure() {
     }
 
+    /**
+     * 
+     * @param m 
+     */
     public DatasetStructure(Map m) {
         super(m);
     }
