@@ -1,0 +1,4 @@
+com.tilab.fiware.metaware.core
+com.tilab.fiware.metaware.rest
+com.tilab.fiware.metaware.service
+com.tilab.fiware.metaware.tomcat

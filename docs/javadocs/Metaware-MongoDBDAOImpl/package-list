@@ -1,0 +1,3 @@
+com.tilab.fiware.metaware.dao.impls.mongodb
+com.tilab.fiware.metaware.dao.impls.mongodb.core
+com.tilab.fiware.metaware.dao.impls.mongodb.domain
