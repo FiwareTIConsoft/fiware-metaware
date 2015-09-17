@@ -115,7 +115,7 @@ The following is the schema of the Algorithm metadata entity.
 | `creationDate`     | `Long`             | Represented as Unix time                          |
 | `lastModifiedDate` | `Long`             | Represented as Unix time                          |
 | `permissions`      | `List<Permission>` | List of permission specifications                 |
-| `owner`            | `ObjectId`         | This refers to a User, a Department, or a Company |
+| `owner`            | `ObjectId`         | This refers to a User, a Department, or a Company <br> At the web application level this field is represented as a String |
 | `status`           | `String`           |                                                   |
 | `model`            | `String`           |                                                   |
 | `subModel`         | `String`           |                                                   |
@@ -124,7 +124,7 @@ The following is the schema of the Algorithm metadata entity.
 | `runNumber`        | `int`              |                                                   |
 | `logUrl`           | `String`           |                                                   |
 
-The Id in the `owner` field is represented at web application layer as a normal string.
+The Algorithm entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.Algorithm`.
 
 ####Dataset
 The following is the schema of the Dataset metadata entity; which is completed by the entity called `DatasetStructure` (sub-entity)
@@ -137,7 +137,7 @@ The following is the schema of the Dataset metadata entity; which is completed b
 | `creationDate`     | `Long`             | Represented as Unix time                          |
 | `lastModifiedDate` | `Long`             | Represented as Unix time                          |
 | `permissions`      | `List<Permission>` | List of permission specifications                 |
-| `owner`            | `ObjectId`         | This refers to a User, a Department, or a Company |
+| `owner`            | `ObjectId`         | This refers to a User, a Department, or a Company <br> At the web application level this field is represented as a String |
 | `status`           | `String`           |                                                   |
 | `readOnly`         | `boolean`          |                                                   |
 | `structure`        | `DatasetStructure` | See the following entity                          |
@@ -221,6 +221,8 @@ It is important to know that conversion from "normal" entity representation to D
 </rdf:RDF>
 ```
 
+The Dataset entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.Dataset`.
+
 #####DatasetStructure
 The `DatasetStructure` is a sub-entity (or sub-document) of `Dataset`, and for this reason it does not have the `_id` field.
 This sub-entity does not have a well-defined schema neither, because each dataset can have a different structure; the class `DatasetStructure` should be considered as a simple `Map`.
@@ -249,6 +251,7 @@ The following is an example of `Dataset` and the `DatasetStructure` (field `stru
     }
 }
 ```
+
 So the previous example is the metadata of the Dataset, instead the final Dataset will be something like this:
 
 | ID_SKATE_SHARING | NAME_HUB | UBICAZIONE | URL                       | COORD_X | COORD_Y |
@@ -256,6 +259,8 @@ So the previous example is the metadata of the Dataset, instead the final Datase
 | 11               | hub1     | Street 1   | http://example/skate/11   | 45.1    | 45.2    |
 | 22               | hub1     | Street 1   | http://example/skate/22   | 45.1    | 45.2    |
 | 33               | hub2     | Street 4   | http://example/skate/33   | 47.1    | 45.9    |
+
+The DatasetStructure sub-entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.DatasetStructure`.
 
 ####Data-Source
 The following is the schema of the Data-Source metadata entity.
@@ -268,7 +273,7 @@ The following is the schema of the Data-Source metadata entity.
 | `creationDate`     | `Long`             | Represented as Unix time                          |
 | `lastModifiedDate` | `Long`             | Represented as Unix time                          |
 | `permissions`      | `List<Permission>` | List of permission specifications                 |
-| `owner`            | `ObjectId`         | This refers to a User, a Department, or a Company |
+| `owner`            | `ObjectId`         | This refers to a User, a Department, or a Company <br> At the web application level this field is represented as a String |
 | `status`           | `String`           |                                                   |
 | `subtype`          | `String`           |                                                   |
 | `url`              | `String`           |                                                   |
@@ -276,6 +281,8 @@ The following is the schema of the Data-Source metadata entity.
 | `password`         | `String`           |                                                   |
 | `resourceType`     | `String`           | Can be `table`, `query`, or `file`                |
 | `resource`         | `String`           | Can be `table name`, `query`, `file name`         |
+
+The Data-Source entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.DataSource`.
 
 
 ####Process
@@ -289,13 +296,15 @@ The following is the schema of the Process metadata entity.
 | `creationDate`     | `Long`                  | Represented as Unix time                          |
 | `lastModifiedDate` | `Long`                  | Represented as Unix time                          |
 | `permissions`      | `List<Permission>`      | List of permission specifications                 |
-| `owner`            | `ObjectId`              | This refers to a User, a Department, or a Company |
+| `owner`            | `ObjectId`              | This refers to a User, a Department, or a Company <br> At the web application level this field is represented as a String |
 | `status`           | `String`                |                                                   |
 | `frequence`        | `String`                |                                                   |
 | `startingTime`     | `Long`                  | Represented as Unix time                          |
 | `lastRunTime`      | `Long`                  | Represented as Unix time                          |
 | `runNumber`        | `Long`                  |                                                   |
 | `processingBlock`  | `List<ProcessingBlock>` | See the following entity                          |
+
+The Process entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.Process`.
 
 
 #####ProcessingBlock
@@ -305,6 +314,8 @@ The `ProcessingBlock` is a sub-entity (or sub-document) of `Process`, and for th
 | :------- | :--------- |
 | `order`  | `int`      |
 | `block`  | `String`   |
+
+The ProcessingBlock sub-entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.ProcessingBlock`.
 
 
 ####Template
@@ -318,6 +329,8 @@ The following is the basic schema of a Template.
 | :-------- | :---------------- | :----------------------- |
 | `name`    | `String`          |                          |
 | `details` | `TemplateDetails` | See the following entity |
+
+The Template entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.Template`.
 
 
 #####TemplateDetails
@@ -345,30 +358,59 @@ The following is an example of `Template` and the `TemplateDetails` (field `deta
 ```
 It is easy to understand that this is a template for User entity and the `details` field contains a sub-document that describes the various fields contained in the User metadata entity.
 
+The TemplateDetails sub-entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.TemplateDetails`.
 
-###API Walkthrough
+###Authentication
+For this first version of Metaware, we decided to use the [Basic Access Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) method, which consists in providing a username and password when making a HTTP request (REST).
+Every REST API accepts an authorization header parameter (`String authorization`) that is used to identify the user who is requesting the current resource.
+Here's an example:
+```java
+public Response getAlgorithmsList(@HeaderParam("Authorization") String authorization) {
+    /*...*/
+}
+```
+
+The steps to produce this authorization string are well-known and at [this address](https://en.wikipedia.org/wiki/Basic_access_authentication#Client_side) you can find a brief explanation.
+
+Once the HTTP request comes to Metaware REST API, the method `filter(ContainerRequestContext crc)` from the class `com.tilab.fiware.metaware.rest.AuthRequestFiler` (which implements `ContainerRequestFilter` class) is executed automatically; this method first extracts the authorization string from the header of the request (`crc`), which is passed to the method `decodeBasicAuth` (class `om.tilab.fiware.metaware.core.Util`) that returns an array of strings composed by username and password.
+The `filter` method starts from the credentials (just retrieved) and search for the related user (`getUserByCredentials(String username, String password)`).
+If the user exists and is valid, then the authorization check is performed.
+
+###Authorization
+The authorization in Metaware strongly relies on `securityRoleFiler(User user, String verb, String path)` method and on `Permission` entities (and of course the related method `checkPerm(List<Permission> permissionsList, String userId, CharSequence perm)`).
+
+When a new request comes and the related user is correctly deduced from the credentials, the `securityRoleFilter` method is called, by passing all the necessary parameters.
+The very first check is about the user, and in particular if the user is an administrator (`user.isAdmin()`), the authorization is immediately granted; this behavior might not be the best and probably this process will be enhanced during the next releases.
+
+If the user is not an administrator (or _admin_) then we can identify several branches of execution, each branch is related to a specific type of resources and in particular we have:
+- `algorithms`
+- `api-docs` (this is for Swagger-UI)
+- `companies`
+- `datasets`
+- `datasources`
+- `departments`
+- `discoverObjects`
+- `users`
+- `templates`
+
+The behavior for each branch is quite similar and consists in:
+1. retrieve the specified resource;
+2. check if it is public or not;
+3. check if the requestor is the owner of the resource;
+4. considering the HTTP verb of the request (i.e., GET, POST, PUT, DELETE), check the permissions array associated with the resource.
+
+Basically, if the resource is public or the requestor is its owner, the `securityRoleFilter` method returns true, otherwise the method `checkPerm` is executed.
+The latter takes the array of permissions associated with the resources, the Id of the requestor, and the action to be checked (i.e., `r` for read, `u` for update, `d` for delete), then checks if there is a permission in the array that corresponds to the requestor.
+If there is a match, the allowed actions are checked and the method returns true or false based on this last check.
+
+If at the end of this process the user is authorized, the request can proceed, and the related REST API serves the request.
+
+###API summarize
 The following is the list of available RESTful APIs from Metaware.
 
 Please assume the root of the Metaware as the following: http://localhost:8080/metaware
-###Users
-| Name           | Verb   | URL                |
-| :------------- | :----- | :----------------- |
-| Get User       | GET    | /v1/users/{userId} |
-| Get Users List | GET    | /v1/users/         |
-| Create User    | POST   | /v1/users          |
-| Update User    | PUT    | /v1/users/{userId} |
-| Delete User    | DELETE | /v1/users/{userId} |
 
-###Departments
-| Name                 | Verb   | URL                            |
-| :------------------- | :----- | :----------------------------- |
-| Get Department       | GET    | /v1/departments/{departmentId} |
-| Get Departments List | GET    | /v1/departments/               |
-| Create Department    | POST   | /v1/departments                |
-| Update Department    | PUT    | /v1/departments/{departmentId} |
-| Delete Department    | DELETE | /v1/departments/{departmentId} |
-
-###companies
+####Companies
 | Name               | Verb   | URL                       |
 | :----------------- | :----- | :------------------------ |
 | Get Company        | GET    | /v1/companies/{companyId} |
@@ -377,40 +419,60 @@ Please assume the root of the Metaware as the following: http://localhost:8080/m
 | Update Company     | PUT    | /v1/companies/{companyId} |
 | Delete Company     | DELETE | /v1/companies/{companyId} |
 
-###DiscoverObjects
+####Departments
+| Name                 | Verb   | URL                            |
+| :------------------- | :----- | :----------------------------- |
+| Get Department       | GET    | /v1/departments/{departmentId} |
+| Get Departments List | GET    | /v1/departments                |
+| Create Department    | POST   | /v1/departments                |
+| Update Department    | PUT    | /v1/departments/{departmentId} |
+| Delete Department    | DELETE | /v1/departments/{departmentId} |
+
+####Users
+| Name           | Verb   | URL                |
+| :------------- | :----- | :----------------- |
+| Get User       | GET    | /v1/users/{userId} |
+| Get Users List | GET    | /v1/users          |
+| Create User    | POST   | /v1/users          |
+| Update User    | PUT    | /v1/users/{userId} |
+| Delete User    | DELETE | /v1/users/{userId} |
+
+####DiscoverObjects
 | Name                    | Verb   | URL                                      |
 | :---------------------- | :----- | :--------------------------------------- |
 | Discover usable objects | GET    | /v1/discoverObjects/usable/{requestedId} |
 | Discover owned objects  | GET    | /v1/discoverObjects/owner/{userId}       |
 
-###Algorithms
+####Algorithms
 | Name                | Verb   | URL                          |
 | :------------------ | :----- | :--------------------------- |
 | Get Algorithm       | GET    | /v1/algorithms/{algorithmId} |
-| Get Algorithms List | GET    | /v1/algorithms/              |
+| Get Algorithms List | GET    | /v1/algorithms               |
 | Create Algorithm    | POST   | /v1/algorithms               |
 | Update Algorithm    | PUT    | /v1/algorithms/{algorithmId} |
 | Delete Algorithm    | DELETE | /v1/algorithms/{algorithmId} |
 
-###Datasets
-| Name              | Verb   | URL                      |
-| :---------------- | :----- | :----------------------- |
-| Get Dataset       | GET    | /v1/datasets/{datasetId} |
-| Get Datasets List | GET    | /v1/datasets/            |
-| Create Dataset    | POST   | /v1/datasets             |
-| Update Dataset    | PUT    | /v1/datasets/{datasetId} |
-| Delete Dataset    | DELETE | /v1/datasets/{datasetId} |
+####Datasets
+| Name              | Verb   | URL                                     |
+| :---------------- | :----- | :-------------------------------------- |
+| Get Dataset       | GET    | /v1/datasets/{datasetId}                |
+| Get Datasets List | GET    | /v1/datasets                            |
+| Create Dataset    | POST   | /v1/datasets                            |
+| Update Dataset    | PUT    | /v1/datasets/{datasetId}                |
+| Delete Dataset    | DELETE | /v1/datasets/{datasetId}                |
+| Import Open Data  | POST   | /v1/datasets/importOpenData             |
+| Export Open Data  | GET    | /v1/datasets/exportOpenData/{datasetId} |
 
-###Datasources
+####Datasources
 | Name                  | Verb   | URL                            |
 | :-------------------- | :----- | :----------------------------- |
 | Get Data-Source       | GET    | /v1/datasources/{datasourceId} |
-| Get Data-Sources List | GET    | /v1/datasources/               |
+| Get Data-Sources List | GET    | /v1/datasources                |
 | Create Data-Source    | POST   | /v1/datasources                |
 | Update Data-Source    | PUT    | /v1/datasources/{datasourceId} |
 | Delete Data-Source    | DELETE | /v1/datasources/{datasourceId} |
 
-###Templates
+####Templates
 | Name               | Verb   | URL                          |
 | :----------------- | :----- | :--------------------------- |
 | Get Template       | GET    | /v1/templates/{templateName} |

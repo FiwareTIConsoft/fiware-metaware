@@ -34,6 +34,11 @@ public class Util {
 
     private static final int SALT_LENGTH = 16;
 
+    /**
+     *
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
     public static String getSalt() throws NoSuchAlgorithmException {
         SecureRandom rnd = SecureRandom.getInstance("SHA1PRNG");
         byte[] salt = new byte[SALT_LENGTH];
@@ -41,6 +46,11 @@ public class Util {
         return Arrays.toString(salt);
     }
 
+    /**
+     *
+     * @param auth
+     * @return
+     */
     public static String[] decodeBasicAuth(String auth) {
         String uap = auth.replaceFirst("[B|b]asic", ""); // remove "(B|b)asic" from the string
         byte[] decodedBytes = DatatypeConverter.parseBase64Binary(uap);

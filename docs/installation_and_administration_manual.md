@@ -101,52 +101,75 @@ To check that everything is fine, you can use the `tree` command; you should see
 ```
 $ tree
 .
-└── metaware
-    ├── fiware-metaware
-    │   ├── docs
-    │   │   ├── installation_and_administration_manual.md
-    │   │   └── user_and_programming_manual.md
-    │   ├── pom.xml
-    │   ├── README.md
-    │   └── src
-    │       ├── main
-    │       │   ├── java
-    │       │   │   └── com
-    │       │   │       ...
-    │       │   ├── resources
-    │       │   │   ...
-    │       │   └── webapp
-    │       │       ...
-    │       └── test
-    │           └── java
-    │               └── com
-    │                   ...
-    ├── fiware-metaware-dao
-    │   ├── pom.xml
-    │   ├── README.md
-    │   └── src
-    │       ├── main
-    │       │   └── java
-    │       │       ...
-    │       └── test
-    │           └── java
-    │               └── com
-    │                   ...
-    └── fiware-metaware-mongodbdaoimpl
-        ├── pom.xml
-        ├── README.md
-        └── src
-            ├── main
-            │   ├── java
-            │   │   ...
-            │   └── resources
-            │       └── log4j.properties
-            └── test
-                └── java
-                    └── com
-                        ...
+├── docker
+│   ├── Dockerfile
+│   └── README.md
+├── docs
+│   ├── installation_and_administration_manual.md
+│   ├── javadocs
+│   │   └── ...
+│   ├── open_specs
+│   │   └── open_specs_api.apib
+│   └── user_and_programming_manual.md
+├── LICENSE
+├── Metaware
+│   ├── pom.xml
+│   ├── README.md
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── tilab
+│       │   │           └── fiware
+│       │   │               └── metaware
+│       │   │                   └── ...
+│       │   ├── resources
+│       │   │   └── ...
+│       │   └── webapp
+│       │       ├── index.html
+│       │       ├── META-INF
+│       │       │   └── context.xml
+│       │       └── WEB-INF
+│       │           └── web.xml
+│       └── test
+│           └── ...
+├── Metaware-DAO
+│   ├── LICENSE
+│   ├── pom.xml
+│   ├── README.md
+│   └── src
+│       ├── main
+│       │   └── java
+│       │       └── com
+│       │           └── tilab
+│       │               └── fiware
+│       │                   └── metaware
+│       │                       └── ...
+│       └── test
+│           └── ...
+├── Metaware-MongoDBDAOImpl
+│   ├── pom.xml
+│   ├── README.md
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── tilab
+│       │   │           └── fiware
+│       │   │               └── metaware
+│       │   │                   └── dao
+│       │   │                       └── impls
+│       │   │                           └── mongodb
+│       │   │                               └── ...
+│       │   └── resources
+│       │       └── log4j.properties
+│       └── test
+│           └── ...
+├── pom.xml
+└── README.md
 
-73 directories, 152 files
+112 directories, 411 files
+
 ```
 (The number of directories and files may be different due to new features inclusion).
 
