@@ -65,19 +65,20 @@ public class TemplateService {
     }
 
     /**
+     * Creates a new template.
      *
-     * @param template
-     * @return
-     * @throws JsonProcessingException
+     * @param template the template to be stored.
+     * @return the name of the new template.
      */
-    public String createTemplate(Template template) throws JsonProcessingException {
+    public String createTemplate(Template template) {
         log.debug(MSG_SRV_CREATE);
         return INSTANCE.getTemplateDao().createTemplate(template);
     }
 
     /**
+     * Deletes the selected template.
      *
-     * @param name
+     * @param name the name of the template.
      */
     public void deleteTemplate(String name) {
         log.debug(MSG_SRV_DELETE + name);

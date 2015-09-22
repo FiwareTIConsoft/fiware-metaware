@@ -46,8 +46,9 @@ public class DataSourceService {
             = "Serving delete request for datasource's metadata with Id: ";
 
     /**
+     * Retrieves the list of data-sources' metadata.
      *
-     * @return
+     * @return the list of data-sources' metadata.
      */
     public List<DataSource> getDataSourcesList() {
         log.debug(MSG_SRV_GET_LIST);
@@ -55,9 +56,10 @@ public class DataSourceService {
     }
 
     /**
+     * Retrieves the selected data-source's metadata.
      *
-     * @param id
-     * @return
+     * @param id the Id of the selected data-source.
+     * @return the metadata of the selected data-source.
      */
     public DataSource getDataSource(String id) {
         log.debug(MSG_SRV_GET);
@@ -65,9 +67,10 @@ public class DataSourceService {
     }
 
     /**
+     * Creates a new metadata object about a data-source.
      *
-     * @param datasource
-     * @return
+     * @param datasource the object containing the metadata.
+     * @return the Id of the new metadata object.
      */
     public String createDataSource(DataSource datasource) {
         log.debug(MSG_SRV_CREATE);
@@ -75,10 +78,11 @@ public class DataSourceService {
     }
 
     /**
+     * Updates (or inserts if missing) the metadata related to the selected data-source.
      *
-     * @param id
-     * @param datasource
-     * @return
+     * @param id         the Id of the selected data-source.
+     * @param datasource the metadata containing the modifications.
+     * @return the modified metadata object related to the selected data-source.
      */
     public DataSource upsertDataSource(String id, DataSource datasource) {
         log.debug(MSG_SRV_UPSERT + id);
@@ -86,8 +90,9 @@ public class DataSourceService {
     }
 
     /**
+     * Removes the selected data-source's metadata.
      *
-     * @param id
+     * @param id the Id of the selected data-source.
      */
     public void deleteDataSource(String id) {
         log.debug(MSG_SRV_DELETE + id);

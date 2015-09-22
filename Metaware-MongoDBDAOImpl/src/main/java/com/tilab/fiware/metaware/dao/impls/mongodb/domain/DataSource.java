@@ -104,128 +104,152 @@ public class DataSource extends BasicDBObject {
     }
 
     /**
+     * Retrieves the name of the current data-source.
      *
-     * @return
+     * @return the name of the data-source.
      */
     public String getName() {
         return getString("name");
     }
 
     /**
+     * Specifies the name of the current data-source.
      *
-     * @param name
+     * @param name the name of the data-source.
      */
     public void setName(String name) {
         put("name", name);
     }
 
     /**
+     * Retrieves the description of the current data-source.
      *
-     * @return
+     * @return the description of the data-source.
      */
     public String getDescription() {
         return getString("description");
     }
 
     /**
+     * Specifies the description of the current data-source.
      *
-     * @param description
+     * @param description the description of the data-source.
      */
     public void setDescription(String description) {
         put("description", description);
     }
 
     /**
+     * Retrieves the type of the current data-source.
      *
-     * @return
+     * @return the type of the data-source.
      */
     public String getType() {
         return getString("type");
     }
 
     /**
+     * Specifies the type of the current data-source.
      *
-     * @param type
+     * @param type the type of the data-source.
      */
     public void setType(String type) {
         put("type", type);
     }
 
     /**
+     * Retrieves the creation date of the data-source, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the creation date of the data-source.
      */
     public Long getCreationDate() {
         return getLong("creationDate");
     }
 
     /**
+     * Sets the creation date of the data-source.
      *
-     * @param creationDate
+     * @param creationDate the creation date of the data-source, expressed in Unix Epoch time.
      */
     public void setCreationDate(Long creationDate) {
         put("creationDate", creationDate);
     }
 
     /**
+     * Retrieves the date of last modifications of the data-source, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the date of the last modifications in Unix Epoch time.
      */
     public Long getLastModifiedDate() {
         return getLong("lastModifiedDate");
     }
 
     /**
+     * Sets a last modification date for the data-source.
      *
-     * @param lastModifiedDate
+     * @param lastModifiedDate the last modification date of the data-source, expressed in Unix
+     *                         Epoch time.
      */
     public void setLastModifiedDate(Long lastModifiedDate) {
         put("lastModifiedDate", lastModifiedDate);
     }
 
     /**
+     * Retrieves the list of permissions for the current data-source.
      *
-     * @return
+     * Note: this method returns a list of Object objects.
+     *
+     * @return the list of permissions.
      */
     public List<Object> getPermissions() {
         return (List<Object>) get("permissions");
     }
 
     /**
+     * Retrieves the list of permissions for the current data-source.
+     * Note: this method returns a list of Permission objects.
      *
-     * @return
+     * @return the list of permissions.
      */
     public List<Permission> getPermissionsIds() {
         return (List<Permission>) get("permissions");
     }
 
     /**
+     * Sets the permissions for the current data-source.
      *
-     * @param permissions
+     * @param permissions the list of permissions, composed by Permission objects.
      */
     public void setPermissions(List<Permission> permissions) {
         put("permissions", permissions);
     }
 
     /**
+     * Retrieves the Id of the owner of the current data-source.
      *
-     * @return
+     * Note: this method returns the Id expressed as Object class.
+     *
+     * @return the Id of the owner.
      */
     public Object getOwner() {
         return get("owner");
     }
 
     /**
+     * Retrieves the Id of the owner of the current data-source.
      *
-     * @return
+     * Note: this method returns the Id expressed as ObjectId class.
+     *
+     * @return the Id of the owner.
      */
     public ObjectId getOwnerId() {
         return getObjectId("owner");
     }
 
     /**
+     * Sets the owner of the current data-source.
      *
-     * @param owner
+     * @param owner the Id of the owner expressed as string.
      */
     public void setOwner(String owner) {
         if (!ObjectId.isValid(owner)) {
@@ -237,120 +261,140 @@ public class DataSource extends BasicDBObject {
     }
 
     /**
+     * Sets the owner of the current data-source by specifying its Id.
      *
-     * @param owner
+     * Note: the input parameter for this method must be expressed as ObjectId.
+     *
+     * @param owner the Id of the owner, expressed as ObjectId,
      */
     public void setOwnerId(ObjectId owner) {
         put("owner", owner);
     }
 
     /**
+     * Retrieves the status of the current data-source.
      *
-     * @return
+     * @return the status of the data-source.
      */
     public String getStatus() {
         return getString("status");
     }
 
     /**
+     * Sets the status of the data-source.
      *
-     * @param status
+     * @param status the status of the data-source.
      */
     public void setStatus(String status) {
         put("status", status);
     }
 
     /**
+     * Retrieves the sub-type of the current data-source.
      *
-     * @return
+     * @return the sub-type of the data-source.
      */
     public String getSubtype() {
         return getString("subtype");
     }
 
     /**
+     * Specifies the sub-type for the current data-source.
      *
-     * @param subtype
+     * @param subtype the sub-type for the data-source.
      */
     public void setSubtype(String subtype) {
         put("subtype", subtype);
     }
 
     /**
+     * Retrieves the URL of the current data-source.
      *
-     * @return
+     * @return the URL of the data-source.
      */
     public String getURL() {
         return getString("url");
     }
 
     /**
+     * Specifies the URL for the current data-source.
      *
-     * @param URL
+     * @param URL the URL for the data-source.
      */
     public void setURL(String URL) {
         put("url", URL);
     }
 
     /**
+     * Retrieves the username to connect with the current data-source.
      *
-     * @return
+     * @return the username for the data-source.
      */
     public String getUsername() {
         return getString("username");
     }
 
     /**
+     * Sets the username to connect with the current data-source.
      *
-     * @param username
+     * @param username the username for the data-source.
      */
     public void setUsername(String username) {
         put("username", username);
     }
 
     /**
+     * Retrieves the password to connect with the current data-source.
      *
-     * @return
+     * @return the password for the data-source.
      */
     public String getPassword() {
         return getString("password");
     }
 
     /**
+     * Sets the password to connect with the current data-source.
      *
-     * @param password
+     * @param password the password for the data-source.
      */
     public void setPassword(String password) {
         put("password", password);
     }
 
     /**
+     * Retrieves the type of resource of the current data-source; it can be "table", "query", or
+     * "file".
      *
-     * @return
+     * @return the resource type of the data-source.
      */
     public String getResourceType() {
         return getString("resourceType");
     }
 
     /**
+     * Sets the type of resource for the current data-source; it can be "table", "query", or "file".
      *
-     * @param resourceType
+     * @param resourceType the resource type of the data-source.
      */
     public void setResourceType(String resourceType) {
         put("resourceType", resourceType);
     }
 
     /**
+     * Retrieves the resource of the current data-source; it can be "table name", "query", or "file
+     * name".
      *
-     * @return
+     * @return the resource of the data-source.
      */
     public String getResource() {
         return getString("resource");
     }
 
     /**
+     * Sets the resource for the current data-source; it can be "table name", "query", or "file
+     * name".
      *
-     * @param resource
+     * @param resource the resource of the data-source.
      */
     public void setResource(String resource) {
         put("resource", resource);

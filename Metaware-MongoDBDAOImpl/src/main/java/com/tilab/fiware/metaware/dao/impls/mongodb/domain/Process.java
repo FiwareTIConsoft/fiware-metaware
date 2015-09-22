@@ -53,21 +53,22 @@ public class Process extends BasicDBObject {
     }
 
     /**
+     * Full constructor.
      *
-     * @param name
-     * @param description
-     * @param type
-     * @param creationDate
-     * @param lastModifiedDate
-     * @param permissions
-     * @param owner
-     * @param status
-     * @param frequence
-     * @param startingTime
-     * @param lastRunTime
-     * @param runNumber
-     * @param processingBlocks
-     * @param logUrl
+     * @param name             the name of the process.
+     * @param description      the description of the process.
+     * @param type             the type of the process.
+     * @param creationDate     the date when the process was created.
+     * @param lastModifiedDate the last date when the process was modified.
+     * @param permissions      the permissions list associated with the process.
+     * @param owner            the Id of the owner of the process.
+     * @param status           the status of the process.
+     * @param frequence        the frequence of the process.
+     * @param startingTime     the time when the process started.
+     * @param lastRunTime      the time when the process run for the last time.
+     * @param runNumber        the number of run of the process.
+     * @param processingBlocks the processing block.
+     * @param logUrl           the URL where the log of the process is stored.
      */
     public Process(String name, String description, String type, Long creationDate,
             Long lastModifiedDate, List<Permission> permissions, ObjectId owner, String status,
@@ -90,16 +91,21 @@ public class Process extends BasicDBObject {
     }
 
     /**
+     * Retrieves the Id of the process as a String.
      *
-     * @return
+     * @return the string containing the Id of the process.
      */
     public String getId() {
         return getString("_id");
     }
 
     /**
+     * Sets the Id of the process.
      *
-     * @param id
+     * Note: the usage of this method can lead to data inconsistency at DB level; use this method
+     * only if really necessary.
+     *
+     * @param id the string containing the Id of the process.
      */
     public void setId(String id) {
         if (!ObjectId.isValid(id)) {
@@ -111,120 +117,142 @@ public class Process extends BasicDBObject {
     }
 
     /**
+     * Retrieves the name of the current process.
      *
-     * @return
+     * @return the name of the process.
      */
     public String getName() {
         return getString("name");
     }
 
     /**
+     * Sets the name of the current process.
      *
-     * @param name
+     * @param name the name of the process.
      */
     public void setName(String name) {
         put("name", name);
     }
 
     /**
+     * Retrieves the description of the current process.
      *
-     * @return
+     * @return the description of the process.
      */
     public String getDescription() {
         return getString("description");
     }
 
     /**
+     * Sets the description of the current process.
      *
-     * @param description
+     * @param description the description of the process.
      */
     public void setDescription(String description) {
         put("description", description);
     }
 
     /**
+     * Retrieves the type of the current process.
      *
-     * @return
+     * @return the type of the process.
      */
     public String getType() {
         return getString("type");
     }
 
     /**
+     * Sets the type of the current process.
      *
-     * @param type
+     * @param type the type of the process.
      */
     public void setType(String type) {
         put("type", type);
     }
 
     /**
+     * Retrieves the creation date of the process, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the creation date of the process.
      */
     public Long getCreationDate() {
         return getLong("creationDate");
     }
 
     /**
+     * Sets the creation date of the process.
      *
-     * @param creationDate
+     * @param creationDate the creation date of the process, expressed in Unix Epoch time.
      */
     public void setCreationDate(Long creationDate) {
         put("creationDate", creationDate);
     }
 
     /**
+     * Retrieves the date of last modifications of the process, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the date of the last modifications in Unix Epoch time.
      */
     public Long getLastModifiedDate() {
         return getLong("lastModifiedDate");
     }
 
     /**
+     * Sets a last modification date for the process.
      *
-     * @param lastModifiedDate
+     * @param lastModifiedDate the last modification date of the process, expressed in Unix Epoch
+     *                         time.
      */
     public void setLastModifiedDate(Long lastModifiedDate) {
         put("lastModifiedDate", lastModifiedDate);
     }
 
     /**
+     * Retrieves the list of permissions for the current process.
      *
-     * @return
+     * Note: this method returns a list of Object objects.
+     *
+     * @return the list of permissions.
      */
     public List<Object> getPermissions() {
         return (List<Object>) get("permissions");
     }
 
     /**
+     * Retrieves the list of permissions for the current process.
      *
-     * @return
+     * Note: this method returns a list of Permission objects.
+     *
+     * @return the list of permissions.
      */
     public List<Permission> getPermissionsIds() {
         return (List<Permission>) get("permissions");
     }
 
     /**
+     * Sets the permissions for the current process.
      *
-     * @param permissions
+     * @param permissions the list of permissions, composed by Permission objects.
      */
     public void setPermissions(List<Permission> permissions) {
         put("permissions", permissions);
     }
 
     /**
+     * Retrieves the Id of the owner of the current process.
      *
-     * @return
+     * Note: this method returns the Id expressed as Object class.
+     *
+     * @return the Id of the owner.
      */
     public Object getOwner() {
         return get("owner");
     }
 
     /**
+     * Sets the owner of the current dataset.
      *
-     * @param owner
+     * @param owner the Id of the owner expressed as string.
      */
     public void setOwner(String owner) {
         if (!ObjectId.isValid(owner)) {
@@ -236,136 +264,161 @@ public class Process extends BasicDBObject {
     }
 
     /**
+     * Retrieves the Id of the owner of the current dataset.
      *
-     * @return
+     * Note: this method returns the Id expressed as ObjectId class.
+     *
+     * @return the Id of the owner.
      */
     public ObjectId getOwnerId() {
         return (ObjectId) get("owner");
     }
 
     /**
+     * Sets the owner of the current dataset by specifying its Id.
      *
-     * @param owner
+     * Note: the input parameter for this method must be expressed as ObjectId.
+     *
+     * @param owner the Id of the owner, expressed as ObjectId,
      */
     public void setOwnerId(ObjectId owner) {
         put("owner", owner);
     }
 
     /**
+     * Retrieves the status of the current dataset.
      *
-     * @return
+     * @return the status of the dataset.
      */
     public String getStatus() {
         return getString("status");
     }
 
     /**
+     * Sets the status of the dataset.
      *
-     * @param status
+     * @param status the status of the dataset.
      */
     public void setStatus(String status) {
         put("status", status);
     }
 
     /**
+     * Retrieves the frequence of the current dataset.
      *
-     * @return
+     * @return the frequence of the dataset.
      */
     public String getFrequence() {
         return getString("frequence");
     }
 
     /**
+     * Sets the frequence of the current dataset.
      *
-     * @param frequence
+     * @param frequence the frequence of the dataset.
      */
     public void setFrequence(String frequence) {
         put("frequence", frequence);
     }
 
     /**
+     * Retrieves the starting time of the current dataset, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the starting time of the dataset in Unix Epoch time.
      */
     public Long getStartingTime() {
         return getLong("startingTime");
     }
 
     /**
+     * Sets the starting time of the current dataset.
      *
-     * @param startingTime
+     * @param startingTime the starting time of the dataset in Unix Epoch time.
      */
     public void setStartingTime(Long startingTime) {
         put("startingTime", startingTime);
     }
 
     /**
+     * Retrieves the time when the process executed, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the last run time of the dataset in Unix Epoch time.
      */
     public Long getLastRunTime() {
         return getLong("lastRunTime");
     }
 
     /**
+     * Sets the time when the process executed for the last time.
      *
-     * @param lastRunTime
+     * @param lastRunTime the last run time of the dataset in Unix Epoch time.
      */
     public void setLastRunTime(Long lastRunTime) {
         put("lastRunTime", lastRunTime);
     }
 
     /**
+     * Retrieves the total number of runs of the process.
      *
-     * @return
+     * @return the run number of the process.
      */
     public Long getRunNumber() {
         return getLong("runNumber");
     }
 
     /**
+     * Sets the total number of runs of the process.
      *
-     * @param runNumber
+     * @param runNumber the run number of the process.
      */
     public void setRunNumber(Long runNumber) {
         put("runNumber", runNumber);
     }
 
     /**
+     * Retrieves the processing blocks of the process.
      *
-     * @return
+     * Note: this method returns a list of Object objects.
+     *
+     * @return the list of processing blocks.
      */
     public List<Object> getProcessingBlocksObj() {
         return (List<Object>) get("processingBlocks");
     }
 
     /**
+     * Retrieves the processing blocks of the process.
      *
-     * @return
+     * Note: this method returns a list of ProcessingBlock objects.
+     *
+     * @return the list of processing blocks
      */
     public List<ProcessingBlock> getProcessingBlocks() {
         return (List<ProcessingBlock>) get("processingBlocks");
     }
 
     /**
+     * Sets the processing blocks of the process.
      *
-     * @param processingBlocks
+     * @param processingBlocks the list of processing blocks of the process.
      */
     public void setProcessingBlocks(List<ProcessingBlock> processingBlocks) {
         put("processingBlocks", processingBlocks);
     }
 
     /**
+     * Retrieves the URL where the process stores the log.
      *
-     * @return
+     * @return the log URL of the process.
      */
     public String getLogUrl() {
         return getString("logUrl");
     }
 
     /**
+     * Sets the URL where the process stores the log.
      *
-     * @param logUrl
+     * @param logUrl the log URL of the process.
      */
     public void setLogUrl(String logUrl) {
         put("logUrl", logUrl);

@@ -62,7 +62,7 @@ public class Permission extends BasicDBObject {
     }
 
     /**
-     * Get the Id of the User, Department, or Company associated to the current permission object.
+     * Gets the Id of the User, Department, or Company associated to the current permission object.
      *
      * @return the String representation of the Id.
      */
@@ -71,9 +71,10 @@ public class Permission extends BasicDBObject {
     }
 
     /**
-     * Get the Id of the User, Department, or Company associated to the current permission object.
+     * Gets the Id of the User, Department, or Company associated to the current permission object.
      *
-     * @return ObjectId
+     * @return the Id (represented as ObjectId) of the User, Department, or Company associated to
+     *         the permission.
      */
     public ObjectId getReferenceId() {
         if (get("referenceId") instanceof ObjectId) {
@@ -83,9 +84,11 @@ public class Permission extends BasicDBObject {
     }
 
     /**
+     * Sets the Id of the User, Department, or Company associate to the current permission object.
      *
-     * @param referenceId
-     * @throws InvalidIdException
+     * @param referenceId the string representation of the Id to be associated.
+     * @throws InvalidIdException this happens when the passed Id, as String, is not a valid
+     *                            ObjectId.
      */
     public void setReference(String referenceId) throws InvalidIdException {
         if (!ObjectId.isValid(referenceId)) {
@@ -97,26 +100,31 @@ public class Permission extends BasicDBObject {
     }
 
     /**
+     * Sets the Id of the User, Department, or Company to be associated to the current permission
+     * object.
      *
-     * @param referenceId
+     * @param referenceId the Id to be associated, represented as ObjectId.
      */
     public void setReferenceId(ObjectId referenceId) {
         put("referenceId", referenceId);
     }
 
     /**
+     * Retrieves the actions allowed by the current permission object.
      *
-     * @return
+     * @return the string that contains the allowed actions.
      */
     public String getPerm() {
         return getString("perm");
     }
 
     /**
+     * Sets the actions allowed by the current permission object.
      *
-     * @param perm
+     * @param perm the string that contains the allowed actions.
      */
     public void setPerm(String perm) {
         put("perm", perm);
     }
+
 }

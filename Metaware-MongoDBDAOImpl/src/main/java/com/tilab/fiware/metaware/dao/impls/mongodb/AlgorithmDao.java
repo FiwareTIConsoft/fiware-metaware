@@ -193,7 +193,7 @@ public class AlgorithmDao {
      * Updates the selected algorithm's metadata if exists, otherwise creates a new one.
      *
      * @param id        the Id of the selected algorithm's metadata to be updated.
-     * @param algorihtm the dataset's metadata object with the modifications (or the metadata to be
+     * @param algorihtm the algorithm's metadata object with the modifications (or the metadata to be
      *                  saved).
      * @return the updated metadata object.
      */
@@ -268,7 +268,7 @@ public class AlgorithmDao {
     /**
      * Removes the selected algorithm's metadata.
      *
-     * @param id the Id of the selected dataset's metadata.
+     * @param id the Id of the selected algorithm's metadata.
      */
     public void deleteAlgorithm(String id) {
         log.debug(MSG_DAO_DELETE + id);
@@ -287,7 +287,6 @@ public class AlgorithmDao {
             log.error(MSG_ERR_NOT_FOUND);
             throw new ResourceNotFoundException();
         }
-
     }
 
     /**

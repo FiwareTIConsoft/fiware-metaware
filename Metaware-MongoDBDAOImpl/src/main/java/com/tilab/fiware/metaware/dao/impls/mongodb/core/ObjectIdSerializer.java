@@ -21,7 +21,6 @@
 package com.tilab.fiware.metaware.dao.impls.mongodb.core;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
@@ -36,17 +35,16 @@ import org.bson.types.ObjectId;
 public class ObjectIdSerializer extends JsonSerializer<ObjectId> {
 
     /**
-     * 
-     * @param t
-     * @param jg
-     * @param sp
-     * @throws IOException
-     * @throws JsonProcessingException 
+     * Custom serialization for ObjectId.
+     *
+     * @param t  the ObjectId to be serialized.
+     * @param jg the JsonGenerator.
+     * @param sp the SerializeProvider
+     * @throws IOException if a problem occurs while producing the final String.
      */
     @Override
     public void serialize(ObjectId t, JsonGenerator jg, SerializerProvider sp)
-            throws IOException, JsonProcessingException {
-        jg.writeString(t.toString()); // just write the ObjectId as it is (hex-string)
+            throws IOException {
+        jg.writeString(t.toHexString()); // just write the ObjectId as it is (hex-string)
     }
-
 }

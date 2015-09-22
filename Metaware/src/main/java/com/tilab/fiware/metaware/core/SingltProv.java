@@ -79,7 +79,7 @@ public enum SingltProv {
     private static final String MSG_SUCCESSFULLY_DISCONNECTED_FROM_DB = "DB disconnected.";
 
     /**
-     *
+     * Constructor for the Singleton class.
      */
     SingltProv() {
     }
@@ -137,8 +137,9 @@ public enum SingltProv {
     }
 
     /**
+     * Manually sets the properties for Metaware.
      *
-     * @param customProp
+     * @param customProp the custom properties.
      */
     public void setManualProperties(Properties customProp) {
         this.customProp = customProp;

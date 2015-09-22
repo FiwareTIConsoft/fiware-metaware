@@ -56,17 +56,18 @@ public class Dataset extends BasicDBObject {
     }
 
     /**
+     * Full constructor.
      *
-     * @param name
-     * @param description
-     * @param type
-     * @param creationDate
-     * @param lastModifiedDate
-     * @param permissions
-     * @param owner
-     * @param status
-     * @param readOnly
-     * @param structure
+     * @param name             the name of the dataset.
+     * @param description      the description of the dataset.
+     * @param type             the type of the dataset.
+     * @param creationDate     the date of creation of the dataset.
+     * @param lastModifiedDate the date of last modification of the dataset.
+     * @param permissions      the permissions list associated with the dataset.
+     * @param owner            the Id of the owner of the dataset.
+     * @param status           the status of the dataset.
+     * @param readOnly         specify if the dataset is read-only.
+     * @param structure        the structure (or schema) of the associated dataset.
      */
     public Dataset(String name, String description, String type, Long creationDate,
             Long lastModifiedDate, List<Permission> permissions, ObjectId owner, String status,
@@ -86,22 +87,22 @@ public class Dataset extends BasicDBObject {
     /**
      * Main constructor extension for DCAT extension
      *
-     * @param name
-     * @param description
-     * @param type
-     * @param creationDate
-     * @param lastModifiedDate
-     * @param permissions
-     * @param owner
-     * @param status
-     * @param readOnly
-     * @param keyword
-     * @param theme
-     * @param accessUrl
-     * @param distDescription
-     * @param distFormat
-     * @param license
-     * @param structure
+     * @param name             the name of the dataset.
+     * @param description      the description of the dataset.
+     * @param type             the type of the dataset.
+     * @param creationDate     the date of creation of the dataset.
+     * @param lastModifiedDate the date of last modification of the dataset.
+     * @param permissions      the permissions list associated with the dataset.
+     * @param owner            the Id of the owner of the dataset.
+     * @param status           the status of the dataset.
+     * @param readOnly         specify if the dataset is read-only.
+     * @param keyword          a keyword associated with the dataset.
+     * @param theme            the main theme of the dataset.
+     * @param accessUrl        the access URL for the dataset.
+     * @param distDescription  the description of the distribution for the dataset.
+     * @param distFormat       the distribution format for the dataset.
+     * @param license          the license associated with the dataset.
+     * @param structure        the structure (or schema) of the associated dataset.
      */
     public Dataset(String name, String description, String type, Long creationDate,
             Long lastModifiedDate, List<Permission> permissions, ObjectId owner, String status,
@@ -126,16 +127,21 @@ public class Dataset extends BasicDBObject {
     }
 
     /**
+     * Retrieves the Id of the current dataset.
      *
-     * @return
+     * @return the Id of the dataset, expressed in a String.
      */
     public String getId() {
         return getString("_id");
     }
 
     /**
+     * Specifies the new Id of the current dataset.
      *
-     * @param id
+     * Note: the usage of this method can lead to data inconsistency at DB level; use this method
+     * only if really necessary.
+     *
+     * @param id the Id of the dataset, expressed in a String.
      */
     public void setId(String id) {
         if (!ObjectId.isValid(id)) {
@@ -147,120 +153,142 @@ public class Dataset extends BasicDBObject {
     }
 
     /**
+     * Retrieves the name of the current dataset.
      *
-     * @return
+     * @return the name of the dataset.
      */
     public String getName() {
         return getString("name");
     }
 
     /**
+     * Sets the name for the current dataset.
      *
-     * @param name
+     * @param name the name of the dataset.
      */
     public void setName(String name) {
         put("name", name);
     }
 
     /**
+     * Retrieves the description of the current dataset.
      *
-     * @return
+     * @return the description of the dataset.
      */
     public String getDescription() {
         return getString("description");
     }
 
     /**
+     * Sets the description for the current dataset.
      *
-     * @param description
+     * @param description the description of the dataset.
      */
     public void setDescription(String description) {
         put("description", description);
     }
 
     /**
+     * Retrieves the type of the current dataset.
      *
-     * @return
+     * @return the type of the dataset.
      */
     public String getType() {
         return getString("type");
     }
 
     /**
+     * Sets the type for the current dataset.
      *
-     * @param type
+     * @param type the type of the dataset.
      */
     public void setType(String type) {
         put("type", type);
     }
 
     /**
+     * Retrieves the creation date of the dataset, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the creation date of the dataset.
      */
     public Long getCreationDate() {
         return getLong("creationDate");
     }
 
     /**
+     * Sets the creation date of the dataset.
      *
-     * @param creationDate
+     * @param creationDate the creation date of the dataset, expressed in Unix Epoch time.
      */
     public void setCreationDate(Long creationDate) {
         put("creationDate", creationDate);
     }
 
     /**
+     * Retrieves the date of last modifications of the dataset, expressed in Unix Epoch time.
      *
-     * @return
+     * @return the date of the last modifications in Unix Epoch time.
      */
     public Long getLastModifiedDate() {
         return getLong("lastModifiedDate");
     }
 
     /**
+     * Sets a last modification date for the dataset.
      *
-     * @param lastModifiedDate
+     * @param lastModifiedDate the last modification date of the dataset, expressed in Unix Epoch
+     *                         time.
      */
     public void setLastModifiedDate(Long lastModifiedDate) {
         put("lastModifiedDate", lastModifiedDate);
     }
 
     /**
+     * Retrieves the list of permissions for the current dataset.
      *
-     * @return
+     * Note: this method returns a list of Object objects.
+     *
+     * @return the list of permissions.
      */
     public List<Object> getPermissions() {
         return (List<Object>) get("permissions");
     }
 
     /**
+     * Retrieves the list of permissions for the current dataset.
      *
-     * @return
+     * Note: this method returns a list of Permission objects.
+     *
+     * @return the list of permissions.
      */
     public List<Permission> getPermissionsIds() {
         return (List<Permission>) get("permissions");
     }
 
     /**
+     * Sets the permissions for the current dataset.
      *
-     * @param permissions
+     * @param permissions the list of permissions, composed by Permission objects.
      */
     public void setPermissions(List<Permission> permissions) {
         put("permissions", permissions);
     }
 
     /**
+     * Retrieves the Id of the owner of the current dataset.
      *
-     * @return
+     * Note: this method returns the Id expressed as Object class.
+     *
+     * @return the Id of the owner.
      */
     public Object getOwner() {
         return get("owner");
     }
 
     /**
+     * Sets the owner of the current dataset.
      *
-     * @param owner
+     * @param owner the Id of the owner expressed as string.
      */
     public void setOwner(String owner) {
         if (!ObjectId.isValid(owner)) {
@@ -272,152 +300,175 @@ public class Dataset extends BasicDBObject {
     }
 
     /**
+     * Retrieves the Id of the owner of the current dataset.
      *
-     * @return
+     * Note: this method returns the Id expressed as ObjectId class.
+     *
+     * @return the Id of the owner.
      */
     public ObjectId getOwnerId() {
         return (ObjectId) get("owner");
     }
 
     /**
+     * Sets the owner of the current dataset by specifying its Id.
      *
-     * @param owner
+     * Note: the input parameter for this method must be expressed as ObjectId.
+     *
+     * @param owner the Id of the owner, expressed as ObjectId,
      */
     public void setOwnerId(ObjectId owner) {
         put("owner", owner);
     }
 
     /**
+     * Retrieves the status of the current dataset.
      *
-     * @return
+     * @return the status of the dataset.
      */
     public String getStatus() {
         return getString("status");
     }
 
     /**
+     * Sets the status of the dataset.
      *
-     * @param status
+     * @param status the status of the dataset.
      */
     public void setStatus(String status) {
         put("status", status);
     }
 
     /**
+     * Retrieves the keyword associated to the current dataset.
      *
-     * @return
+     * @return the associated keyword.
      */
     public String getKeyword() {
         return getString("keyword");
     }
 
     /**
+     * Associates a keyword to the current dataset.
      *
-     * @param keyword
+     * @param keyword the keyword for the dataset.
      */
     public void setKeyword(String keyword) {
         put("keyword", keyword);
     }
 
     /**
+     * Retrieves the theme of the dataset.
      *
-     * @return
+     * @return the theme of the dataset.
      */
     public String getTheme() {
         return getString("theme");
     }
 
     /**
+     * Sets the theme for the dataset.
      *
-     * @param theme
+     * @param theme the theme of the dataset.
      */
     public void setTheme(String theme) {
         put("theme", theme);
     }
 
     /**
+     * Retrieves the access URL of the dataset.
      *
-     * @return
+     * @return the access URL of the dataset.
      */
     public String getAccessUrl() {
         return getString("accessUrl");
     }
 
     /**
+     * Sets the access URL for the dataset.
      *
-     * @param accessUrl
+     * @param accessUrl the access URL of the dataset.
      */
     public void setAccessUrl(String accessUrl) {
         put("accessUrl", accessUrl);
     }
 
     /**
+     * Retrieves the description of the dataset's distribution.
      *
-     * @return
+     * @return the description of the distribution.
      */
     public String getDistDescription() {
         return getString("distDescription");
     }
 
     /**
+     * Sets the description of the dataset's distribution.
      *
-     * @param distDescription
+     * @param distDescription the description of the distribution.
      */
     public void setDistDescription(String distDescription) {
         put("distDescription", distDescription);
     }
 
     /**
+     * Retrieves the format of the dataset's distribution.
      *
-     * @return
+     * @return the format of the distribution.
      */
     public String getDistFormat() {
         return getString("distFormat");
     }
 
     /**
+     * Set the format of the dataset's distribution.
      *
-     * @param distFormat
+     * @param distFormat the format of the distribution.
      */
     public void setDistFormat(String distFormat) {
         put("distFormat", distFormat);
     }
 
     /**
+     * Retrieves the license of the dataset.
      *
-     * @return
+     * @return the license of the dataset.
      */
     public String getLicense() {
         return getString("license");
     }
 
     /**
+     * Sets the license of the dataset.
      *
-     * @param license
+     * @param license the license of the dataset.
      */
     public void setLicense(String license) {
         put("license", license);
     }
 
     /**
+     * Tells if the current dataset is read-only.
      *
-     * @return
+     * @return true if the dataset is read-only, false otherwise.
      */
     public boolean isReadOnly() {
         return getBoolean("readOnly");
     }
 
     /**
+     * Specifies if the dataset is read-only.
      *
-     * @param readOnly
+     * @param readOnly true if the dataset is read-only, false otherwise.
      */
     public void setReadOnly(boolean readOnly) {
         put("readOnly", readOnly);
     }
 
     /**
+     * Retrieves the structure (or schema) of the dataset.
      *
-     * @return
+     * @return the dataset's structure.
      */
     public DatasetStructure getStructure() {
         try {
@@ -428,8 +479,9 @@ public class Dataset extends BasicDBObject {
     }
 
     /**
+     * Specifies the structure (or schema) of the dataset.
      *
-     * @param structure
+     * @param structure the dataset's structure.
      */
     public void setStructure(DatasetStructure structure) {
         put("structure", structure);

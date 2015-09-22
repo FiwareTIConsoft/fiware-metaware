@@ -129,7 +129,8 @@ public class DiscoverObjDao {
             // "referenceId" that contains at least one element from the array "iDs"
             queryObjects.add(innerQuery); // include the inner query in objects query
         } else {
-            departmentsCollection = INSTANCE.getDatasource().getDbCollection(DEPARTMENTS_COLLECTION_NAME);
+            departmentsCollection = INSTANCE.getDatasource().getDbCollection(
+                    DEPARTMENTS_COLLECTION_NAME);
             departmentsCollection.setObjectClass(Department.class);
             reqDepartment = (Department) departmentsCollection.findOne(query);
             if (reqDepartment != null) {
@@ -145,7 +146,8 @@ public class DiscoverObjDao {
                                         new BasicDBObject("$in", iDs))));
                 queryObjects.add(innerQuery); // include the inner query in objects query
             } else {
-                companiesCollection = INSTANCE.getDatasource().getDbCollection(COMPANIES_COLLECTION_NAME);
+                companiesCollection = INSTANCE.getDatasource().getDbCollection(
+                        COMPANIES_COLLECTION_NAME);
                 companiesCollection.setObjectClass(Company.class);
                 reqCompany = (Company) companiesCollection.findOne(query);
                 if (reqCompany != null) {
@@ -230,5 +232,4 @@ public class DiscoverObjDao {
 
         return result;
     }
-
 }

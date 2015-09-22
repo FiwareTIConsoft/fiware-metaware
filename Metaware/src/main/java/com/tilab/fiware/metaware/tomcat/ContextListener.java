@@ -26,6 +26,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 /**
+ * Custom ContextListener class.
  *
  * @author Marco Terrinoni marco.terrinoni at consoft.it
  */

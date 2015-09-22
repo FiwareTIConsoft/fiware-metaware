@@ -118,5 +118,4 @@ public class DataSourceProvider {
     public DBCollection getDbCollection(String collectionName) {
         return db.getCollection(collectionName);
     }
-
 }

@@ -71,8 +71,9 @@ public class DataSourceDao {
     private DBCursor cursor;
 
     /**
-     * 
-     * @return 
+     * Retrieves the list of data-sources' metadata.
+     *
+     * @return the list of metadata.
      */
     public List<DataSource> getDataSourcesList() {
         log.debug(MSG_DAO_GET_LIST);
@@ -97,9 +98,10 @@ public class DataSourceDao {
     }
 
     /**
-     * 
-     * @param id
-     * @return 
+     * Retrieves the spelected data-source's metadata.
+     *
+     * @param id the Id of the selected data-source's metadata.
+     * @return the selected data-source's metadata.
      */
     public DataSource getDataSource(String id) {
         log.debug(MSG_DAO_GET + id);
@@ -134,9 +136,10 @@ public class DataSourceDao {
     }
 
     /**
-     * 
-     * @param datasource
-     * @return 
+     * Creates a new data-source's metadata object.
+     *
+     * @param datasource the new data-source's metadata to be stored.
+     * @return the Id of the new data-source object.
      */
     public String createDataSource(DataSource datasource) {
         log.debug(MSG_DAO_CREATE);
@@ -190,10 +193,12 @@ public class DataSourceDao {
     }
 
     /**
-     * 
-     * @param id
-     * @param datasource
-     * @return 
+     * Updates the selected data-source's metadata if exists, otherwise insert the new object.
+     *
+     * @param id         the Id of the selected data-source's metadata to be updated.
+     * @param datasource the data-source's metadata object with the modifications (or the metadata
+     *                   to be stored).
+     * @return the updates metadata object.
      */
     public DataSource upsertDataSource(String id, DataSource datasource) {
         log.debug(MSG_DAO_UPSERT + id);
@@ -264,8 +269,9 @@ public class DataSourceDao {
     }
 
     /**
-     * 
-     * @param id 
+     * Removes the selected data-source's metadata object.
+     *
+     * @param id the Id of the selected data-source's metadata object.
      */
     public void deleteDataSource(String id) {
         log.debug(MSG_DAO_DELETE + id);
@@ -290,10 +296,10 @@ public class DataSourceDao {
      * Checks if the selected owner exists in users, departments, or companies collection; if so,
      * returns the related ObjectId.
      *
-     * @param datasource the selected datasource.
-     * @param usersCollection the collection of registered users.
+     * @param datasource            the selected datasource.
+     * @param usersCollection       the collection of registered users.
      * @param departmentsCollection the collection of registered departments.
-     * @param companiesCollection the collection of registered companies.
+     * @param companiesCollection   the collection of registered companies.
      * @return the Id of the owner of the datasource if exists, null otherwise.
      */
     private ObjectId checkOwner(DataSource datasource, DBCollection usersCollection,
@@ -351,10 +357,10 @@ public class DataSourceDao {
      * Checks if the selected Ids in permissions (can be user, department, or company) exist in
      * users, departments, or companies collections; if so, returns the list of permissions.
      *
-     * @param datasource the selected data source.
-     * @param usersCollection the collection of registered users.
+     * @param datasource            the selected data source.
+     * @param usersCollection       the collection of registered users.
      * @param departmentsCollection the collection of registered departments.
-     * @param companiesCollection the collection of registered companies.
+     * @param companiesCollection   the collection of registered companies.
      * @return permissionsList the list of permissions.
      */
     private List<Permission> checkPermissions(DataSource datasource, DBCollection usersCollection,

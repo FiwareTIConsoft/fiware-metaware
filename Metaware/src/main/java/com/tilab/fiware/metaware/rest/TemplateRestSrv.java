@@ -84,7 +84,7 @@ public class TemplateRestSrv {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTemplatesList(
             @ApiParam(value = "Basic authentication string",
-                    defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
             @HeaderParam("Authorization") String authorization) {
         log.info(MSG_GET_LIST);
 
@@ -112,7 +112,7 @@ public class TemplateRestSrv {
      * Discovery the selected template by name.
      *
      * @param authorization basic authorization string.
-     * @param name The name of the selected template
+     * @param name          The name of the selected template
      * @return The selected template
      */
     @GET
@@ -129,7 +129,7 @@ public class TemplateRestSrv {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTemplate(
             @ApiParam(value = "Basic authentication string",
-                    defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
             @HeaderParam("Authorization") String authorization,
             @ApiParam(value = "The name of the template to fetch", required = true)
             @PathParam("templateName") String name) {
@@ -159,10 +159,11 @@ public class TemplateRestSrv {
     }
 
     /**
+     * Creates a new template.
      *
-     * @param authorization
-     * @param template
-     * @return
+     * @param authorization basic authorization string.
+     * @param template      the details about the new template.
+     * @return the name of the template stored in Metaware.
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -173,21 +174,17 @@ public class TemplateRestSrv {
 
         String name;
 
-        try {
-            name = INSTANCE.getTemplateService().createTemplate(template);
-        } catch (JsonProcessingException e) {
-            log.error(e, e);
-            return Response.serverError().build();
-        }
+        name = INSTANCE.getTemplateService().createTemplate(template);
 
         return Response.ok(name, MediaType.APPLICATION_JSON).build();
     }
 
     /**
+     * Deletes the selected template from Metaware.
      *
-     * @param authorization
-     * @param name
-     * @return
+     * @param authorization basic authorization string.
+     * @param name          the name of the selected template.
+     * @return the name of the selected template.
      */
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)

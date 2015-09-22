@@ -412,5 +412,4 @@ public class ProcessDao {
 
         return permissionsList;
     }
-
 }

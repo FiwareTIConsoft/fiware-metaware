@@ -41,6 +41,7 @@ public class Template extends BasicDBObject {
     }
 
     /**
+     * Full constructor.
      *
      * @param name
      * @param details

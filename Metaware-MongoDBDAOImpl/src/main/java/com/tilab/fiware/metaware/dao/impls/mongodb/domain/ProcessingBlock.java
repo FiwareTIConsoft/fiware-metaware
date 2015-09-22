@@ -24,6 +24,7 @@ import com.mongodb.BasicDBObject;
 import java.util.Map;
 
 /**
+ * Domain class for ProcessingBlock, part of Process and extension of a BasicDBObject for MongoDB.
  *
  * @author Marco Terrinoni marco.terrinoni at consoft.it
  */
@@ -33,22 +34,28 @@ public class ProcessingBlock extends BasicDBObject {
 
     /**
      * Empty constructor.
+     *
+     * Creates a new processing block section for a process.
      */
     public ProcessingBlock() {
     }
 
     /**
+     * Full map constructor.
      *
-     * @param m
+     * Create a new processing block section for a process from a starting map.
+     *
+     * @param m the starting map.
      */
     public ProcessingBlock(Map m) {
         super(m);
     }
 
     /**
+     * Full constructor.
      *
-     * @param order
-     * @param block
+     * @param order the order of the processing block.
+     * @param block the block of the processing block.
      */
     public ProcessingBlock(int order, String block) {
         put("order", order);
@@ -56,32 +63,36 @@ public class ProcessingBlock extends BasicDBObject {
     }
 
     /**
+     * Retrieves the order of the associated processing block.
      *
-     * @return
+     * @return the order of the processing block.
      */
     public int getOrder() {
         return getInt("order");
     }
 
     /**
+     * Sets the order of the associated processing block.
      *
-     * @param order
+     * @param order the order of the processing block.
      */
     public void setOrder(int order) {
         put("order", order);
     }
 
     /**
+     * Retrieves the block of the processing block.
      *
-     * @return
+     * @return the order of the processing block.
      */
     public String getBlock() {
         return getString("block");
     }
 
     /**
+     * Sets the block of the processing block.
      *
-     * @param block
+     * @param block the order of the processing block.
      */
     public void setBlock(String block) {
         put("block", block);

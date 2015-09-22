@@ -39,8 +39,12 @@ public class DatasetStructure extends BasicDBObject {
     }
 
     /**
-     * 
-     * @param m 
+     * Full constructor.
+     *
+     * This constructor will use the constructor for BasicDBObject, which takes a Map as input and
+     * extends to an object that can be handled by MongoDB.
+     *
+     * @param m the map that will be used to build the object.
      */
     public DatasetStructure(Map m) {
         super(m);

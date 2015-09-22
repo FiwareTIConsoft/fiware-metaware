@@ -32,7 +32,7 @@ import org.bson.types.ObjectId;
 public class CustomObjectMapper extends ObjectMapper {
 
     /**
-     * 
+     * Custom ObjectMapper definition.
      */
     public CustomObjectMapper() {
         SimpleModule module = new SimpleModule("ObjectIdmodule");

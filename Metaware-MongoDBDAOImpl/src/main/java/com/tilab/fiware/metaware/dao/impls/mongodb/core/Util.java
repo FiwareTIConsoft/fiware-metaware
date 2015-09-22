@@ -31,6 +31,12 @@ import org.bson.types.ObjectId;
  */
 public class Util {
 
+    /**
+     * Extracts the attributes of a Java object and produces a Map.
+     *
+     * @param object the Java object to be analyzed.
+     * @return the Map containing the attributes of the Java object.
+     */
     public static Map<String, Object> extractObjectAttributesAsAMap(Object object) {
         return INSTANCE.getObjectMapper().convertValue(object, Map.class);
     }
@@ -40,7 +46,7 @@ public class Util {
      *
      * @param obj1 the first Id.
      * @param obj2 the second Id.
-     * @return true if obj1 is equal to obj2
+     * @return true if the first ObjectId is equal to the second ObjectId.
      */
     public static boolean compareIds(Object obj1, Object obj2) {
         if (obj1 instanceof String && obj2 instanceof String) {

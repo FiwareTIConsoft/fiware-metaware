@@ -66,12 +66,13 @@ public class TemplateDao {
 
         List<Template> templatesList = new ArrayList<>();
 
+        // Setup the query
         templatesCollection = INSTANCE.getDatasource().getDbCollection(TEMPLATES_COLLECTION_NAME);
         templatesCollection.setObjectClass(Template.class);
         cursor = templatesCollection.find();
 
         try {
-            while (cursor.hasNext()) {
+            while (cursor.hasNext()) { // iterate the whole list
                 Template t = (Template) cursor.next();
                 templatesList.add(t);
             }
@@ -91,6 +92,7 @@ public class TemplateDao {
     public Template getTemplate(String name) {
         log.debug(MSG_DAO_GET + name + " .");
 
+        // Setup the query
         templatesCollection = INSTANCE.getDatasource().getDbCollection(TEMPLATES_COLLECTION_NAME);
         templatesCollection.setObjectClass(Template.class);
         BasicDBObject query = new BasicDBObject();
@@ -162,5 +164,4 @@ public class TemplateDao {
             throw new ResourceNotFoundException();
         }
     }
-
 }
