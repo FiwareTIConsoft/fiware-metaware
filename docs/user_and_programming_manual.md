@@ -31,10 +31,10 @@ By having a look to the various "getters" and "setters" it is possible to see th
 
 The `get<type>(String key)` method is used to execute the automatic conversion (when possible) of the requested field to the specified type.
 Some examples are: [getString(String key)](http://api.mongodb.org/java/current/org/bson/BasicBSONObject.html#getString-java.lang.String-), [getLong(String key)](http://api.mongodb.org/java/current/org/bson/BasicBSONObject.html#getLong-java.lang.String-), [getObjectId(String key)](http://api.mongodb.org/java/current/org/bson/BasicBSONObject.html#getObjectId-java.lang.String-).
-In Metaware when the type of the requested field is known, such methods are used instead of the generic one, in order to include an additional layer in type-check.
-Obviously, if the type of the selected field does not have the corresponding method, the generic one is called, together with the explicit type conversion (`put(String key)` returns an `Object`).
+In Metaware when the type of the requested field is known, such methods are used instead of the generic one, in order to include an additional layer in type-checking.
+Obviously, if the type of the selected field does not have the corresponding method, the generic one is called, together with the explicit type conversion (`get(String key)` returns an `Object`).
 
-A possible alternative to the current usage of MongoDB Java driver consists in using a ORM, like Morphia, which can definitely speed-up the development, but for this version of Metaware we chose to use natively the MongoDB Java driver and deal with BasicDBObjects.
+A possible alternative to the current usage of MongoDB Java driver consists in using a ORM, like [Morphia](http://mongodb.github.io/morphia/), which can definitely speed-up the development, but for this version of Metaware we chose to use natively the MongoDB Java driver and deal with BasicDBObjects.
 
 Another important note is that most of the following entities, in addition to the specified internal fields, they have the `_id` field, which is automatically added once the entity is stored in the database.
 The type of this field is [ObjectId](http://api.mongodb.org/java/current/org/bson/types/ObjectId.html).
@@ -259,6 +259,8 @@ So the previous example is the metadata of the Dataset, instead the final Datase
 | 11               | hub1     | Street 1   | http://example/skate/11   | 45.1    | 45.2    |
 | 22               | hub1     | Street 1   | http://example/skate/22   | 45.1    | 45.2    |
 | 33               | hub2     | Street 4   | http://example/skate/33   | 47.1    | 45.9    |
+
+As you can see, the titles of the various columns are exactly the same fields of the `structure` sub-document.
 
 The DatasetStructure sub-entity is represented by the class `com.tilab.fiware.metaware.dao.impls.mongodb.domain.DatasetStructure`.
 
