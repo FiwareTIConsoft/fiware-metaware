@@ -406,6 +406,20 @@ If there is a match, the allowed actions are checked and the method returns true
 If at the end of this process the user is authorized, the request can proceed, and the related REST API serves the request.
 
 ###API summarize
+Metaware exposes a rich set of RESTful API as Web Services, so all of them are accessible through HTTP calls.
+Most of them requires a basic authentication while calling (as explained before), this means that the header of the HTTP request must contain the authorization parameter with the hash of the user's credentials; in addition, when requested, another header parameter specifying the Content-Type must be inserted (`application/json` is valid in most of the cases).
+
+The following is an example of a header parameters:
+
+```
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Type: application/json
+```
+Where the `YWRtaW46YWRtaW4=` string is the hash of the user credentials.
+
+The payload of the HTTP requests, when requested, must respect the schema of the related resource you are going to call; this is important in order to maintain the functionalities of Metaware.
+Unspecified schema in resource's call is accepted by Metaware, but then some functionalities will not work properly.
+
 The following is the list of available RESTful APIs from Metaware.
 
 Please assume the root of the Metaware as the following: http://localhost:8080/metaware
@@ -416,8 +430,16 @@ Please assume the root of the Metaware as the following: http://localhost:8080/m
 | Get Company        | GET    | /v1/companies/{companyId} |
 | Get Companies List | GET    | /v1/companies/            |
 | Create Company     | POST   | /v1/companies             |
-| Update Company     | PUT    | /v1/companies/{companyId} |
+| Upsert Company     | PUT    | /v1/companies/{companyId} |
 | Delete Company     | DELETE | /v1/companies/{companyId} |
+
+The APIs that require a payload with the information related to the current Company metadata are:
+- "Create Company"
+- "Upsert Company"
+
+Both of them have to respect the Company schema.
+
+The "Upser Company" will replace the metadata of the selected company (specified by the `companyId`) with the content of the payload of the HTTP request.
 
 ####Departments
 | Name                 | Verb   | URL                            |
@@ -425,8 +447,16 @@ Please assume the root of the Metaware as the following: http://localhost:8080/m
 | Get Department       | GET    | /v1/departments/{departmentId} |
 | Get Departments List | GET    | /v1/departments                |
 | Create Department    | POST   | /v1/departments                |
-| Update Department    | PUT    | /v1/departments/{departmentId} |
+| Upsert Department    | PUT    | /v1/departments/{departmentId} |
 | Delete Department    | DELETE | /v1/departments/{departmentId} |
+
+The APIs that require a payload with the information related to the current Department metadata are:
+- "Create Department"
+- "Upsert Department"
+
+Both of them have to respect the Department schema.
+
+The "Upser Department" will replace the metadata of the selected department (specified by the `departmentId`) with the content of the payload of the HTTP request.
 
 ####Users
 | Name           | Verb   | URL                |
@@ -434,14 +464,22 @@ Please assume the root of the Metaware as the following: http://localhost:8080/m
 | Get User       | GET    | /v1/users/{userId} |
 | Get Users List | GET    | /v1/users          |
 | Create User    | POST   | /v1/users          |
-| Update User    | PUT    | /v1/users/{userId} |
+| Upsert User    | PUT    | /v1/users/{userId} |
 | Delete User    | DELETE | /v1/users/{userId} |
 
+The APIs that require a payload with the information related to the current User metadata are:
+- "Create User"
+- "Upsert User"
+
+Both of them have to respect the User schema.
+
+The "Upser User" will replace the metadata of the selected user (specified by the `userId`) with the content of the payload of the HTTP request.
+
 ####DiscoverObjects
-| Name                    | Verb   | URL                                      |
-| :---------------------- | :----- | :--------------------------------------- |
-| Discover usable objects | GET    | /v1/discoverObjects/usable/{requestedId} |
-| Discover owned objects  | GET    | /v1/discoverObjects/owner/{userId}       |
+| Name                    | Verb | URL                                      |
+| :---------------------- | :--- | :--------------------------------------- |
+| Discover usable objects | GET  | /v1/discoverObjects/usable/{requestedId} |
+| Discover owned objects  | GET  | /v1/discoverObjects/owner/{userId}       |
 
 ####Algorithms
 | Name                | Verb   | URL                          |
@@ -449,8 +487,16 @@ Please assume the root of the Metaware as the following: http://localhost:8080/m
 | Get Algorithm       | GET    | /v1/algorithms/{algorithmId} |
 | Get Algorithms List | GET    | /v1/algorithms               |
 | Create Algorithm    | POST   | /v1/algorithms               |
-| Update Algorithm    | PUT    | /v1/algorithms/{algorithmId} |
+| Upsert Algorithm    | PUT    | /v1/algorithms/{algorithmId} |
 | Delete Algorithm    | DELETE | /v1/algorithms/{algorithmId} |
+
+The APIs that require a payload with the information related to the current Algorithm metadata are:
+- "Create Algorithm"
+- "Upsert Algorithm"
+
+Both of them have to respect the Algorithm schema.
+
+The "Upser Algorithm" will replace the metadata of the selected algorithm (specified by the `algorithmId`) with the content of the payload of the HTTP request.
 
 ####Datasets
 | Name              | Verb   | URL                                     |
@@ -458,10 +504,21 @@ Please assume the root of the Metaware as the following: http://localhost:8080/m
 | Get Dataset       | GET    | /v1/datasets/{datasetId}                |
 | Get Datasets List | GET    | /v1/datasets                            |
 | Create Dataset    | POST   | /v1/datasets                            |
-| Update Dataset    | PUT    | /v1/datasets/{datasetId}                |
+| Upsert Dataset    | PUT    | /v1/datasets/{datasetId}                |
 | Delete Dataset    | DELETE | /v1/datasets/{datasetId}                |
 | Import Open Data  | POST   | /v1/datasets/importOpenData             |
 | Export Open Data  | GET    | /v1/datasets/exportOpenData/{datasetId} |
+
+The APIs that require a payload with the information related to the current Dataset metadata are:
+- "Create Dataset"
+- "Upsert Dataset"
+- "Import Open Data"
+
+All of them have to respect the Algorithm schema.
+In particular the "Import Open Data" must respect the XML DCAT format representation of the Dataset, previously described in the Dataset schema.
+Still regarding the "Import Open Data" request, it is important to mention that the import process is not lossless.
+
+The "Upser Dataset" will replace the metadata of the selected dataset (specified by the `datasetId`) with the content of the payload of the HTTP request.
 
 ####Datasources
 | Name                  | Verb   | URL                            |
@@ -469,11 +526,23 @@ Please assume the root of the Metaware as the following: http://localhost:8080/m
 | Get Data-Source       | GET    | /v1/datasources/{datasourceId} |
 | Get Data-Sources List | GET    | /v1/datasources                |
 | Create Data-Source    | POST   | /v1/datasources                |
-| Update Data-Source    | PUT    | /v1/datasources/{datasourceId} |
+| Upsert Data-Source    | PUT    | /v1/datasources/{datasourceId} |
 | Delete Data-Source    | DELETE | /v1/datasources/{datasourceId} |
+
+The APIs that require a payload with the information related to the current Data-Source metadata are:
+- "Create Data-Source"
+- "Upsert Data-Source"
+
+Both of them have to respect the Data-Source schema.
+
+The "Upser Data-Source" will replace the metadata of the selected algorithm (specified by the `algorithmId`) with the content of the payload of the HTTP request.
 
 ####Templates
 | Name               | Verb   | URL                          |
 | :----------------- | :----- | :--------------------------- |
 | Get Template       | GET    | /v1/templates/{templateName} |
-| Get Templates List | GET    | /v1/templates/               |
+| Get Templates List | GET    | /v1/templates                |
+| Create Template    | POST   | /v1/templates                |
+| Delete Template    | DELETE | /v1/templates                |
+
+The API that requires a payload with the information related to the current Template is "Create Data-Source"; the payload has to respect the Template schema.
