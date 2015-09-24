@@ -135,3 +135,11 @@ The section "Sanity check procedures" in __Installation and Administration manua
 ###Other documents
 The full Javadoc of Metaware is available in [this folder](https://github.com/FiwareTIConsoft/fiware-metaware/tree/master/docs/javadocs) of the repository.
 Each folder refers to a specific "layer" of Metaware.
+
+### Docker instructions
+1. sudo docker pull mongo -> download the official mongodb image from dockerhub
+2. sudo docker run -d -p 27017:27017 --name mongodb mongo -> run mongodb docker container
+3. cd <githubrepo>/docker -> move to dockerfile folder
+4. sudo docker build -t metaware/tomcat . -> build the dockerfile
+5. sudo docker run --name tomcat --link mongodb:mongodb -p 8080:8080 metaware/tomcat -> start tomcat
+6. manual insert admin user in mongodb

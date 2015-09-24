@@ -15,8 +15,9 @@ ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
 
 RUN mkdir -p $CATALINA_TMPDIR
 
-CMD wget "https://github.com/FiwareTIConsoft/fiware-metaware/blob/master/dist/metaware.war?raw=true" -P "/var/lib/tomcat7/webapps/" -O metaware.war
+RUN wget "https://github.com/FiwareTIConsoft/fiware-metaware/blob/master/dist/metaware.war?raw=true" -P "/var/lib/tomcat7/webapps/" -O metaware.war
 
 EXPOSE 8080
 
-ENTRYPOINT [ "/usr/share/tomcat7/bin/catalina.sh", "run" ]
+#ENTRYPOINT [ "/usr/share/tomcat7/bin/catalina.sh", "run" ]
+RUN [ "/usr/share/tomcat7/bin/catalina.sh", "run" ]
