@@ -15,8 +15,7 @@ ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
 
 RUN mkdir -p $CATALINA_TMPDIR
 
-#VOLUME [ "/var/lib/tomcat7/webapps/" ]
-#CMD wget 
+CMD wget "https://github.com/FiwareTIConsoft/fiware-metaware/blob/master/dist/metaware.war?raw=true" -P "/var/lib/tomcat7/webapps/" -O metaware.war
 
 EXPOSE 8080
 
