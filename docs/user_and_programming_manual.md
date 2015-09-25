@@ -537,7 +537,24 @@ The APIs that require a payload with the information related to the current Data
 
 Both of them have to respect the Data-Source schema.
 
-The "Upser Data-Source" will replace the metadata of the selected algorithm (specified by the `algorithmId`) with the content of the payload of the HTTP request.
+The "Upsert Data-Source" will replace the metadata of the selected data-source (specified by the `datasourceId`) with the content of the payload of the HTTP request.
+
+###Processes
+| Name               | Verb   | URL                       |
+| :----------------- | :----- | :-------------------------|
+| Get Process        | GET    | /v1/processes/{processId} |
+| Get Processes List | GET    | /v1/processes             |
+| Create Process     | POST   | /v1/processes             |
+| Upsert Process     | PUT    | /v1/processes/{processId} |
+| Delete Process     | DELETE | /v1/processes/{processId} |
+
+The APIs that require a payload with the information related to the current Process metadata are:
+- "Create Process"
+- "Upsert Process"
+
+Both of them have to respect the Process schema.
+
+The "Upsert Process" will replace the metadata of the selected process (specified by the `processId`) with the content of the payload of the HTTP request.
 
 ####Templates
 | Name               | Verb   | URL                          |
