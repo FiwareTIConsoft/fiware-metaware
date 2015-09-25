@@ -1,23 +1,15 @@
-FROM ubuntu:14.04
+# Starting image
+FROM tomcat:7
 
-MAINTAINER _aayek <aayekk@gmail.com>
+MAINTAINER marcoterrinoni <marco.terrinoni@consoft.it>
 
-ENV REFRESHED_AT 2015-09-21
+# Initial update
+RUN apt-get -yq update
 
-RUN apt-get -yqq update
-RUN apt-get -yqq install tomcat7 default-jdk
+# Retrieve the war package
+ADD https://github.com/FiwareTIConsoft/fiware-metaware/releases/download/v1.0/metaware.war /usr/local/tomcat/webapps/
 
-ENV CATALINA_HOME /usr/share/tomcat7
-ENV CATALINA_BASE /var/lib/tomcat7
-ENV CATALINA_PID /var/run/tomcat7.pid
-ENV CATALINA_SH /usr/share/tomcat7/bin/catalina.sh
-ENV CATALINA_TMPDIR /tmp/tomcat7-tomcat7-tmp
-
-RUN mkdir -p $CATALINA_TMPDIR
-
-RUN wget "https://github.com/FiwareTIConsoft/fiware-metaware/releases/download/v1.0/metaware.war" -P "/var/lib/tomcat7/webapps/" -O metaware.war
-
+# Expose Tomcat main port
 EXPOSE 8080
 
-#ENTRYPOINT [ "/usr/share/tomcat7/bin/catalina.sh", "run" ]
-RUN [ "/usr/share/tomcat7/bin/catalina.sh", "run" ]
+CMD ["catalina.sh", "run"]
