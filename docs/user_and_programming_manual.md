@@ -539,7 +539,7 @@ Both of them have to respect the Data-Source schema.
 
 The "Upsert Data-Source" will replace the metadata of the selected data-source (specified by the `datasourceId`) with the content of the payload of the HTTP request.
 
-###Processes
+####Processes
 | Name               | Verb   | URL                       |
 | :----------------- | :----- | :-------------------------|
 | Get Process        | GET    | /v1/processes/{processId} |
@@ -565,3 +565,7 @@ The "Upsert Process" will replace the metadata of the selected process (specifie
 | Delete Template    | DELETE | /v1/templates                |
 
 The API that requires a payload with the information related to the current Template is "Create Data-Source"; the payload has to respect the Template schema.
+
+### Swagger-UI
+Metaware also comes with a Swagger-UI interface, which contains the whole API list.
+Please, follow [these instructions](http://swagger.io/swagger-ui/) to interact with Metaware through Swagger-UI (http://<tomcat-address>:8080/swagger-ui/).
