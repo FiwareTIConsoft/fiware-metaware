@@ -190,6 +190,18 @@ If this is not your case, you can modify the "Database access information" in th
 Once you get the WAR package from `metaware`, you can deploy it on Tomcat.
 If the deploy goes fine, the root of Metaware will be available at `http://localhost:8080/metaware/api/v1/`.
 
+####Add admin user
+Metaware comes with a empty User collection, this means that at the very beginning (almost) none of the APIs will allow the selected operation (`401 Unauthorized` error will return).
+
+In order to really start using Metaware, a first admin user must be manually inserted in the MongoDB.
+The steps to do so are the following:
+1. open the `mongo` shell (or whatever mongo client you prefer)
+2. `use MetadataRepo`
+3. `db.users.insert({"name" : "admin", surname" : "admin", email" : "", "phone" : "", "company_id" : null, "department_id" : null, "username" : "admin", "password" : "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "role" : "admin"})`
+
+The value `8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918` is the Sha256hex of the string "admin", this means to interact for the first time with Metaware APIs, the credentials to use are "admin" - "admin" (username - password).
+Of course you can insert whatever username and password you prefer, but keep in mind that the password string is the Sha256Hex of the plain password, and the role field contains the string "admin".
+
 ##Sanity check procedures
 You can verify that your environment is ready by checking the "responsiveness" of all the needed tools.
 
@@ -248,3 +260,34 @@ TO-DO -->
 
 <!-- ###I/O flows
 TO-DO -->
+
+###Docker
+Metaware comes with a Dockerfile that can be user to "Dockerize" a Metaware instance.
+The Dockerfile (locate in the `docker` folder) represents an extension of the official Tomcat Docker image, and indeed the only extra operation that is executed consists in adding the WAR package of Metaware to be deployed.
+It is important to mention that the Dockerfile (and consequently the Dockerization of Metaware) will not contain the MongoDB instance, which must be instantiated in another Docker container.
+
+The steps to get a functional environment for Metaware through Docker are the following:
+1. install Docker (the [Get Started](http://docs.docker.com/windows/started/) can drive you through the first moves with Docker);
+2. retrieve the MongoDB official Docker image, the following command downloads the latest MongoDB image directly from the [DockerHub](https://hub.docker.com/_/mongo/):
+```
+docker pull mongo
+```
+3. create a container for the MongoDB image and run it by specifying the port matching `27017:27017` and the name `mongodb` of the container (the former to allow MongoDB to be visibile outside of the container, the latter to allow the creation of the link between the MongoDB container and the Metaware Web application):
+```
+docker run -d -p 27017:27017 --name mongodb mongo
+```
+4. once you have a running instance of MongoDB, you can proceed with Metaware by using the proper Docker file, located in the `docker` folder (`fiware-metaware/docker/Dockerfile`);
+```
+cd fiware-metaware/docker
+```
+5. build the Metaware image by using the Dockerfile
+```
+docker build -t metaware/tomcat .
+```
+6. check that the Metaware Docker image is available (`docker images` command, you should see an image called `metaware/tomcat`), then instantiate a Docker container for the Metaware; the following command is extremely important since the port matching and the link with MongoDB must be executed properly (the link with MongoDB is done by using the option `-link` of Docker `run` command, followed by the name of the container to be linked, `mongodb` in this case):
+```
+docker run --name tomcat --link mongodb:mongodb -p 8080:8080 metaware/tomcat
+```
+
+At this point you can start interacting with Metaware (remember to [add an initial admin user](#Add admin user)).
+In case you are running the Docker environment in Windows, keep in mind that most probably the IP address will be something similar to 192.168.99.100 (not `localhost`).
