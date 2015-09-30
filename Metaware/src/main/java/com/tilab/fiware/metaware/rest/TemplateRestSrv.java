@@ -166,10 +166,22 @@ public class TemplateRestSrv {
      * @return the name of the template stored in Metaware.
      */
     @POST
+    @ApiOperation(
+            value = "Creates a new template",
+            notes = "Only an admin can create a new template."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(code = 400, message = "Bad request"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 500, message = "Internal server error")
+    })
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createTemplate(@HeaderParam("Authorization") String authorization,
-            Template template) {
+    public Response createTemplate(
+            @ApiParam(value = "Basic authentication string",
+                      defaultValue = "Basic cm9zc2k6cm9zc2k=", required = true)
+            @HeaderParam("Authorization") String authorization,
+            @ApiParam(value = "The template to be created", required = true) Template template) {
         log.info(MSG_CREATE);
 
         String name;
@@ -187,7 +199,16 @@ public class TemplateRestSrv {
      * @return the name of the selected template.
      */
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{templateName}")
+    @ApiOperation(
+            value = "Deletes the selected template by name",
+            notes = "Only an admin can delete a template."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 404, message = "Template not found"),
+        @ApiResponse(code = 500, message = "Internal server error")
+    })
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteTemplate(@HeaderParam("Authorization") String authorization,
             @ApiParam(value = "The name of the template to fetch", required = true)
