@@ -85,11 +85,9 @@ Then, there is the `Metaware-DAO`, which basically defines the various entities 
 Finally, the `Metaware-MongoDBDAOImpl` defines the implementation of the entities specified in `Metaware-DAO`; actually, at this level, a new definition of the entities is done, but this one is more related to MongoDB implementation.
 If one decides to change MongoDB in favor of other databases, only this last piece of Metaware has to be re-implemented (plus some other minor changes in `Metaware`, but nothing crucial).
 
-The source code for the Metaware's sections are collected in the following GitHub repository:
+The source code for the Metaware's sections are collected in the following GitHub repository: https://github.com/FiwareTIConsoft/fiware-metaware.git
 
-1. https://github.com/FiwareTIConsoft/fiware-metaware.git
-
-In a command line interface, these are some simple instructions to get all the code you need to start working with Metaware:
+Using a command line interface, these are some simple instructions to get all the code you need to start working with Metaware:
 ```
 cd ~
 mkdir metaware
@@ -186,6 +184,7 @@ A solution consists in removing the tests execution, but we strongly suggest to 
 
 In Metaware, we use the default port for MongoDB, which we assume it is running on localhost.
 If this is not your case, you can modify the "Database access information" in the file `fiware-metaware/src/main/resources/metaware.properties` before the creation of the WAR package.
+This file is extremely important since it specifies all the parameters to connect with MongoDB, so please configure it properly.
 
 Once you get the WAR package from `metaware`, you can deploy it on Tomcat.
 If the deploy goes fine, the root of Metaware will be available at `http://localhost:8080/metaware/api/v1/`.

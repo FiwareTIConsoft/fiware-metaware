@@ -171,65 +171,42 @@ public class UserDao {
             throw new BadRequestException(MSG_ERR_NOT_VALID_OBJ);
         }
 
-        // Check company Id
         // Setup MongoDB objects
-        DBCollection companyCollection = INSTANCE.getDatasource().
-                getDbCollection(COMPANIES_COLLECTION_NAME);
-        companyCollection.setObjectClass(Company.class);
         BasicDBObject query = new BasicDBObject();
 
-        if (user.getCompany() instanceof ObjectId) {
+        // Check company Id
+        if (user.getCompany() instanceof ObjectId) { // ObjectId inserted
             ObjectId company_id = user.getCompanyId();
-
             log.debug("Inserted company id: " + company_id.toHexString());
 
             // Setup query object
             query.put("_id", company_id);
+            // Execute the query and associate the final companyId
+            user.setCompanyId(new ObjectId(retrieveCompany(query).getId()));
         } else if (user.getCompany() instanceof String) { // if a string has been inserted
             String company_id = user.getCompany().toString();
 
             if (company_id != null && company_id.isEmpty()) {
                 log.debug(MSG_WARN_NO_COMPANY); // allow creation of users without company
             } else {
+                // Check if the inserted Id is valid
                 if (!ObjectId.isValid(company_id)) {
                     log.error(MSG_ERR_NOT_VALID_COMPANY_ID);
                     throw new BadRequestException(MSG_ERR_NOT_VALID_COMPANY_ID);
                 }
-
                 log.debug("Inserted company id: " + company_id);
 
                 // Setup query object
                 query.put("_id", new ObjectId(company_id));
+                // Execute the query and associate the final companyId
+                user.setCompanyId(new ObjectId(retrieveCompany(query).getId()));
             }
         } else {
             log.error(MSG_ERR_NOT_VALID_COMPANY_ID);
             throw new BadRequestException(MSG_ERR_NOT_VALID_COMPANY_ID);
         }
-
-        Company resCompany = (Company) companyCollection.findOne(query);
-
-        if (resCompany == null) { // selected company doesn't exist
-            log.error(MSG_ERR_NOT_VALID_COMPANY_ID);
-            throw new BadRequestException(MSG_ERR_NOT_VALID_COMPANY_ID);
-        } else {
-            String debugMsg;
-            try {
-                debugMsg = INSTANCE.getObjectMapper().writeValueAsString(resCompany);
-                log.debug("Related company: " + debugMsg); // print res in json format
-            } catch (JsonProcessingException e) {
-                log.error(e, e);
-            }
-        }
-
-        // Associate the final companyId
-        user.setCompanyId(new ObjectId(resCompany.getId()));
 
         // Check department id
-        // Setup MongoDB objects
-        DBCollection departmentsCollection = INSTANCE.getDatasource().
-                getDbCollection(DEPARTMENTS_COLLECTION_NAME);
-        departmentsCollection.setObjectClass(Department.class);
-
         if (user.getDepartment() instanceof ObjectId) {
             ObjectId department_id = user.getDepartmentId();
 
@@ -237,6 +214,8 @@ public class UserDao {
 
             // Setup query object
             query.put("_id", department_id);
+            // Execute the query and associate the final departmentId
+            user.setDepartmentId(new ObjectId(retrieveDepartment(query).getId()));
         } else if (user.getDepartment() instanceof String) { // if a string has been inserted
             String department_id = user.getDepartment().toString();
 
@@ -252,31 +231,13 @@ public class UserDao {
 
                 // Setup query object
                 query.put("_id", new ObjectId(department_id));
+                // Execute the query and associate the final departmentId
+                user.setDepartmentId(new ObjectId(retrieveDepartment(query).getId()));
             }
         } else {
             log.error(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
             throw new BadRequestException(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
         }
-
-        // Execute the query
-        Department resDepartment = (Department) departmentsCollection.findOne(query);
-
-        if (resDepartment == null) { // selected company doesn't exist
-            log.error(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
-            throw new BadRequestException(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
-        } else {
-            String debugMsg;
-
-            try {
-                debugMsg = INSTANCE.getObjectMapper().writeValueAsString(resDepartment);
-                log.debug("Related department: " + debugMsg); // print res in json format
-            } catch (JsonProcessingException e) {
-                log.error(e, e);
-            }
-        }
-
-        // Associate the final departmentId
-        user.setDepartmentId(new ObjectId(resDepartment.getId()));
 
         usersCollection = INSTANCE.getDatasource().getDbCollection(USERS_COLLECTION_NAME);
         usersCollection.setObjectClass(User.class);
@@ -320,10 +281,7 @@ public class UserDao {
             throw new BadRequestException(MSG_ERR_NOT_VALID_OBJ);
         }
 
-        // Setup MongoDB objects
-        DBCollection companyCollection = INSTANCE.getDatasource().
-                getDbCollection(COMPANIES_COLLECTION_NAME);
-        companyCollection.setObjectClass(Company.class);
+        // Setup MongoDB query
         BasicDBObject query = new BasicDBObject();
 
         // Check if the inserted company Id is valid
@@ -334,6 +292,8 @@ public class UserDao {
 
             // Setup query object
             query.put("_id", company_id);
+            // Execute the query and associate the final companyId
+            user.setCompanyId(new ObjectId(retrieveCompany(query).getId()));
         } else if (user.getCompany() instanceof String) { // stored as a String
             String company_id = user.getCompany().toString();
 
@@ -350,35 +310,13 @@ public class UserDao {
 
                 // Setup query object
                 query.put("_id", new ObjectId(company_id));
+                // Execute the query and associate the final companyId
+                user.setCompanyId(new ObjectId(retrieveCompany(query).getId()));
             }
         } else {
             log.error(MSG_ERR_NOT_VALID_COMPANY_ID);
             throw new BadRequestException(MSG_ERR_NOT_VALID_COMPANY_ID);
         }
-
-        Company resCompany = (Company) companyCollection.findOne(query); // execute query
-
-        if (resCompany == null) { // selected company doesn't exist
-            log.error(MSG_ERR_NOT_VALID_COMPANY_ID);
-            throw new BadRequestException(MSG_ERR_NOT_VALID_COMPANY_ID);
-        } else {
-            String debugMsg;
-
-            try {
-                debugMsg = INSTANCE.getObjectMapper().writeValueAsString(resCompany);
-                log.debug("Related company: " + debugMsg); // print res in json format
-            } catch (JsonProcessingException e) {
-                log.error(e, e);
-            }
-        }
-
-        // Assiociate final CompanyId
-        user.setCompanyId(new ObjectId(resCompany.getId()));
-
-        // Initialize MongoDB objects
-        DBCollection departmentsCollection = INSTANCE.getDatasource().
-                getDbCollection(DEPARTMENTS_COLLECTION_NAME);
-        departmentsCollection.setObjectClass(Department.class);
 
         // Check if the inserted department Id is valid
         if (user.getDepartment() instanceof ObjectId) { // already an ObjectId
@@ -388,6 +326,8 @@ public class UserDao {
 
             // Setup query object
             query.put("_id", department_id);
+            // Execute the query and associate the final departmentId
+            user.setDepartmentId(new ObjectId(retrieveDepartment(query).getId()));
         } else if (user.getDepartment() instanceof String) { // stored as a string
             String department_id = user.getDepartment().toString();
 
@@ -403,31 +343,13 @@ public class UserDao {
 
                 // Setup query object
                 query.put("_id", new ObjectId(department_id));
+                // Execute the query and associate the final departmentId
+                user.setDepartmentId(new ObjectId(retrieveDepartment(query).getId()));
             }
         } else {
             log.error(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
             throw new BadRequestException(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
         }
-
-        // Execute the query
-        Department resDepartment = (Department) departmentsCollection.findOne(query);
-
-        if (resDepartment == null) { // selected department doesn't exist
-            log.error(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
-            throw new BadRequestException(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
-        } else {
-            String debugMsg;
-
-            try {
-                debugMsg = INSTANCE.getObjectMapper().writeValueAsString(resDepartment);
-                log.debug("Related department: " + debugMsg); // print res in json format
-            } catch (JsonProcessingException e) {
-                log.error(e, e);
-            }
-        }
-
-        // Associate final DepartmentId
-        user.setDepartmentId(new ObjectId(resDepartment.getId()));
 
         // Perform the upsert
         usersCollection = INSTANCE.getDatasource().getDbCollection(USERS_COLLECTION_NAME);
@@ -476,5 +398,69 @@ public class UserDao {
             log.error(MSG_ERR_NOT_FOUND);
             throw new ResourceNotFoundException();
         }
+    }
+
+    /**
+     * Use the passed query to retrieve the selected Company from the companies collection.
+     *
+     * @param query the BasicDBObject containing the query to be executed.
+     * @return the selected Company, null if not found.
+     */
+    private Company retrieveCompany(BasicDBObject query) {
+        // Setup MongoDB objects
+        DBCollection companyCollection = INSTANCE.getDatasource().
+                getDbCollection(COMPANIES_COLLECTION_NAME);
+        companyCollection.setObjectClass(Company.class);
+
+        // Execute the query
+        Company resCompany = (Company) companyCollection.findOne(query);
+
+        if (resCompany == null) { // selected company doesn't exist
+            log.error(MSG_ERR_NOT_VALID_COMPANY_ID);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_COMPANY_ID);
+        } else {
+            String debugMsg;
+
+            try {
+                debugMsg = INSTANCE.getObjectMapper().writeValueAsString(resCompany);
+                log.debug("Related company: " + debugMsg); // print res in json format
+            } catch (JsonProcessingException e) {
+                log.error(e, e);
+            }
+        }
+
+        return resCompany;
+    }
+
+    /**
+     * Use the passed query to retrieve the selected Department from the departments collection.
+     *
+     * @param query the BasicDBObject containing the query to be executed.
+     * @return the selected Department, null if not found.
+     */
+    private Department retrieveDepartment(BasicDBObject query) {
+        // Initialize MongoDB objects
+        DBCollection departmentsCollection = INSTANCE.getDatasource().
+                getDbCollection(DEPARTMENTS_COLLECTION_NAME);
+        departmentsCollection.setObjectClass(Department.class);
+
+        // Execute the query
+        Department resDepartment = (Department) departmentsCollection.findOne(query);
+
+        if (resDepartment == null) { // selected department doesn't exist
+            log.error(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
+            throw new BadRequestException(MSG_ERR_NOT_VALID_DEPARTMENT_ID);
+        } else {
+            String debugMsg;
+
+            try {
+                debugMsg = INSTANCE.getObjectMapper().writeValueAsString(resDepartment);
+                log.debug("Related department: " + debugMsg); // print res in json format
+            } catch (JsonProcessingException e) {
+                log.error(e, e);
+            }
+        }
+
+        return resDepartment;
     }
 }
