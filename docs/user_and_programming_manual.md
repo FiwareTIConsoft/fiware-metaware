@@ -475,7 +475,27 @@ The APIs that require a payload with the information related to the current User
 
 Both of them have to respect the User schema.
 
+It is possible to create or update a user without specifying the `department_id` nor the `company_id`, but it is important to include the key fields in the JSON payload request.
+The following is a JSON example of a User creation without Department and Company.
+```
+{
+    "name" : "Marco",
+    "surname" : "Terrinoni",
+    "email" : "marco@terrinoni.it",
+    "phone" : "123456789",
+    "address" : "Via Terrinoni",
+    "company_id" : "",
+    "department_id" : "",
+    "username" : "marco",
+    "password" : "marco",
+    "role" : "basic"
+}
+```
+
 The "Upser User" will replace the metadata of the selected user (specified by the `userId`) with the content of the payload of the HTTP request.
+
+While updating a User, it is important to mention that only an admin can change the role of a User (independently from his/her role), but in every case it is not possible to upgrade the role from "basic" to "admin" (only "admin" to "basic").
+If you want to upgrade a basic user to an admin, you have to create a new admin user from scratch.
 
 ####DiscoverObjects
 | Name                    | Verb | URL                                      |
