@@ -1,4 +1,4 @@
-Welcome to the Metaware Installation and Administration Guide!
+# Welcome to Metaware
 Metaware is a Java-based web service that deals with metadata information, and it can run on Apache Tomcat.
 
 It is an implementation of the FIWARE Metadata Store Management Platform Generic Enabler, from Telecom Italia and Consoft Sistemi S.p.A.
